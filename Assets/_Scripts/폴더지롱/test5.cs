@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test4 : MonoBehaviour
+public class test5 : MonoBehaviour
 {
     // Start is called before the first frame update
-    // 끼야악
+    // 집에 보내줘 진짜
     void Start()
     {
         
