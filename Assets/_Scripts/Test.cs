@@ -5,9 +5,9 @@ using UnityEngine;
 public class Test : MonoBehaviour
 {
     // Start is called before the first frame update
-    // ÇÑ
-    // ±Û
-    //ÁÖ
+    // í•œ
+    // ê¸€
+    //ì£¼
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class Test : MonoBehaviour
 
     // Update is called once per frame
 
-    //¼®ÀÌÁö·Õ
+    //ì„ì´ì§€ë¡±
     void Update()
     {
         

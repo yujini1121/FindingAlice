@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClockManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    // ÇÑ±ÛÁÖ¼®
+    // í•œê¸€ì£¼ì„
     void Start()
     {
         
