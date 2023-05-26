@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float jumpForce;
 
     Rigidbody       rigid;
+    IEnumerator     smoothJump;
     [SerializeField] bool collideToWall;
 
     float xAxis;
@@ -67,31 +68,33 @@ public class Movement : MonoBehaviour
     }
 
     // ===============================================================================================
-    // ÇÃ·§ÆûÀÇ ¼öÁ÷¸é¿¡ ´ê¾Ò´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼ö
-    // ÇÃ·¹ÀÌ¾î¿¡¼­ Ãæµ¹Á¡À¸·Î ÇâÇÏ´Â º¤ÅÍ(collision.contacts[0].point - transform.position)¿Í
-    // (0, -1, 0) º¤ÅÍ¸¦ ³»ÀûÇÏ¿© ÇÃ·§Æû°ú ÇÃ·¹ÀÌ¾îÀÇ Ãæµ¹ »óÅÂ¸¦ ±¸ÇÔ.
-    // 0.5´Â ÀÓÀÇÀÇ °ª. ÃßÈÄ °ª Á¶Á¤ ¿¹Á¤ (0.5 == cos(50'))
-    // ¿Ã¹Ù¸¥ Ãæµ¹ ½Ã SmoothJump ÄÚ·çÆ¾À» ¸ØÃß°í, ´Ù½Ã Á¡ÇÁÇÒ ¼ö ÀÖ´Â »óÅÂ·Î ÀüÈ¯
-    // ³»ÀûÀ» »ç¿ëÇÏ¿© °è»êÇÑ ÀÌÀ¯ : collision.contacts[n].normal.y·Î °è»ê ½Ã ÇÃ·§ÆûÀÇ ¾Æ·¡¿¡¼­
-    // ÇÃ·¹ÀÌ¾î°¡ Á¡ÇÁÇÏ¿© Á¤¼ö¸®¸¦ ´ê¾Æµµ ¿Ã¹Ù¸¥ Ãæµ¹·Î ÀÎ½ÄÇÏ±â ¶§¹®¿¡ ¿ÀÁ÷ ÇÃ·¹ÀÌ¾îÀÇ ¹ß·ÎºÎÅÍ
-    // ÀÏÁ¤ °¢µµÀÇ Ãæµ¹¸¸ Ã³¸®ÇÏ±â À§ÇÔ
+    // í”Œëž«í¼ì˜ ìˆ˜ì§ë©´ì— ë‹¿ì•˜ëŠ”ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
+    // í”Œë ˆì´ì–´ì—ì„œ ì¶©ëŒì ìœ¼ë¡œ í–¥í•˜ëŠ” ë²¡í„°(collision.contacts[0].point - transform.position)ì™€
+    // (0, -1, 0) ë²¡í„°ë¥¼ ë‚´ì í•˜ì—¬ í”Œëž«í¼ê³¼ í”Œë ˆì´ì–´ì˜ ì¶©ëŒ ìƒíƒœë¥¼ êµ¬í•¨.
+    // 0.5ëŠ” ìž„ì˜ì˜ ê°’. ì¶”í›„ ê°’ ì¡°ì • ì˜ˆì • (0.5 == cos(50'))
+    // ì˜¬ë°”ë¥¸ ì¶©ëŒ ì‹œ SmoothJump ì½”ë£¨í‹´ì„ ë©ˆì¶”ê³ , ë‹¤ì‹œ ì í”„í•  ìˆ˜ ìžˆëŠ” ìƒíƒœë¡œ ì „í™˜
+    // ë‚´ì ì„ ì‚¬ìš©í•˜ì—¬ ê³„ì‚°í•œ ì´ìœ  : collision.contacts[n].normal.yë¡œ ê³„ì‚° ì‹œ í”Œëž«í¼ì˜ ì•„ëž˜ì—ì„œ
+    // í”Œë ˆì´ì–´ê°€ ì í”„í•˜ì—¬ ì •ìˆ˜ë¦¬ë¥¼ ë‹¿ì•„ë„ ì˜¬ë°”ë¥¸ ì¶©ëŒë¡œ ì¸ì‹í•˜ê¸° ë•Œë¬¸ì— ì˜¤ì§ í”Œë ˆì´ì–´ì˜ ë°œë¡œë¶€í„°
+    // ì¼ì • ê°ë„ì˜ ì¶©ëŒë§Œ ì²˜ë¦¬í•˜ê¸° ìœ„í•¨
     // ===============================================================================================
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Platform")
         {
-            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.5f)
+            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.85f)
             {
                 isJump = false;
-                StopCoroutine(SmoothJump());
+
+                if (smoothJump != null)
+                    StopCoroutine(smoothJump);
             }
         }
     }
 
     // ===============================================================================================
-    // ÇÃ·§ÆûÀÇ º® ºÎºÐ¿¡ ´ê¾Ò´ÂÁö °Ë»çÇÏ´Â ÇÔ¼ö
-    // ÇÑ¹øÀÌ¶óµµ º®¿¡ Ãæµ¹Çß´Ù¸é collideToWall º¯¼ö¸¦ True·Î ¸¸µê.
-    // ¹Ýº¹¹®À» »ç¿ëÇÏ¿© °Ë»çÇÏ´Â ÀÌÀ¯´Â µ¿½Ã¿¡ ¿©·¯ ¹°Ã¼¿Í Ãæµ¹ »óÅÂ°¡ µÉ ¼ö ÀÖ±â ¶§¹®.
+    // í”Œëž«í¼ì˜ ë²½ ë¶€ë¶„ì— ë‹¿ì•˜ëŠ”ì§€ ê²€ì‚¬í•˜ëŠ” í•¨ìˆ˜
+    // í•œë²ˆì´ë¼ë„ ë²½ì— ì¶©ëŒí–ˆë‹¤ë©´ collideToWall ë³€ìˆ˜ë¥¼ Trueë¡œ ë§Œë“¦.
+    // ë°˜ë³µë¬¸ì„ ì‚¬ìš©í•˜ì—¬ ê²€ì‚¬í•˜ëŠ” ì´ìœ ëŠ” ë™ì‹œì— ì—¬ëŸ¬ ë¬¼ì²´ì™€ ì¶©ëŒ ìƒíƒœê°€ ë  ìˆ˜ ìžˆê¸° ë•Œë¬¸.
     // ===============================================================================================
     private void OnCollisionStay(Collision collision)
     {
@@ -99,7 +102,7 @@ public class Movement : MonoBehaviour
         {
             for (int i = 0; i < collision.contacts.Length; i++)
             {
-                if (Vector3.Dot(collision.contacts[i].point - transform.position, Vector3.down) <= 0.5f)
+                if (Vector3.Dot(collision.contacts[i].point - transform.position, Vector3.down) <= 0.85f)
                 {
                     collideToWall = true;
                     break;
@@ -109,11 +112,11 @@ public class Movement : MonoBehaviour
     }
 
     // ===============================================================================================
-    // ÇÃ·§ÆûÀÇ ¹Ù´Ú¿¡¼­ ¹þ¾î³¯ ¶§¸¸ È£ÃâµÇ´Â ÇÔ¼ö
-    // º®¿¡¼­ ¹þ¾î³µ´Ù¸é È£ÃâµÇÁö ¾ÊÀ¸¸ç, ÇÃ·§Æû¿¡¼­ Á¡ÇÁÇÏÁö ¾Ê°í ¹Ì²ô·¯ ¶³¾îÁø »óÅÂ¶ó¸é ÄÚ·çÆ¾ ½ÇÇàÇÏ¿©
-    // ÀÏÁ¤ ½Ã°£ µÚ¿¡ Á¡ÇÁ ºÒ°¡ »óÅÂ·Î ÀüÈ¯
-    // OnCollisionExitÀÌ È£ÃâµÇ´Â ¼ø°£ °¡ºñÁö ÄÝ·ºÅÍ°¡ collision.contacts¸¦ ºñ¿ö¹ö·Á¼­ Ãæµ¹Á¡À» Ã£À» ¼ö
-    // ¾ø±â ¶§¹®¿¡ Stay ÇÔ¼ö¿¡¼­ Ãæµ¹Á¡À» °Ë»çÇØ¼­ Ãæµ¹ »óÅÂ Á¶»çÇÔ.
+    // í”Œëž«í¼ì˜ ë°”ë‹¥ì—ì„œ ë²—ì–´ë‚  ë•Œë§Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
+    // ë²½ì—ì„œ ë²—ì–´ë‚¬ë‹¤ë©´ í˜¸ì¶œë˜ì§€ ì•Šìœ¼ë©°, í”Œëž«í¼ì—ì„œ ì í”„í•˜ì§€ ì•Šê³  ë¯¸ë„ëŸ¬ ë–¨ì–´ì§„ ìƒíƒœë¼ë©´ ì½”ë£¨í‹´ ì‹¤í–‰í•˜ì—¬
+    // ì¼ì • ì‹œê°„ ë’¤ì— ì í”„ ë¶ˆê°€ ìƒíƒœë¡œ ì „í™˜
+    // OnCollisionExitì´ í˜¸ì¶œë˜ëŠ” ìˆœê°„ ê°€ë¹„ì§€ ì½œë ‰í„°ê°€ collision.contactsë¥¼ ë¹„ì›Œë²„ë ¤ì„œ ì¶©ëŒì ì„ ì°¾ì„ ìˆ˜
+    // ì—†ê¸° ë•Œë¬¸ì— Stay í•¨ìˆ˜ì—ì„œ ì¶©ëŒì ì„ ê²€ì‚¬í•´ì„œ ì¶©ëŒ ìƒíƒœ ì¡°ì‚¬í•¨.
     // ===============================================================================================
     private void OnCollisionExit(Collision collision)
     {
@@ -122,17 +125,20 @@ public class Movement : MonoBehaviour
             if (collideToWall)
                 collideToWall = false;
             else
-                StartCoroutine(SmoothJump());
+            {
+                smoothJump = SmoothJump();
+                StartCoroutine(smoothJump);
+            }
         }
     }
 
     // ===============================================================================================
-    // ºÎµå·¯¿î Á¡ÇÁ ±¸ÇöÇÏ±â À§ÇÑ ÇÔ¼ö
-    // ÃßÈÄ ÇÔ¼ö¿¡ ÀÖ´Â °ª ºÐ¸®
+    // ë¶€ë“œëŸ¬ìš´ ì í”„ êµ¬í˜„í•˜ê¸° ìœ„í•œ í•¨ìˆ˜
+    // ì¶”í›„ í•¨ìˆ˜ì— ìžˆëŠ” ê°’ ë¶„ë¦¬
     // ===============================================================================================
     private IEnumerator SmoothJump()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         isJump = true;
     }
 }
