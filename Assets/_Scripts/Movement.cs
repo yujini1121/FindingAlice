@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float jumpForce;
 
     Rigidbody       rigid;
-    bool collideToWall;
+    [SerializeField] bool collideToWall;
 
     float xAxis;
     [SerializeField] bool doJump;
@@ -70,7 +70,7 @@ public class Movement : MonoBehaviour
     // 플랫폼의 수직면에 닿았는지 확인하는 함수
     // 플레이어에서 충돌점으로 향하는 벡터(collision.contacts[0].point - transform.position)와
     // (0, -1, 0) 벡터를 내적하여 플랫폼과 플레이어의 충돌 상태를 구함.
-    // 0.75는 임의의 값. 추후 값 조정 예정
+    // 0.5는 임의의 값. 추후 값 조정 예정 (0.5 == cos(50'))
     // 올바른 충돌 시 SmoothJump 코루틴을 멈추고, 다시 점프할 수 있는 상태로 전환
     // 내적을 사용하여 계산한 이유 : collision.contacts[n].normal.y로 계산 시 플랫폼의 아래에서
     // 플레이어가 점프하여 정수리를 닿아도 올바른 충돌로 인식하기 때문에 오직 플레이어의 발로부터
@@ -80,7 +80,7 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
         {
-            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.75f)
+            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.5f)
             {
                 isJump = false;
                 StopCoroutine(SmoothJump());
@@ -99,7 +99,7 @@ public class Movement : MonoBehaviour
         {
             for (int i = 0; i < collision.contacts.Length; i++)
             {
-                if (Vector3.Dot(collision.contacts[i].point - transform.position, Vector3.down) <= 0.75f)
+                if (Vector3.Dot(collision.contacts[i].point - transform.position, Vector3.down) <= 0.5f)
                 {
                     collideToWall = true;
                     break;
@@ -112,12 +112,17 @@ public class Movement : MonoBehaviour
     // 플랫폼의 바닥에서 벗어날 때만 호출되는 함수
     // 벽에서 벗어났다면 호출되지 않으며, 플랫폼에서 점프하지 않고 미끄러 떨어진 상태라면 코루틴 실행하여
     // 일정 시간 뒤에 점프 불가 상태로 전환
+    // OnCollisionExit이 호출되는 순간 가비지 콜렉터가 collision.contacts를 비워버려서 충돌점을 찾을 수
+    // 없기 때문에 Stay 함수에서 충돌점을 검사해서 충돌 상태 조사함.
     // ===============================================================================================
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Platform" && !collideToWall)
+        if (collision.gameObject.tag == "Platform")
         {
-            StartCoroutine(SmoothJump());
+            if (collideToWall)
+                collideToWall = false;
+            else
+                StartCoroutine(SmoothJump());
         }
     }
 
