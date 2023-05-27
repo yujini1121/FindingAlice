@@ -13,6 +13,7 @@ public class ClockManager : MonoBehaviour
 
     GameObject player;
     GameObject clock;
+    IEnumerator clockState;
 
     void Start()
     {
@@ -22,6 +23,22 @@ public class ClockManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Application.platform == RuntimePlatform.Android)
+        {
+
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                clockState = ClockShoot();
+                StartCoroutine(clockState);
+            }
+        }
+    }
+
+    IEnumerator ClockShoot()
+    {
+        player.GetComponent<Movement>().
     }
 }

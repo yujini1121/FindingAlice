@@ -4,38 +4,17 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
-    [SerializeField] float jumpForce;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float jumpForce;
 
-    Rigidbody       rigid;
-    IEnumerator     smoothJump;
-    [SerializeField] bool collideToWall;
+    protected Rigidbody rigid;
+    protected IEnumerator smoothJump;
+    [SerializeField] protected bool collideToWall;
 
-    float xAxis;
-    [SerializeField] bool doJump;
-    [SerializeField] bool isJump;
+    protected float xAxis;
+    [SerializeField] protected bool doJump;
+    [SerializeField] protected bool isJump;
 
-    void Start()
-    {
-        rigid       = GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-        xAxis = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetKeyDown(KeyCode.Space) && !isJump)
-        {
-            isJump = true;
-            doJump = true;
-        }
-    }
-
-    void FixedUpdate()
-    {
-        Move();
-        Jump();
-    }
 
     public void Move()
     {
@@ -71,7 +50,6 @@ public class Movement : MonoBehaviour
     // 플랫폼의 수직면에 닿았는지 확인하는 함수
     // 플레이어에서 충돌점으로 향하는 벡터(collision.contacts[0].point - transform.position)와
     // (0, -1, 0) 벡터를 내적하여 플랫폼과 플레이어의 충돌 상태를 구함.
-    // 0.5는 임의의 값. 추후 값 조정 예정 (0.5 == cos(50'))
     // 올바른 충돌 시 SmoothJump 코루틴을 멈추고, 다시 점프할 수 있는 상태로 전환
     // 내적을 사용하여 계산한 이유 : collision.contacts[n].normal.y로 계산 시 플랫폼의 아래에서
     // 플레이어가 점프하여 정수리를 닿아도 올바른 충돌로 인식하기 때문에 오직 플레이어의 발로부터
