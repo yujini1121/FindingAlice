@@ -1,21 +1,35 @@
 # About Finding Alice :rabbit2:   
 
 ***
+## 목차
+***
+### [Finding Alice 소개](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%86%8C%EA%B0%9C)
+### [Finding Alice 챕터](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%B1%95%ED%84%B0)
+### [Finding Alice 이미지](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%B1%95%ED%84%B0)
+### [Finding Alice 스크립팅](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8C%85)
+### [Finding Alice Pages](https://github.com/yujini1121/FindingAlice#pages)
+### [멤버 소개](https://github.com/yujini1121/FindingAlice#%EB%A9%A4%EB%B2%84-%EC%86%8C%EA%B0%9C)
+<br/>
+
+***
 ## Finding Alice 소개
 ***
-- **프로젝트 이름**: Finding Alice   
-- **기간**: 2022.04.06 ~ ing
-- **간단한 설명**: `Finding Alice`는 약간의 컨트롤을 요구하는 2.5D 횡스크롤 모바일 게임입니다.
-달나라 토끼의 주 업무는 맛있는 떡을 만드는 것! 이지만…. 주인공 토끼(플레이어)는 `이상한 나라의 앨리스`를 읽고 시계 토끼를 동경하게 되어 앨리스를 찾아 지구로 떠나게 되었습니다. 지구에 도착했지만 다양한 동화 속 인물들의 사건을 해결해야만 앨리스를 찾을 수 있으며, 주인공은 `도약이 가능한 회중시계`를 이용해 사건을 해결해 나갈 수 있습니다.   
-- **플랫폼**: Android :iphone:    
-- **장르**: `2.5D 횡스크롤 와이어 액션 플랫포머` 게임  
-- **다운방법**: Google Play Store에서 다운로드 가능합니다.  
-**>> [Download](https://play.google.com/store/apps/details?id=com.newbies.FindingAlice&hl=ko)**  
+**>> [Download](https://play.google.com/store/apps/details?id=com.newbies.FindingAlice&hl=ko)**
+| 학년 | 이름 |
+| --- | --- | 
+| 프로젝트 이름 | Finding Alice |
+| 장르 | 2.5D 횡스크롤 와이어 액션 플랫포머 게임 |
+| 기간 | 2022.04.06 ~ |
+| 플랫폼 | Android :iphone: |
+| 다운방법 | Google Play Store |
 <br/>
 
 ***
 ## Finding Alice 챕터
 ***
+
+- **스토리 설명**
+>>* 달나라 토끼의 주 업무는 맛있는 떡을 만드는 것! 이지만… 주인공 토끼(플레이어)는 `이상한 나라의 앨리스`를 읽고 시계 토끼를 동경하게 되어 앨리스를 찾아 지구로 떠나게 되었습니다. 지구에 도착했지만 생각보다 모험이 길고 험난할 것 같습니다... 주인공은 `도약이 가능한 회중시계`를 이용해 사건을 점차 해결해 나가게 됩니다. 과연 주인공은 무사히 `앨리스`를 찾을 수 있을까요? 
 
 - **튜토리얼** :arrow_forward:
 >>* 파인딩 앨리스의 기본적인 기능을 익힙니다.
@@ -59,7 +73,6 @@
 >>    * 아무 플랫폼 위에 플레이어가 계속 있으면 시계 횟수가 충전되는 시스템
 >>  * 영지 침범
 >>    * 여왕의 영지에 초대 받지 않은 모든 이들은 각자의 능력에 따라 저주를 받습니다.
-
 <br/>
 
 ***
@@ -124,7 +137,7 @@
 <br/>
 
 ***
-## Pages
+## Finding Alice Pages
 ***
 - [**파인딩앨리스 설문조사**](https://docs.google.com/forms/d/e/1FAIpQLScKXSLZwnU7ZOz2QlLN3dmoqAGOPZDtzA7EsF5PSpt_eQ7j4g/viewform?usp=sharing)
 - **[파인딩앨리스 기획서 Notion Page](https://www.notion.so/Finding-Alice-a80f6fa39893456ab39d25d6f254cbfd)**
@@ -139,7 +152,7 @@
   
 | 학년 | 이름 | 구분 | 비고 |
 | --- | --- | -------- | --- |
-| 4 | [이승찬](https://github.com/gehfand729) | [ 프로그래밍] | 메인 프로그래머 |
+| 4 | [이승찬](https://github.com/gehfand729) | [ 프로그래밍 ] | 메인 프로그래머 |
 | 3 | [염승민](https://github.com/SeungminYeom) | [ 기획 / 프로그래밍 ] | 메인 프로그래머 |
 | 3 | [허재혁](https://github.com/walaHeo) | [ 그래픽 ] | 3D 배경 |
 | 2 | 변재현 | [ 기획 ] | 시나리오 |
@@ -156,7 +169,7 @@
 | 학년 | 이름 | 구분 | 비고 |
 | --- | --- | -------- | --- |
 | 4 | [정하영](https://www.artstation.com/674) | [ 그래픽 ] | 원화 |
-| 3 | [고민철](https://github.com/gmcc0713) | [ 프로그래밍] | 메인 프로그래머 |
+| 3 | [고민철](https://github.com/gmcc0713) | [ 프로그래밍 ] | 메인 프로그래머 |
 | 3 | 김태현 | [ 프로그래밍 ] | 서브 프로그래머 |
 | 3 | 이수진 | [ 그래픽 ] | 2D 애니메이션 |
 | 3 | 원소영 | [ 그래픽 ] | 3D 배경 |
@@ -176,7 +189,7 @@
 ### 2022
 | 학년 | 이름 | 구분 | 비고 |
 | --- | --- | -------- | --- |
-| 4 | [이승찬](https://github.com/gehfand729) | [ 프로그래밍] | 메인 프로그래머 |
+| 4 | [이승찬](https://github.com/gehfand729) | [ 프로그래밍 ] | 메인 프로그래머 |
 | 3 | [염승민](https://github.com/SeungminYeom) | [ 기획 / 프로그래밍 ] | 메인 프로그래머 |
 | 3 | [허재혁](https://github.com/walaHeo) | [ 그래픽 ] | 3D 배경 |
 | 2 | 변재현 | [ 기획 ] | 시나리오 |
@@ -185,13 +198,14 @@
 | 1 | [송치원](https://github.com/Chiweon) | [ 그래픽 ] | 2D |
 | 1 | 이상윤 | [ 그래픽 ] | 3D 플랫폼 |
 | 1 | [이유진](https://github.com/yujini1121) | [ 프로그래밍 ] | 서브 프로그래머 |
+
 <br/>
 
 ### 2023
 | 학년 | 이름 | 구분 | 비고 |
 | --- | --- | -------- | --- |
 | 4 | [정하영](https://www.artstation.com/674) | [ 그래픽 ] | 원화 |
-| 3 | [고민철](https://github.com/gmcc0713) | [ 프로그래밍] | 메인 프로그래머 |
+| 3 | [고민철](https://github.com/gmcc0713) | [ 프로그래밍 ] | 메인 프로그래머 |
 | 3 | 김태현 | [ 프로그래밍 ] | 서브 프로그래머 |
 | 3 | 이수진 | [ 그래픽 ] | 2D 애니메이션 |
 | 3 | 원소영 | [ 그래픽 ] | 3D 배경 |
@@ -200,6 +214,6 @@
 | 2 | [김규리](https://github.com/Gyuri0315) | [ 프로그래밍 ] | 서브 프로그래머 |
 | 2 | 정민주 | [ 프로그래밍 ] | 서브 프로그래머 |
 | 1 | 진유리 | [ 그래픽 ] | 이펙트 |
-| 1 | 김태원 | [ 그래픽 ] | 3D 플랫폼 |
-
+| 1 | 김태원 | [ 그래픽 ]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 3D 플랫폼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+<!-- 태원씨 죄송해요 -->
 *& Thanks to [염승민](https://github.com/SeungminYeom)*
