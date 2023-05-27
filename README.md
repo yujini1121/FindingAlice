@@ -15,7 +15,7 @@
 ## Finding Alice 소개
 ***
 **>> [Download](https://play.google.com/store/apps/details?id=com.newbies.FindingAlice&hl=ko)**
-| 학년 | 이름 |
+| 구분 | 설명 |
 | --- | --- | 
 | 프로젝트 이름 | Finding Alice |
 | 장르 | 2.5D 횡스크롤 와이어 액션 플랫포머 게임 |
