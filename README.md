@@ -82,24 +82,24 @@
 ***
 
 - **튜토리얼 이미지**   
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/b9e5448f-95e9-4ebe-97b2-7d5ea64cc1a0" width="50%"  height="50%">
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/b9e5448f-95e9-4ebe-97b2-7d5ea64cc1a0" width="70%"  height="70%">
 
 - **챕터 1 이미지**   
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/a52fbb15-6a47-42a2-abf2-24f8c0164a96" width="50%"  height="50%">
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/a52fbb15-6a47-42a2-abf2-24f8c0164a96" width="70%"  height="70%">
 
 - **플랫폼 이미지**   
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/20389222-d7bb-4fd6-8fa2-a79adba3d763" width="50%"  height="50%">
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/20389222-d7bb-4fd6-8fa2-a79adba3d763" width="70%"  height="70%">
 
 - **캐릭터 이미지**     
-  <img src = "https://github.com/yujini1121/FindingAlice_2022/assets/107358820/a334200d-4eb4-4b1c-9ab3-08be65e9dc54" width="50%"  height="50%">
+  <img src = "https://github.com/yujini1121/FindingAlice_2022/assets/107358820/a334200d-4eb4-4b1c-9ab3-08be65e9dc54" width="70%"  height="70%">
 
 - **캐릭터 스프라이트 이미지**   
-  <img src = "https://raw.githubusercontent.com/Gyuri0315/FindingAlice/main/Deck/Rabbit_Sprite.PNG" width="50%"  height="50%">
+  <img src = "https://raw.githubusercontent.com/Gyuri0315/FindingAlice/main/Deck/Rabbit_Sprite.PNG" width="70%"  height="70%">
 
 - **아이템 이미지**   
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/ea293676-843e-431e-9054-4e89c34933fe" width="50%"  height="50%">
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/79174668-d81c-463d-90ca-e8284bf91b65" width="50%"  height="50%">
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/1f2a926f-0e0f-4497-8685-fd1fa4356091" width="50%"  height="50%">
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/1f2a926f-0e0f-4497-8685-fd1fa4356091" width="25%"  height="25%">
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/79174668-d81c-463d-90ca-e8284bf91b65" width="25%"  height="25%">
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/ea293676-843e-431e-9054-4e89c34933fe" width="25%"  height="25%">
 <br/>
 
 ***   
