@@ -18,17 +18,19 @@
 | 구분 | 설명 |
 | --- | --- | 
 | 프로젝트 이름 | Finding Alice |
-| 장르 | 2.5D 횡스크롤 와이어 액션 플랫포머 게임 |
-| 기간 | 2022.04.06 ~ |
+| 장르 | 2.5D / 횡스크롤 와이어 액션 플랫포머 |
+| 개발 | 동의대학교 Newbies |
+| 기간 | 2022.04.06 ~ ing |
 | 플랫폼 | Android :iphone: |
 | 다운방법 | Google Play Store |
+| 엔진 | Unity |
 <br/>
 
 ***
 ## Finding Alice 챕터
 ***
 
-- **스토리 설명**
+- **스토리 설명** :speech_balloon:
 >>* 달나라 토끼의 주 업무는 맛있는 떡을 만드는 것! 이지만… 주인공 토끼(플레이어)는 `이상한 나라의 앨리스`를 읽고 시계 토끼를 동경하게 되어 앨리스를 찾아 지구로 떠나게 되었습니다. 지구에 도착했지만 생각보다 모험이 길고 험난할 것 같습니다... 주인공은 `도약이 가능한 회중시계`를 이용해 사건을 점차 해결해 나가게 됩니다. 과연 주인공은 무사히 `앨리스`를 찾을 수 있을까요? 
 
 - **튜토리얼** :arrow_forward:
@@ -92,7 +94,7 @@
 ![파인딩 앨리스 캐릭터](https://github.com/yujini1121/FindingAlice_2022/assets/107358820/a334200d-4eb4-4b1c-9ab3-08be65e9dc54)  
 
 - **캐릭터 스프라이트 이미지**   
-![캐릭터 스프라이트](/Deck/Rabbit_Sprite.PNG)   
+![캐릭터 스프라이트](https://raw.githubusercontent.com/Gyuri0315/FindingAlice/main/Deck/Rabbit_Sprite.PNG)   
 
 - **아이템 이미지**   
 ![아이템1](https://github.com/Gyuri0315/FindingAlice/assets/122785488/ea293676-843e-431e-9054-4e89c34933fe)      
@@ -107,7 +109,7 @@
 - **파인딩앨리스 주요 스크립트**
 [주요 스크립트에 대한 설명]
 
-- **코드 스타일 가이드 라인**   
+- **코딩 스타일 가이드 라인**   
    * **중괄호**    
       * 내용이 한줄이어도 사용
       * BSD 스타일 (조건과 여는 블록의 줄을 다르게 함)
@@ -140,7 +142,7 @@
 ## Finding Alice Pages
 ***
 - [**파인딩앨리스 설문조사**](https://docs.google.com/forms/d/e/1FAIpQLScKXSLZwnU7ZOz2QlLN3dmoqAGOPZDtzA7EsF5PSpt_eQ7j4g/viewform?usp=sharing)
-- **[파인딩앨리스 기획서 Notion Page](https://www.notion.so/Finding-Alice-a80f6fa39893456ab39d25d6f254cbfd)**
+- **[파인딩앨리스 기획서 Notion Page](https://absorbed-splash-9bb.notion.site/a1834c6a357d4bfe84a5722cd9f11c60)**
 <br/><br/>
 
 
