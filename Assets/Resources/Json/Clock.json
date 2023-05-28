@@ -7,5 +7,5 @@
 
     "clockMaxDistance":         5,
     "clockCurDistance":         0,
-    "clockShootPower":          10
+    "clockShootPower":          20
 }

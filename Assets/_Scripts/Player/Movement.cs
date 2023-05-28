@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
         public bool     collideToWall;
         public bool     doJump;
         public bool     isJump;
+        public bool     movable;
     }
 
     protected Value         value;
@@ -29,6 +30,8 @@ public class Movement : MonoBehaviour
 
     protected virtual void Move()
     {
+        if (!value.movable) return;
+
         if (transform.localScale.x < 0 && value.xAxis > 0)
         {
             Vector3 reverse = transform.localScale;
@@ -134,5 +137,11 @@ public class Movement : MonoBehaviour
     protected void Shooting()
     {
         value.isJump = true;
+        value.movable = false;
+    }
+
+    protected void Following()
+    {
+        value.movable = true;
     }
 }

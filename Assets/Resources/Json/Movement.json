@@ -1,4 +1,6 @@
 {
     "moveSpeed":    5,
-    "jumpForce":    15
+    "jumpForce":    15,
+
+    "movable":      true
 }
