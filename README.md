@@ -3,12 +3,12 @@
 ***
 ## 목차
 ***
-### [Finding Alice 소개](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%86%8C%EA%B0%9C-1)
-### [Finding Alice 챕터](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%B1%95%ED%84%B0-1)
-### [Finding Alice 이미지](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%9D%B4%EB%AF%B8%EC%A7%80-1)
-### [Finding Alice 스크립팅](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8C%85-1)
-### [Finding Alice Pages](https://github.com/yujini1121/FindingAlice#finding-alice-pages-1)
-### [멤버 소개](https://github.com/yujini1121/FindingAlice#%EB%A9%A4%EB%B2%84-%EC%86%8C%EA%B0%9C-2)
+#### [1. Finding Alice 소개](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%86%8C%EA%B0%9C-1)
+#### [2. Finding Alice 챕터](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%B1%95%ED%84%B0-1)
+#### [3. Finding Alice 이미지](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%9D%B4%EB%AF%B8%EC%A7%80-1)
+#### [4. Finding Alice 스크립팅](https://github.com/yujini1121/FindingAlice#finding-alice-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8C%85-1)
+#### [5. Finding Alice Pages](https://github.com/yujini1121/FindingAlice#finding-alice-pages-1)
+#### [6. 멤버 소개](https://github.com/yujini1121/FindingAlice#%EB%A9%A4%EB%B2%84-%EC%86%8C%EA%B0%9C-2)
 <br/>
 
 ***
