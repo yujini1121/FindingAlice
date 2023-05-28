@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class Ch1_Movement : Movement
 {
-    void Start()
-    {
-        rigid = GetComponent<Rigidbody>();
-    }
-
     void Update()
     {
-        xAxis = Input.GetAxisRaw("Horizontal");
+        value.xAxis = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isJump)
+        if (Input.GetKeyDown(KeyCode.Space) && !value.isJump)
         {
-            isJump = true;
-            doJump = true;
+            value.isJump = true;
+            value.doJump = true;
         }
     }
 
     void FixedUpdate()
     {
-        Move();
-        Jump();
+        base.Move();
+        base.Jump();
     }
 }

@@ -4,46 +4,57 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] protected float moveSpeed;
-    [SerializeField] protected float jumpForce;
-
-    protected Rigidbody rigid;
-    protected IEnumerator smoothJump;
-    [SerializeField] protected bool collideToWall;
-
-    protected float xAxis;
-    [SerializeField] protected bool doJump;
-    [SerializeField] protected bool isJump;
-
-
-    public void Move()
+    [System.Serializable]
+    protected class Value
     {
-        if (transform.localScale.x < 0 && xAxis > 0)
+        public float    moveSpeed;
+        public float    jumpForce;
+        public float    xAxis;
+
+        public bool     collideToWall;
+        public bool     doJump;
+        public bool     isJump;
+    }
+
+    protected Value         value;
+    protected Rigidbody     rigid;
+    protected IEnumerator   smoothJump;
+
+    protected virtual void Start()
+    {
+        value = JsonUtility.FromJson<Value>(Resources.Load<TextAsset>("Json/Movement").text);
+
+        rigid = GetComponent<Rigidbody>();
+    }
+
+    protected virtual void Move()
+    {
+        if (transform.localScale.x < 0 && value.xAxis > 0)
         {
             Vector3 reverse = transform.localScale;
             reverse.x = -transform.localScale.x;
             transform.localScale = reverse;
         }
-        if (transform.localScale.x > 0 && xAxis < 0)
+        if (transform.localScale.x > 0 && value.xAxis < 0)
         {
             Vector3 reverse = transform.localScale;
             reverse.x = -transform.localScale.x;
             transform.localScale = reverse;
         }
 
-        Vector3 velocity = new Vector3(xAxis, 0, 0);
-        velocity = velocity * moveSpeed;
+        Vector3 velocity = new Vector3(value.xAxis, 0, 0);
+        velocity = velocity * value.moveSpeed;
 
         rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
     }
 
-    public void Jump()
+    protected virtual void Jump()
     {
-        if (!doJump) return;
+        if (!value.doJump) return;
 
-        doJump = false;
+        value.doJump = false;
         rigid.velocity = Vector3.zero;
-        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rigid.AddForce(Vector3.up * value.jumpForce, ForceMode.Impulse);
     }
 
     // ===============================================================================================
@@ -55,13 +66,13 @@ public class Movement : MonoBehaviour
     // 플레이어가 점프하여 정수리를 닿아도 올바른 충돌로 인식하기 때문에 오직 플레이어의 발로부터
     // 일정 각도의 충돌만 처리하기 위함
     // ===============================================================================================
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Platform")
         {
             if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.85f)
             {
-                isJump = false;
+                value.isJump = false;
 
                 if (smoothJump != null)
                     StopCoroutine(smoothJump);
@@ -74,15 +85,15 @@ public class Movement : MonoBehaviour
     // 한번이라도 벽에 충돌했다면 collideToWall 변수를 True로 만듦.
     // 반복문을 사용하여 검사하는 이유는 동시에 여러 물체와 충돌 상태가 될 수 있기 때문.
     // ===============================================================================================
-    private void OnCollisionStay(Collision collision)
+    protected virtual void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Platform" && !collideToWall)
+        if (collision.gameObject.tag == "Platform" && !value.collideToWall)
         {
             for (int i = 0; i < collision.contacts.Length; i++)
             {
                 if (Vector3.Dot(collision.contacts[i].point - transform.position, Vector3.down) <= 0.85f)
                 {
-                    collideToWall = true;
+                    value.collideToWall = true;
                     break;
                 }
             }
@@ -96,12 +107,12 @@ public class Movement : MonoBehaviour
     // OnCollisionExit이 호출되는 순간 가비지 콜렉터가 collision.contacts를 비워버려서 충돌점을 찾을 수
     // 없기 때문에 Stay 함수에서 충돌점을 검사해서 충돌 상태 조사함.
     // ===============================================================================================
-    private void OnCollisionExit(Collision collision)
+    protected virtual void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Platform")
         {
-            if (collideToWall)
-                collideToWall = false;
+            if (value.collideToWall)
+                value.collideToWall = false;
             else
             {
                 smoothJump = SmoothJump();
@@ -114,9 +125,14 @@ public class Movement : MonoBehaviour
     // 부드러운 점프 구현하기 위한 함수
     // 추후 함수에 있는 값 분리
     // ===============================================================================================
-    private IEnumerator SmoothJump()
+    protected IEnumerator SmoothJump()
     {
         yield return new WaitForSeconds(0.3f);
-        isJump = true;
+        value.isJump = true;
+    }
+
+    protected void Shooting()
+    {
+        value.isJump = true;
     }
 }

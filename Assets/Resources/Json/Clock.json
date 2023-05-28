@@ -1,0 +1,11 @@
+{
+    "timeScaleValue":           0.05,
+
+    "clockIncreasableTime":     1,
+    "clockMaxDistanceTime":     2,
+    "clockStartTime":           0,
+
+    "clockMaxDistance":         5,
+    "clockCurDistance":         0,
+    "clockShootPower":          10
+}
