@@ -67,14 +67,23 @@ public class Clock : MonoBehaviour
 
         while (Time.unscaledTime - value.clockStartTime < value.clockIncreasableTime + value.clockMaxDistanceTime)
         {
-            value.clockCurDistance += Time.unscaledDeltaTime * (value.clockMaxDistance / value.clockIncreasableTime);
+            if (value.clockCurDistance < value.clockMaxDistance)
+                value.clockCurDistance += value.clockMaxDistance * (Time.unscaledDeltaTime / value.clockIncreasableTime);
 
             dir = (Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
                                                               Input.mousePosition.y,
                                                               -Camera.main.transform.position.z))
                         - player.transform.position).normalized;
 
-            transform.localPosition = new Vector3(dir.x * value.clockCurDistance, dir.y * value.clockCurDistance, 0);
+            if ((dir.x < 0 && player.transform.localScale.x > 0) || (dir.x > 0 && player.transform.localScale.x < 0))
+            {
+                Vector3 sightDir = player.transform.localScale;
+                sightDir.x *= -1;
+                player.transform.localScale = sightDir;
+            }
+
+            transform.localPosition = new Vector3(dir.x * value.clockCurDistance * (player.transform.localScale.x / Mathf.Abs(player.transform.localScale.x)),
+                                                    dir.y * value.clockCurDistance, 0);
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg));
 
             yield return null;
@@ -99,10 +108,7 @@ public class Clock : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            player.GetComponent<Movement>().SendMessage("Following");
-            //player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            player.GetComponent<Rigidbody>().useGravity = true;
-            player.GetComponent<Rigidbody>().AddForce(dir * value.clockCurDistance, ForceMode.Impulse);
+            player.GetComponent<Movement>().SendMessage("Following", dir * value.clockCurDistance);
         }
         else if (other.gameObject.tag == "Platform")
         {

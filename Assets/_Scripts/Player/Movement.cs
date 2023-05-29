@@ -21,11 +21,14 @@ public class Movement : MonoBehaviour
     protected Rigidbody     rigid;
     protected IEnumerator   smoothJump;
 
+    protected Vector3       vecClockFollow;
+
     protected virtual void Start()
     {
         value = JsonUtility.FromJson<Value>(Resources.Load<TextAsset>("Json/Movement").text);
 
         rigid = GetComponent<Rigidbody>();
+        vecClockFollow = Vector3.zero;
     }
 
     protected virtual void Move()
@@ -46,9 +49,20 @@ public class Movement : MonoBehaviour
         }
 
         Vector3 velocity = new Vector3(value.xAxis, 0, 0);
-        velocity = velocity * value.moveSpeed;
 
-        rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
+        //if (vecClockFollow.magnitude > value.moveSpeed)
+        if (Mathf.Abs(vecClockFollow.x) > value.moveSpeed)
+        {
+            velocity.x = vecClockFollow.x;
+            vecClockFollow *= 0.98f;
+        }
+        else
+        {
+            velocity *= value.moveSpeed;
+        }
+
+
+        rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, 0);
     }
 
     protected virtual void Jump()
@@ -140,8 +154,11 @@ public class Movement : MonoBehaviour
         value.movable = false;
     }
 
-    protected void Following()
+    protected void Following(Vector3 vec)
     {
+        vecClockFollow = vec * 2;
+
         value.movable = true;
+        rigid.useGravity = true;
     }
 }
