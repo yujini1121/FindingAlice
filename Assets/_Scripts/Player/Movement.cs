@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     protected class Value
     {
         public float    moveSpeed;
+        public float    speedDecreaseRate;
         public float    jumpForce;
         public float    xAxis;
 
@@ -35,13 +36,7 @@ public class Movement : MonoBehaviour
     {
         if (!value.movable) return;
 
-        if (transform.localScale.x < 0 && value.xAxis > 0)
-        {
-            Vector3 reverse = transform.localScale;
-            reverse.x = -transform.localScale.x;
-            transform.localScale = reverse;
-        }
-        if (transform.localScale.x > 0 && value.xAxis < 0)
+        if ((transform.localScale.x < 0 && value.xAxis > 0) || (transform.localScale.x > 0 && value.xAxis < 0))
         {
             Vector3 reverse = transform.localScale;
             reverse.x = -transform.localScale.x;
@@ -54,13 +49,12 @@ public class Movement : MonoBehaviour
         if (Mathf.Abs(vecClockFollow.x) > value.moveSpeed)
         {
             velocity.x = vecClockFollow.x;
-            vecClockFollow *= 0.98f;
+            vecClockFollow *= value.speedDecreaseRate;
         }
         else
         {
             velocity *= value.moveSpeed;
         }
-
 
         rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, 0);
     }
@@ -148,17 +142,22 @@ public class Movement : MonoBehaviour
         value.isJump = true;
     }
 
-    protected void Shooting()
+    protected void StateBeginShoot()
     {
         value.isJump = true;
         value.movable = false;
     }
 
-    protected void Following(Vector3 vec)
+    protected void StateCollsionFromClock(Vector3 vec)
     {
-        vecClockFollow = vec * 2;
+        vecClockFollow = vec * 4;
 
         value.movable = true;
         rigid.useGravity = true;
+    }
+
+    protected void StateEndInClockEvent()
+    {
+
     }
 }

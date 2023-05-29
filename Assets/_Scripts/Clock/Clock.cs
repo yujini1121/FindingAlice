@@ -22,7 +22,7 @@ public class Clock : MonoBehaviour
     protected GameObject player;
     protected IEnumerator clockState;
 
-    protected Vector3 dir;
+    protected Vector3 vecToClock;
 
     private void Awake()
     {
@@ -42,15 +42,29 @@ public class Clock : MonoBehaviour
 
     private void OnEnable()
     {
+        clockState = ClockShoot();
         StartCoroutine(clockState);
     }
 
     void ClockReturnIdle()
     {
+        if (Time.timeScale != 1)
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        }
 
+        StopCoroutine(clockState);
+        clockState = null;
+
+        value.clockCurDistance = 0;
+
+        this.transform.parent = player.transform;
+        this.transform.localPosition = Vector3.zero;
+        this.gameObject.SetActive(false);
     }
 
-    void StateChangeToFollow()
+    public void StateChangeToFollow()
     {
         StopCoroutine(clockState);
         clockState = ClockFollow();
@@ -64,27 +78,31 @@ public class Clock : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
         player.GetComponent<Movement>().SendMessage("Shooting");
+        Transform playerTrans = player.transform;
 
         while (Time.unscaledTime - value.clockStartTime < value.clockIncreasableTime + value.clockMaxDistanceTime)
         {
             if (value.clockCurDistance < value.clockMaxDistance)
+            {
                 value.clockCurDistance += value.clockMaxDistance * (Time.unscaledDeltaTime / value.clockIncreasableTime);
+                Debug.Log(Time.unscaledTime - value.clockStartTime);
+            }
 
-            dir = (Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+            vecToClock = (Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
                                                               Input.mousePosition.y,
                                                               -Camera.main.transform.position.z))
                         - player.transform.position).normalized;
 
-            if ((dir.x < 0 && player.transform.localScale.x > 0) || (dir.x > 0 && player.transform.localScale.x < 0))
+            if ((vecToClock.x < 0 && playerTrans.localScale.x > 0) || (vecToClock.x > 0 && playerTrans.localScale.x < 0))
             {
-                Vector3 sightDir = player.transform.localScale;
+                Vector3 sightDir = playerTrans.localScale;
                 sightDir.x *= -1;
-                player.transform.localScale = sightDir;
+                playerTrans.localScale = sightDir;
             }
 
-            transform.localPosition = new Vector3(dir.x * value.clockCurDistance * (player.transform.localScale.x / Mathf.Abs(player.transform.localScale.x)),
-                                                    dir.y * value.clockCurDistance, 0);
-            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg));
+            transform.localPosition = new Vector3(vecToClock.x * value.clockCurDistance * (playerTrans.localScale.x / Mathf.Abs(playerTrans.localScale.x)),
+                                                    vecToClock.y * value.clockCurDistance, 0);
+            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -Mathf.Atan2(vecToClock.x, vecToClock.y) * Mathf.Rad2Deg));
 
             yield return null;
         }
@@ -99,7 +117,7 @@ public class Clock : MonoBehaviour
 
         transform.SetParent(null);
         player.GetComponent<Rigidbody>().useGravity = false;
-        player.GetComponent<Rigidbody>().velocity = dir * value.clockShootPower;
+        player.GetComponent<Rigidbody>().velocity = vecToClock * value.clockShootPower;
 
         yield return null;
     }
@@ -108,7 +126,9 @@ public class Clock : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            player.GetComponent<Movement>().SendMessage("Following", dir * value.clockCurDistance);
+            player.GetComponent<Movement>().SendMessage("Following", vecToClock * value.clockCurDistance);
+
+            ClockReturnIdle();
         }
         else if (other.gameObject.tag == "Platform")
         {
