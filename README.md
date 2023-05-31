@@ -31,10 +31,10 @@
 ***
 
 - **스토리 설명** :speech_balloon:
->>* 달나라 토끼의 주 업무는 맛있는 떡을 만드는 것! 이지만… 주인공 토끼(플레이어)는 `이상한 나라의 앨리스`를 읽고 시계 토끼를 동경하게 되어 앨리스를 찾아 지구로 떠나게 되었습니다. 지구에 도착했지만 생각보다 모험이 길고 험난할 것 같습니다... 주인공은 `도약이 가능한 회중시계`를 이용해 사건을 점차 해결해 나가게 됩니다. 과연 주인공은 무사히 `앨리스`를 찾을 수 있을까요? 
+>>* 달나라 토끼의 주 업무는 맛있는 떡을 만드는 것! 이지만… 토끼는 이상한 나라의 앨리스를 읽고 시계 토끼를 동경하게 되어 `앨리스`를 찾아 지구로 떠나게 되었습니다. 지구에 도착했지만 다양한 동화 속 인물들의 사건을 해결해야만 앨리스를 찾을 수 있으며, 토끼는 `도약이 가능한 회중시계`를 이용해 사건을 점차 해결해 나가게 됩니다. 구석구석 숨겨진 사건에 필요한 수집품을 찾아보세요! 하지만 수집품을 찾는 과정은 결코 쉽지는 않을 것입니다...
 
 - **튜토리얼** :arrow_forward:
->>* 파인딩 앨리스의 기본적인 기능을 익힙니다.
+>>* Finding Alice의 기본적인 기능을 익힙니다.
 >>     * 시계, 점프 등
 
 - **챕터 1** :deciduous_tree:
@@ -81,32 +81,29 @@
 ## Finding Alice 이미지
 ***
 
-- **튜토리얼 이미지**   
+- **튜토리얼**   
   <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/b9e5448f-95e9-4ebe-97b2-7d5ea64cc1a0" width="70%"  height="70%">
 
-- **챕터 1 이미지**   
+- **챕터 1**   
   <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/a52fbb15-6a47-42a2-abf2-24f8c0164a96" width="70%"  height="70%">
 
-- **플랫폼 이미지**   
+- **플랫폼**   
   <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/20389222-d7bb-4fd6-8fa2-a79adba3d763" width="70%"  height="70%">
 
-- **캐릭터 이미지**     
+- **캐릭터**     
   <img src = "https://github.com/yujini1121/FindingAlice_2022/assets/107358820/a334200d-4eb4-4b1c-9ab3-08be65e9dc54" width="70%"  height="70%">
 
-- **캐릭터 스프라이트 이미지**   
-  <img src = "https://raw.githubusercontent.com/Gyuri0315/FindingAlice/main/Deck/Rabbit_Sprite.PNG" width="70%"  height="70%">
-
-- **아이템 이미지**   
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/1f2a926f-0e0f-4497-8685-fd1fa4356091" width="25%"  height="25%">
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/79174668-d81c-463d-90ca-e8284bf91b65" width="25%"  height="25%">
-  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/ea293676-843e-431e-9054-4e89c34933fe" width="25%"  height="25%">
+- **아이템**   
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/1f2a926f-0e0f-4497-8685-fd1fa4356091" width="22%"  height="22%">
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/79174668-d81c-463d-90ca-e8284bf91b65" width="22%"  height="22%">
+  <img src = "https://github.com/Gyuri0315/FindingAlice/assets/122785488/ea293676-843e-431e-9054-4e89c34933fe" width="22%"  height="22%">
 <br/>
 
 ***   
 ## Finding Alice 스크립팅   
 ***
 
-- **파인딩앨리스 주요 스크립트**
+- **Finding Alice 주요 스크립트**
 [주요 스크립트에 대한 설명]
 
 - **코딩 스타일 가이드 라인**   
@@ -141,12 +138,12 @@
 ***
 ## Finding Alice Pages
 ***
-- [**파인딩앨리스 설문조사**](https://docs.google.com/forms/d/e/1FAIpQLScKXSLZwnU7ZOz2QlLN3dmoqAGOPZDtzA7EsF5PSpt_eQ7j4g/viewform?usp=sharing)
-- **[파인딩앨리스 기획서 Notion Page](https://absorbed-splash-9bb.notion.site/a1834c6a357d4bfe84a5722cd9f11c60)**
+- **[Finding Alice 설문조사](https://docs.google.com/forms/d/e/1FAIpQLScKXSLZwnU7ZOz2QlLN3dmoqAGOPZDtzA7EsF5PSpt_eQ7j4g/viewform?usp=sharing)**
+- **[Finding Alice 기획서](https://absorbed-splash-9bb.notion.site/a1834c6a357d4bfe84a5722cd9f11c60)**
 <br/><br/>
 
 
-
+<!-- 
 ***   
 ## 멤버 소개  
 ***   
@@ -183,7 +180,7 @@
 | 1 | 김태원 | [ 그래픽 ] | 3D 플랫폼 |
 
 *& Thanks to [염승민](https://github.com/SeungminYeom)*
-</div></details><br/><br/><br/><br/>
+</div></details><br/><br/><br/><br/> -->
 
 *****
 ## 멤버 소개
