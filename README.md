@@ -187,32 +187,32 @@
 *****
 ### 2022
 | 학년 | 이름 | 구분 | 비고 |
-| --- | --- | -------- | --- |
-| 4 | [이승찬](https://github.com/gehfand729) | [ 프로그래밍 ] | 메인 프로그래머 |
-| 3 | [염승민](https://github.com/SeungminYeom) | [ 기획 / 프로그래밍 ] | 메인 프로그래머 |
-| 3 | [허재혁](https://github.com/walaHeo) | [ 그래픽 ] | 3D 배경 |
-| 2 | 변재현 | [ 기획 ] | 시나리오 |
-| 1 | [김현모](https://github.com/HyeonMoKim0) | [ 기획 / 프로그래밍 ] | 레벨 디자인 |
-| 1 | 황송희 | [ 그래픽 ] | 캐릭터 원화 & 아이콘 |
-| 1 | [송치원](https://github.com/Chiweon) | [ 그래픽 ] | 2D |
-| 1 | 이상윤 | [ 그래픽 ] | 3D 플랫폼 |
-| 1 | [이유진](https://github.com/yujini1121) | [ 프로그래밍 ] | 서브 프로그래머 |
+| --- | --- | --- | --- |
+| 4 | [이승찬](https://github.com/gehfand729) | 프로그래밍 | 메인 프로그래머 |
+| 3 | [염승민](https://github.com/SeungminYeom) | 기획 / 프로그래밍 | 메인 프로그래머 |
+| 3 | [허재혁](https://github.com/walaHeo) | 그래픽 | 3D 배경 & 오브젝트 |
+| 2 | 변재현 | 기획 | 시나리오 |
+| 1 | [김현모](https://github.com/HyeonMoKim0) | 기획 / 프로그래밍 | 레벨 디자인 |
+| 1 | 황송희 | 그래픽 | 캐릭터 원화 & 아이콘 |
+| 1 | [송치원](https://github.com/Chiweon) | 그래픽 | 2D 오브젝트 |
+| 1 | 이상윤 | 그래픽 | 3D 플랫폼 |
+| 1 | [이유진&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;](https://github.com/yujini1121) | 프로그래밍 | 서브 프로그래머 |
 
 <br/>
 
 ### 2023
 | 학년 | 이름 | 구분 | 비고 |
-| --- | --- | -------- | --- |
-| 4 | [정하영](https://www.artstation.com/674) | [ 그래픽 ] | 원화 |
-| 3 | [고민철](https://github.com/gmcc0713) | [ 프로그래밍 ] | 메인 프로그래머 |
-| 3 | 김태현 | [ 프로그래밍 ] | 서브 프로그래머 |
-| 3 | 이수진 | [ 그래픽 ] | 2D 애니메이션 |
-| 3 | 원소영 | [ 그래픽 ] | 3D 배경 |
-| 2 | [김민지](https://www.artstation.com/user-433749/profile) | [ 그래픽 ] | 3D 플랫폼 |
-| 2 | [이유진](https://github.com/yujini1121) | [ 프로그래밍 ] | 메인 프로그래머 |
-| 2 | [김규리](https://github.com/Gyuri0315) | [ 프로그래밍 ] | 서브 프로그래머 |
-| 2 | 정민주 | [ 프로그래밍 ] | 서브 프로그래머 |
-| 1 | 진유리 | [ 그래픽 ] | 이펙트 |
-| 1 | 김태원 | [ 그래픽 ]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 3D 플랫폼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+| --- | --- | --- | --- |
+| 4 | [정하영](https://www.artstation.com/674) | 그래픽 | 캐릭터 원화 |
+| 3 | [고민철](https://github.com/gmcc0713) | 프로그래밍 | 메인 프로그래머 |
+| 3 | 김태현 | 프로그래밍 | 서브 프로그래머 |
+| 3 | 이수진 | 그래픽 | 2D 애니메이션 |
+| 3 | 원소영 | 그래픽 | 3D 배경 |
+| 2 | [김민지](https://www.artstation.com/user-433749/profile) | 그래픽 | 3D 플랫폼 |
+| 2 | [이유진](https://github.com/yujini1121) | 프로그래밍 | 메인 프로그래머 |
+| 2 | [김규리](https://github.com/Gyuri0315) | 프로그래밍 | 서브 프로그래머 |
+| 2 | 정민주 | 프로그래밍 | 서브 프로그래머 |
+| 1 | 진유리 | 그래픽 | 이펙터 |
+| 1 | 김태원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 그래픽&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 3D 플랫폼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 <!-- 태원씨 죄송해요 -->
 *& Thanks to [염승민](https://github.com/SeungminYeom)*
