@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,12 +24,15 @@ public class Clock : MonoBehaviour
     protected IEnumerator clockState;
 
     protected Vector3 vecToClock;
+    Action StateBeginShoot;
 
     private void Awake()
     {
         value = JsonUtility.FromJson<Value>(Resources.Load<TextAsset>("Json/Clock").text);
         player = GameObject.FindGameObjectWithTag("Player");
         clockState = ClockShoot();
+        StateBeginShoot = player.GetComponent<Movement>().GetDelegate("StateBeginShoot");
+        //Action StateCollsionFromClock;
     }
 
     void Start()
@@ -77,7 +81,8 @@ public class Clock : MonoBehaviour
         Time.timeScale = value.timeScaleValue;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
-        player.GetComponent<Movement>().SendMessage("Shooting");
+        StateBeginShoot();
+        //player.GetComponent<Movement>().SendMessage("Shooting");
         Transform playerTrans = player.transform;
 
         while (Time.unscaledTime - value.clockStartTime < value.clockIncreasableTime + value.clockMaxDistanceTime)
@@ -85,7 +90,7 @@ public class Clock : MonoBehaviour
             if (value.clockCurDistance < value.clockMaxDistance)
             {
                 value.clockCurDistance += value.clockMaxDistance * (Time.unscaledDeltaTime / value.clockIncreasableTime);
-                Debug.Log(Time.unscaledTime - value.clockStartTime);
+                //Debug.Log(Time.unscaledTime - value.clockStartTime);
             }
 
             vecToClock = (Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
@@ -126,8 +131,7 @@ public class Clock : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            player.GetComponent<Movement>().SendMessage("Following", vecToClock * value.clockCurDistance);
-
+            //player.GetComponent<Movement>().SendMessage("Following", vecToClock * value.clockCurDistance);
             ClockReturnIdle();
         }
         else if (other.gameObject.tag == "Platform")

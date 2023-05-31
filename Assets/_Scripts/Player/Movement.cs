@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -144,8 +146,9 @@ public class Movement : MonoBehaviour
 
     protected void StateBeginShoot()
     {
-        value.isJump = true;
-        value.movable = false;
+        Debug.Log("되나 이게?");
+        //value.isJump = true;
+        //value.movable = false;
     }
 
     protected void StateCollsionFromClock(Vector3 vec)
@@ -158,6 +161,26 @@ public class Movement : MonoBehaviour
 
     protected void StateEndInClockEvent()
     {
-
     }
+
+    public Action GetDelegate(string methodName)
+    {
+        //Action method = (Action)Delegate.CreateDelegate(typeof(Movement), GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance));
+        //Action method = (Action)Delegate.CreateDelegate(typeof(Action), GetType().GetMethod(methodName));
+        //Debug.Log(GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance));
+        MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        //MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance);
+        Debug.Log(info);
+        //Action method = (Action)Delegate.CreateDelegate(typeof(Action), info);
+        //MulticastDelegate.CreateDelegate(typeof(MulticastDelegate), info);
+        //return (Action)Delegate.CreateDelegate(typeof(Action), GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance));
+        return new Action(StateBeginShoot);
+    }
+    //public void GetDelegate(string methodName)
+    //{
+    //    Debug.Log(methodName);
+    //    //Action method = (Action)Delegate.CreateDelegate(typeof(Action), GetType().GetMethod(methodName));
+    //    //Debug.Log(GetType().GetMethod(methodName).ToString());
+    //    Debug.Log(GetType().GetMethod("StateBeginShoot", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).ToString());
+    //}
 }
