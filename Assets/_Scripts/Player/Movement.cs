@@ -20,11 +20,14 @@ public class Movement : MonoBehaviour
         public bool     movable;
     }
 
+    [SerializeField]
     protected Value         value;
     protected Rigidbody     rigid;
     protected IEnumerator   smoothJump;
 
     protected Vector3       vecClockFollow;
+
+    protected bool isClockFollowing;
 
     protected virtual void Start()
     {
@@ -47,7 +50,6 @@ public class Movement : MonoBehaviour
 
         Vector3 velocity = new Vector3(value.xAxis, 0, 0);
 
-        //if (vecClockFollow.magnitude > value.moveSpeed)
         if (Mathf.Abs(vecClockFollow.x) > value.moveSpeed)
         {
             velocity.x = vecClockFollow.x;
@@ -83,6 +85,15 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
         {
+            if (isClockFollowing)
+            {
+                GameObject.Find("Clock").GetComponent<Clock>().ClockReturnIdle();
+                rigid.useGravity = true;
+                rigid.velocity = Vector3.zero;
+                value.movable = true;
+                isClockFollowing = false;
+            }
+
             if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.85f)
             {
                 value.isJump = false;
@@ -144,43 +155,29 @@ public class Movement : MonoBehaviour
         value.isJump = true;
     }
 
-    protected void StateBeginShoot()
+    public void StateBeginShoot()
     {
-        Debug.Log("되나 이게?");
-        //value.isJump = true;
-        //value.movable = false;
+        value.isJump = true;
+        value.movable = false;
     }
 
-    protected void StateCollsionFromClock(Vector3 vec)
+    public void StateBeginFollow(Vector3 vec)
+    {
+        rigid.useGravity = false;
+        rigid.velocity = vec;
+        isClockFollowing = true;
+    }
+
+    public void StateCollsionWithClock(Vector3 vec)
     {
         vecClockFollow = vec * 4;
 
+        isClockFollowing = false;
         value.movable = true;
         rigid.useGravity = true;
     }
 
-    protected void StateEndInClockEvent()
+    public void StateEndInClockEvent()
     {
     }
-
-    public Action GetDelegate(string methodName)
-    {
-        //Action method = (Action)Delegate.CreateDelegate(typeof(Movement), GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance));
-        //Action method = (Action)Delegate.CreateDelegate(typeof(Action), GetType().GetMethod(methodName));
-        //Debug.Log(GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance));
-        MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        //MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance);
-        Debug.Log(info);
-        //Action method = (Action)Delegate.CreateDelegate(typeof(Action), info);
-        //MulticastDelegate.CreateDelegate(typeof(MulticastDelegate), info);
-        //return (Action)Delegate.CreateDelegate(typeof(Action), GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance));
-        return new Action(StateBeginShoot);
-    }
-    //public void GetDelegate(string methodName)
-    //{
-    //    Debug.Log(methodName);
-    //    //Action method = (Action)Delegate.CreateDelegate(typeof(Action), GetType().GetMethod(methodName));
-    //    //Debug.Log(GetType().GetMethod(methodName).ToString());
-    //    Debug.Log(GetType().GetMethod("StateBeginShoot", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).ToString());
-    //}
 }

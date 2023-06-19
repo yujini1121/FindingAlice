@@ -37,7 +37,7 @@ public class ClockManager : MonoBehaviour
             else if (Input.GetMouseButtonUp(0))
             {
                 if (clock.activeInHierarchy)
-                    clock.GetComponent<Clock>().SendMessage("StateChangeToFollow");
+                    clock.GetComponent<Clock>().ClockFollow();
             }
         }
     }

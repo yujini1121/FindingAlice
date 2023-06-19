@@ -1,7 +1,7 @@
 {
     "timeScaleValue":           0.05,
 
-    "clockIncreasableTime":     5,
+    "clockIncreasableTime":     3,
     "clockMaxDistanceTime":     3,
     "clockStartTime":           0,
 
