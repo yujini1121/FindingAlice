@@ -31,11 +31,11 @@ public class Clock : MonoBehaviour
     {
         value = JsonUtility.FromJson<Value>(Resources.Load<TextAsset>("Json/Clock").text);
         player = GameObject.FindGameObjectWithTag("Player");
+        //ClockReturnIdle();
     }
 
     void Start()
     {
-        ClockReturnIdle();
     }
 
     void Update()
@@ -111,7 +111,6 @@ public class Clock : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             player.GetComponent<Movement>().StateCollsionWithClock(vecToClock * value.clockCurDistance);
-
             ClockReturnIdle();
         }
         else if (other.gameObject.tag == "Platform")
