@@ -13,19 +13,20 @@ public class Movement : MonoBehaviour
     protected Vector3       vecClockFollow;
 
     protected bool          isClockFollowing;
+    protected bool          clockCancel;
 
     [Header("Movement Value")]
-    [SerializeField] protected float moveSpeed = 5f;
-    [SerializeField] protected float speedDecreaseRate = 0.98f;
-    [SerializeField] protected float jumpForce = 15f;
+    [SerializeField] protected float moveSpeed          = 5f;
+    [SerializeField] protected float speedDecreaseRate  = 0.98f;
+    [SerializeField] protected float jumpForce          = 15f;
 
     protected float xAxis;
 
     [Header("Test in Inspector")]
-    [SerializeField] protected bool collideToWall = false;
-    [SerializeField] protected bool jumpByKey = false;
-    [SerializeField] protected bool jumpable = false;
-    [SerializeField] protected bool movable = true;
+    [SerializeField] protected bool collideToWall       = false;
+    [SerializeField] protected bool jumpByKey           = false;
+    [SerializeField] protected bool jumpable            = false;
+    [SerializeField] protected bool movable             = true;
 
     protected virtual void Start()
     {
@@ -127,9 +128,10 @@ public class Movement : MonoBehaviour
                     collideToWall = true;
                     break;
                 }
-                else
+                else if (clockCancel)
                 {
-                    //value.jumpByKey = false;
+                    clockCancel = false;
+                    jumpable = true;
                 }
             }
         }
@@ -201,5 +203,15 @@ public class Movement : MonoBehaviour
         isClockFollowing = false;
         movable = true;
         rigid.useGravity = true;
+        clockCancel = true;
+    }
+
+    public void ClockStateEnd()
+    {
+        vecClockFollow = Vector3.zero;
+        isClockFollowing = false;
+        movable = true;
+        rigid.useGravity = true;
+        clockCancel = true;
     }
 }

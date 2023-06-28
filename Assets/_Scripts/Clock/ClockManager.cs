@@ -14,14 +14,12 @@ public class ClockManager : MonoBehaviour
         else if (instance != this) Destroy(gameObject);
     }
 
-    private GameObject clock;
-    private List<GameObject> clockUI;
-    private Coroutine clockReload;
+    private GameObject          clock;
+    private List<GameObject>    clockUI;
+    private Coroutine           clockReload;
     private int clockMaxCount = 2;
-    [SerializeField]
-    private int _clockCounter;
-    [SerializeField]
-    private float clockReloadTime = 3f;
+    [SerializeField] private int _clockCounter;
+    [SerializeField] private float clockReloadTime = 3f;
 
 
     // ===============================================================================================
