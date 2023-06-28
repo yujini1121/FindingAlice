@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,32 +6,36 @@ using UnityEngine;
 
 public class Clock : MonoBehaviour
 {
-    [System.Serializable]
-    protected class Value
-    {
-        public float timeScaleValue;
-
-        public float clockIncreasableTime;
-        public float clockMaxDistanceTime;
-        public float clockStartTime;
-
-        public float clockMaxDistance;
-        public float clockCurDistance;
-        public float clockShootPower;
-    }
-
-    protected Value value;
     private GameObject player;
-    Transform playerTrans;
+    private Transform playerTrans;
 
     private Vector3 vecToClock;
+
+    [Header("Clock Value")]
+    [SerializeField] private float timeScaleValue       = 0.05f;
+    [SerializeField] private float clockIncreasableTime = 2f;
+    [SerializeField] private float clockMaxDistanceTime = 3f;
+    [SerializeField] private float clockStartTime       = 0f;
+    [SerializeField] private float clockMaxDistance     = 8f;
+    [SerializeField] private float clockCurDistance     = 0f;
+    [SerializeField] private float clockShootPower      = 20f;
+
+    // 시네머신 카메라 변수
+    private CinemachineVirtualCamera virtureCam;
+    private CinemachineFramingTransposer virtureCamFT;
+    private float cameraOriginDistance = 10f;
+    private float cameraOriginDampingXY = 1f;
+    private float cameraOriginDampingZ = 0.5f;
+    private float cameraZoomDampingXY = 0.1f;
+    private float cameraZoomDampingZ = 0.1f;
 
     bool isClockOnEnable;
 
     private void Awake()
     {
-        value = JsonUtility.FromJson<Value>(Resources.Load<TextAsset>("Json/Clock").text);
         player = GameObject.FindGameObjectWithTag("Player");
+        virtureCam = GameObject.Find("Cam_Idle").GetComponent<CinemachineVirtualCamera>();
+        virtureCamFT = virtureCam.GetCinemachineComponent<CinemachineFramingTransposer>();
         //ClockReturnIdle();
     }
 
@@ -40,17 +45,18 @@ public class Clock : MonoBehaviour
 
     void Update()
     {
-        if (isClockOnEnable && Time.unscaledTime - value.clockStartTime < value.clockIncreasableTime + value.clockMaxDistanceTime)
+        if (isClockOnEnable && Time.unscaledTime - clockStartTime < clockIncreasableTime + clockMaxDistanceTime)
         {
-            if (value.clockCurDistance < value.clockMaxDistance)
+            if (clockCurDistance < clockMaxDistance)
             {
-                value.clockCurDistance += (value.clockMaxDistance / value.clockIncreasableTime) * Time.unscaledDeltaTime;
+                clockCurDistance += (clockMaxDistance / clockIncreasableTime) * Time.unscaledDeltaTime;
+
+                //카메라 조작
+                virtureCamFT.m_CameraDistance = (Time.unscaledTime - clockStartTime) / clockIncreasableTime * 7 + cameraOriginDistance;
             }
 
-            vecToClock = (Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-                                                              Input.mousePosition.y,
-                                                              -Camera.main.transform.position.z))
-                        - player.transform.position).normalized;
+            Vector3 clockPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+            vecToClock = (clockPos - player.transform.position).normalized;
 
             if ((vecToClock.x < 0 && playerTrans.localScale.x > 0) || (vecToClock.x > 0 && playerTrans.localScale.x < 0))
             {
@@ -59,8 +65,9 @@ public class Clock : MonoBehaviour
                 playerTrans.localScale = sightDir;
             }
 
-            transform.localPosition = new Vector3(vecToClock.x * value.clockCurDistance * (playerTrans.localScale.x / Mathf.Abs(playerTrans.localScale.x)),
-                                                    vecToClock.y * value.clockCurDistance, 0);
+            transform.localPosition = new Vector3(vecToClock.x * clockCurDistance * (playerTrans.localScale.x / Mathf.Abs(playerTrans.localScale.x)),
+                                                  vecToClock.y * clockCurDistance,
+                                                  0);
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -Mathf.Atan2(vecToClock.x, vecToClock.y) * Mathf.Rad2Deg));
         }
     }
@@ -70,13 +77,20 @@ public class Clock : MonoBehaviour
         isClockOnEnable = true;
         playerTrans = player.transform;
 
-        value.clockStartTime = Time.unscaledTime;
-        Time.timeScale = value.timeScaleValue;
+        clockStartTime = Time.unscaledTime;
+        Time.timeScale = timeScaleValue;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
         player.GetComponent<Movement>().StateBeginShoot();
+
+        //카메라 조작
+        virtureCam.m_Follow = transform;
+        CamSettings(true);
     }
 
+    // ===============================================================================================
+    // 시계의 동작이 완전히 종료되었을 때 최종 호출될 함수
+    // ===============================================================================================
     public void ClockReturnIdle()
     {
         isClockOnEnable = false;
@@ -87,12 +101,19 @@ public class Clock : MonoBehaviour
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
         }
 
-        value.clockCurDistance = 0;
+        //카메라 조작
+        virtureCam.m_Follow = player.transform;
+        CamSettings(false);
+
+        clockCurDistance = 0;
         transform.parent = player.transform;
         transform.localPosition = Vector3.zero;
         gameObject.SetActive(false);
     }
 
+    // ===============================================================================================
+    // 시계를 따라갈 때 호출되는 함수
+    // ===============================================================================================
     public void ClockFollow()
     {
         isClockOnEnable = false;
@@ -101,20 +122,47 @@ public class Clock : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
         transform.SetParent(null);
-        player.GetComponent<Movement>().StateBeginFollow(vecToClock * value.clockShootPower);
-        //player.GetComponent<Rigidbody>().useGravity = false;
-        //player.GetComponent<Rigidbody>().velocity = vecToClock * value.clockShootPower;
+        player.GetComponent<Movement>().StateBeginFollow(vecToClock * clockShootPower);
+
+        //카메라 조작
+        CamSettings(false);
     }
 
+    // ===============================================================================================
+    // Cinemachine Virture Camera 값 초기화
+    // ===============================================================================================
+    private void CamSettings(bool isZooming)
+    {
+        if (isZooming)
+        {
+            virtureCam.m_Follow = transform;
+            virtureCamFT.m_XDamping = cameraZoomDampingXY;
+            virtureCamFT.m_YDamping = cameraZoomDampingXY;
+            virtureCamFT.m_ZDamping = cameraZoomDampingZ;
+        }
+        else
+        {
+            virtureCamFT.m_XDamping = cameraOriginDampingXY;
+            virtureCamFT.m_YDamping = cameraOriginDampingXY;
+            virtureCamFT.m_ZDamping = cameraOriginDampingZ;
+            virtureCamFT.m_CameraDistance = cameraOriginDistance;
+        }
+    }
+
+    // ===============================================================================================
+    // 시계가 Player와 충돌했다면 vecToClock(플레이어 위치에서 시계의 위치로 향하는 벡터)에
+    // clockCurDistance(플레이어와 시계 사이의 거리)를 곱한 값을 인자로 함수 호출
+    // ===============================================================================================
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            player.GetComponent<Movement>().StateCollsionWithClock(vecToClock * value.clockCurDistance);
+            player.GetComponent<Movement>().StateCollsionWithClock(vecToClock * clockCurDistance);
             ClockReturnIdle();
         }
         else if (other.gameObject.tag == "Platform")
         {
+            player.GetComponent<Movement>().StateCollsionWithClock(Vector3.zero);
             ClockReturnIdle();
         }
     }
