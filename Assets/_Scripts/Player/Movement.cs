@@ -214,4 +214,24 @@ public class Movement : MonoBehaviour
         rigid.useGravity = true;
         clockCancel = true;
     }
+
+    public void StateDialogueBegin(Vector3 Pos)
+    {
+        vecClockFollow = Vector3.zero;
+        isClockFollowing = false;
+        rigid.useGravity = false;
+        movable     = false;
+        jumpable    = false;
+
+        ClockManager.instance.ClockReturnIdle();
+
+        rigid.velocity = Vector3.zero;
+        transform.position = Pos;
+    }
+
+    public void StateDialogueEnd()
+    {
+        movable     = true;
+        jumpable    = true;
+    }
 }

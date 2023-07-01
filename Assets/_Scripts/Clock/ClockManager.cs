@@ -21,6 +21,8 @@ public class ClockManager : MonoBehaviour
     [SerializeField] private int _clockCounter;
     [SerializeField] private float clockReloadTime = 3f;
 
+    [SerializeField] private bool _clockShootable = true;
+
 
     // ===============================================================================================
     // 시계 발사 횟수를 관리하는 프로퍼티
@@ -60,6 +62,18 @@ public class ClockManager : MonoBehaviour
         }
     }
 
+    public bool clockShootable
+    {
+        get
+        {
+            return _clockShootable;
+        }
+        set
+        {
+            _clockShootable = value;
+        }
+    }
+
     private void Start()
     {
         clock = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
@@ -79,7 +93,7 @@ public class ClockManager : MonoBehaviour
         }
         else
         {
-            if (clockCounter > 0)
+            if (clockCounter > 0 && clockShootable)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -111,6 +125,14 @@ public class ClockManager : MonoBehaviour
         if (clockCounter < clockMaxCount)
         {
             clockReload = StartCoroutine(ClockReload());
+        }
+    }
+
+    public void ClockReturnIdle()
+    {
+        if (clock.activeSelf)
+        {
+            clock.GetComponent<Clock>().ClockReturnIdle();
         }
     }
 }
