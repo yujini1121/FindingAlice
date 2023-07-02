@@ -11,10 +11,11 @@ public class Dialogue : MonoBehaviour
     [System.Serializable]
     public class ScriptData
     {
-        public string   spriteName;
-        public bool     spriteLeft;
-        public string   actorName;
         public int      num;
+        public string   spriteNameL;
+        public string   spriteNameR;
+        public int      speaker;
+        public string   actorName;
         public string   line;
     }
 
@@ -38,57 +39,99 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private float  dialogueBoxScaleZ;
 
     private GameObject dialogueUI;
+    private GameObject dialogueActorName;
+    private GameObject dialogueActorScript;
 
     void Start()
     {
         script = JsonUtility.FromJson<Script>(Resources.Load<TextAsset>("Json/Script").text);
         GetComponent<BoxCollider>().center  = new Vector3(dialogueBoxCenterX, dialogueBoxCenterY, dialogueBoxCenterZ);
         GetComponent<BoxCollider>().size    = new Vector3(dialogueBoxScaleX, dialogueBoxScaleY, dialogueBoxScaleZ);
-        dialogueUI = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+        dialogueUI          = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+        dialogueActorName   = dialogueUI.transform.GetChild(2).GetChild(0).gameObject;
+        dialogueActorScript = dialogueUI.transform.GetChild(2).GetChild(1).gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (BeginNum < EndNum && other.tag == "Player")
         {
-            other.GetComponent<Movement>().StateDialogueBegin(new Vector3(transform.position.x + dialogueBoxCenterX,
-                                                                          transform.position.y + dialogueBoxCenterY,
-                                                                          transform.position.z + dialogueBoxCenterZ));
+            other.GetComponent<Movement>().StateDialogueBegin();
+            other.transform.position = new Vector3(transform.position.x + dialogueBoxCenterX,
+                                                   transform.position.y + dialogueBoxCenterY,
+                                                   transform.position.z + dialogueBoxCenterZ);
             dialogueUI.SetActive(true);
             ClockManager.instance.clockShootable = false;
             StartCoroutine(PrintDialogue(other.gameObject));
         }
     }
 
-    IEnumerator PrintDialogue(GameObject player)
+    private IEnumerator PrintDialogue(GameObject player)
     {
+        DialogueAction();
+
         while (BeginNum < EndNum)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (script.scriptDatas[BeginNum].spriteLeft)
-                {
-                    dialogueUI.transform.GetChild(0).GetComponent<Image>().sprite
-                        = Resources.Load<Sprite>("Sprites/" + script.scriptDatas[BeginNum].spriteName);
-                }
-                else
-                {
-                    dialogueUI.transform.GetChild(1).GetComponent<Image>().sprite
-                        = Resources.Load<Sprite>("Sprites/" + script.scriptDatas[BeginNum].spriteName);
-                }
-                dialogueUI.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text
-                    = script.scriptDatas[BeginNum].actorName;
-                dialogueUI.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text
-                    = script.scriptDatas[BeginNum].line;
-
-
-                BeginNum++;
+                DialogueAction();
             }
 
             yield return null;
         }
 
-        player.GetComponent<Movement>().StateDialogueEnd();
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                player.GetComponent<Movement>().StateDialogueEnd();
+                dialogueUI.SetActive(false);
+                ClockManager.instance.clockShootable = true;
+
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+    private void DialogueAction()
+    {
+        GameObject actor = dialogueUI.transform.GetChild(0).gameObject;
+        // 왼쪽 Actor가 존재하면 활성화
+        if (script.scriptDatas[BeginNum].spriteNameL != "")
+        {
+            actor.SetActive(true);
+            actor.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + script.scriptDatas[BeginNum].spriteNameL);
+        }
+        else
+        {
+            actor.SetActive(false);
+        }
+
+        actor = dialogueUI.transform.GetChild(1).gameObject;
+        // 오른쪽 Actor가 존재하면 활성화
+        if (script.scriptDatas[BeginNum].spriteNameR != "")
+        {
+            actor.SetActive(true);
+            actor.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + script.scriptDatas[BeginNum].spriteNameR);
+        }
+        else
+        {
+            actor.SetActive(false);
+        }
+
+        // 말하고 있지 않은 Actor 어둡게 만들기
+        if (script.scriptDatas[BeginNum].speaker == 0 || script.scriptDatas[BeginNum].speaker == 1)
+        {
+            dialogueUI.transform.GetChild(script.scriptDatas[BeginNum].speaker).GetComponent<Image>().color     = Color.white;
+            dialogueUI.transform.GetChild(1 - script.scriptDatas[BeginNum].speaker).GetComponent<Image>().color = Color.gray;
+        }
+
+        dialogueActorName.GetComponent<TextMeshProUGUI>().text   = script.scriptDatas[BeginNum].actorName;
+        dialogueActorScript.GetComponent<TextMeshProUGUI>().text = script.scriptDatas[BeginNum].line;
+
+        BeginNum++;
     }
 
     private void OnDrawGizmos()

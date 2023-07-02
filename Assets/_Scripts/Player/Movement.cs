@@ -179,8 +179,8 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     public void StateBeginShoot()
     {
-        jumpable = false;
         movable = false;
+        jumpable = false;
     }
 
     // ===============================================================================================
@@ -188,9 +188,10 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     public void StateBeginFollow(Vector3 vec)
     {
+
+        isClockFollowing = true;
         rigid.useGravity = false;
         rigid.velocity = vec;
-        isClockFollowing = true;
     }
 
     // ===============================================================================================
@@ -201,36 +202,35 @@ public class Movement : MonoBehaviour
         vecClockFollow = vec * 4;
 
         isClockFollowing = false;
-        movable = true;
         rigid.useGravity = true;
         clockCancel = true;
+        movable = true;
     }
 
     public void ClockStateEnd()
     {
         vecClockFollow = Vector3.zero;
         isClockFollowing = false;
-        movable = true;
         rigid.useGravity = true;
         clockCancel = true;
+        movable = true;
     }
 
-    public void StateDialogueBegin(Vector3 Pos)
+    public void StateDialogueBegin()
     {
         vecClockFollow = Vector3.zero;
+        rigid.velocity = Vector3.zero;
         isClockFollowing = false;
         rigid.useGravity = false;
         movable     = false;
         jumpable    = false;
 
         ClockManager.instance.ClockReturnIdle();
-
-        rigid.velocity = Vector3.zero;
-        transform.position = Pos;
     }
 
     public void StateDialogueEnd()
     {
+        rigid.useGravity = true;
         movable     = true;
         jumpable    = true;
     }
