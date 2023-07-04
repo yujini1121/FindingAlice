@@ -15,7 +15,7 @@ public class Platform : MonoBehaviour
     */
 
     [System.Serializable]
-    public enum PlatformType
+    private enum PlatformType
     {
         Disappear,
         Passing,
