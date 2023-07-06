@@ -33,6 +33,7 @@ public class ChapterSelect : MonoBehaviour
     {
         option.SetActive(true);
     }
+
     public void CloseOption()
     {
         option.SetActive(false);

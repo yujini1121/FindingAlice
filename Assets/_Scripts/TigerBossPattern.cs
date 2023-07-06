@@ -9,12 +9,6 @@ public class TigerBossPattern : MonoBehaviour
     float patternCooldown = 5f;
     float patternWarningTime = 3f;
 
-    void Start()
-    {
-        
-    }
-
-
     private void OnEnable()
     {
         if (pattern != null) pattern = null;

@@ -1,17 +1,11 @@
 {
-    "gameData" : [
-        {
-            "totalProgressFlag"     : 0,
-
-            "chapterFlag_CT"        : 0,
-            "chapterFlag_C1"        : 0,
-            "chapterFlag_C2"        : 0,
-            "chapterFlag_C3"        : 0,
-            
-            "collectionFlag_CT"     : 0,
-            "collectionFlag_C1"     : 0,
-            "collectionFlag_C2"     : 0,
-            "collectionFlag_C3"     : 0
-        }
-    ]
+    "totalProgressFlag": 0,
+    "chapterFlag_CT": 0,
+    "chapterFlag_C1": 0,
+    "chapterFlag_C2": 0,
+    "chapterFlag_C3": 0,
+    "collectionFlag_CT": 0,
+    "collectionFlag_C1": 0,
+    "collectionFlag_C2": 0,
+    "collectionFlag_C3": 0
 }
