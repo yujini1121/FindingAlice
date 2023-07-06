@@ -30,12 +30,15 @@ public class Ch2_Movement : Movement
         rigid.velocity = Vector3.zero;
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
+        Debug.Log(!jumpByKey + " " + !jumpable);
+
         StartCoroutine(ResetJumpDelay());
     }
 
     IEnumerator ResetJumpDelay()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1f);
         jumpable = true;
+        jumpByKey = false;
     }
 }
