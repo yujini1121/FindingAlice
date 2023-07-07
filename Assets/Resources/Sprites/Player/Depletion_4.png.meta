@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: 15b2ccbccc9190042b00e681f2f8986b
+guid: 7dcfb1684160c4b4b86bd840dc8fc4c1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5879710210869464009
-    second: Recoiling_0
+      213: -525665973144740275
+    second: Depletion_4_0
   - first:
-      213: 6266280893412170356
-    second: Recoiling_1
+      213: 2632365613601293014
+    second: Depletion_4_1
   - first:
-      213: -8685976372702740382
-    second: Recoiling_2
+      213: -2098423595148395251
+    second: Depletion_4_2
   - first:
-      213: 7930811317301452449
-    second: Recoiling_2
+      213: 6249713768262571986
+    second: Depletion_4_3
   - first:
-      213: 186756004898160199
-    second: Recoiling_3
-  - first:
-      213: 8966575249544100067
-    second: Recoiling_4
+      213: -4333148640223890058
+    second: Depletion_4_4
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -85,9 +82,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,9 +94,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,9 +106,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -122,106 +119,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Recoiling_0
+      name: Depletion_4_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 500
-        height: 820
+        width: 1034
+        height: 1287
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73473ea17b2176ea0800000000000000
-      internalID: -5879710210869464009
+      spriteID: d4e9230259574b8f0800000000000000
+      internalID: -525665973144740275
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recoiling_1
+      name: Depletion_4_1
       rect:
         serializedVersion: 2
-        x: 500
+        x: 1034
         y: 0
-        width: 500
-        height: 820
+        width: 1034
+        height: 1287
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47a56aab54d46f650800000000000000
-      internalID: 6266280893412170356
+      spriteID: 6d288a5249a088420800000000000000
+      internalID: 2632365613601293014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recoiling_2
+      name: Depletion_4_2
       rect:
         serializedVersion: 2
-        x: 1000
+        x: 2068
         y: 0
-        width: 500
-        height: 820
+        width: 1034
+        height: 1287
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ae9664bfd6ef0e60800000000000000
-      internalID: 7930811317301452449
+      spriteID: d0db1eeabd6e0e2e0800000000000000
+      internalID: -2098423595148395251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recoiling_3
+      name: Depletion_4_3
       rect:
         serializedVersion: 2
-        x: 1500
+        x: 3102
         y: 0
-        width: 500
-        height: 820
+        width: 1034
+        height: 1287
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74e30a3d89d779200800000000000000
-      internalID: 186756004898160199
+      spriteID: 2d798215f817bb650800000000000000
+      internalID: 6249713768262571986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recoiling_4
+      name: Depletion_4_4
       rect:
         serializedVersion: 2
-        x: 2000
+        x: 4136
         y: 0
-        width: 500
-        height: 820
+        width: 1034
+        height: 1287
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e8b2e8beacaf6c70800000000000000
-      internalID: 8966575249544100067
+      spriteID: 675fc7c05409dd3c0800000000000000
+      internalID: -4333148640223890058
       vertices: []
       indices: 
       edges: []
@@ -229,7 +226,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3e23a343aa2aeff4dba60b6d6319c900
+    spriteID: c95ac664ed16c444caea2703f8551292
     internalID: 0
     vertices: []
     indices: 
