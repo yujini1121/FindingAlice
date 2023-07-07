@@ -17,7 +17,7 @@ public class DataController : MonoBehaviour
 
         gameData = JsonUtility.FromJson<GameData>(Resources.Load<TextAsset>("Json/GameData").text);
 
-        LoadData();
+        gameData.Print();
     }
 
     [System.Serializable]
@@ -34,12 +34,28 @@ public class DataController : MonoBehaviour
         public int collectionFlag_C1;
         public int collectionFlag_C2;
         public int collectionFlag_C3;
+
+        public void Print()
+        {
+            Debug.Log(totalProgressFlag);
+            Debug.Log(chapterFlag_CT);
+            Debug.Log(chapterFlag_C1);
+            Debug.Log(chapterFlag_C2);
+            Debug.Log(chapterFlag_C3);
+            Debug.Log(collectionFlag_CT);
+            Debug.Log(collectionFlag_C1);
+            Debug.Log(collectionFlag_C2);
+            Debug.Log(collectionFlag_C3);
+        }
     }
 
     [SerializeField] GameData gameData;
 
     void Start()
     {
+        LoadData();
+
+        //gameData.Print();
     }
 
     public void SaveData(int bitPlace)
@@ -47,15 +63,35 @@ public class DataController : MonoBehaviour
         switch(SceneManager.GetActiveScene().name)
         {
             case "Chapter_T":
+                // 현재 저장 위치가 이미 저장되어 있다면
+                if ((gameData.chapterFlag_CT & bitPlace) == bitPlace)
+                {
+                    return;
+                }
                 gameData.chapterFlag_CT |= bitPlace;
                 break;
+
             case "Chapter_1":
+                if ((gameData.chapterFlag_C1 & bitPlace) == bitPlace)
+                {
+                    return;
+                }
                 gameData.chapterFlag_C1 |= bitPlace;
                 break;
+
             case "Chapter_2":
+                if ((gameData.chapterFlag_C2 & bitPlace) == bitPlace)
+                {
+                    return;
+                }
                 gameData.chapterFlag_C2 |= bitPlace;
                 break;
+
             case "Chapter_3":
+                if ((gameData.chapterFlag_C3 & bitPlace) == bitPlace)
+                {
+                    return;
+                }
                 gameData.chapterFlag_C3 |= bitPlace;
                 break;
         }

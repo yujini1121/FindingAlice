@@ -212,10 +212,5 @@ public class Clock : MonoBehaviour
             player.GetComponent<Movement>().StateCollsionWithClock(vecToClock * clockCurDistance);
             ClockReturnIdle();
         }
-        else if (other.gameObject.tag == "Platform")
-        {
-            player.GetComponent<Movement>().ClockStateEnd();
-            ClockReturnIdle();
-        }
     }
 }

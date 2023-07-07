@@ -50,11 +50,10 @@ public class Dialogue : MonoBehaviour
         {
             script.scriptDatas.Remove(script.scriptDatas[0]);
         }
-        while (EndNum - BeginNum < script.scriptDatas.Count - 1)
+        while ((EndNum - BeginNum) < (script.scriptDatas.Count - 1))
         {
             script.scriptDatas.Remove(script.scriptDatas[script.scriptDatas.Count - 1]);
         }
-
 
         GetComponent<BoxCollider>().center  = new Vector3(dialogueBoxCenterX, dialogueBoxCenterY, dialogueBoxCenterZ);
         GetComponent<BoxCollider>().size    = new Vector3(dialogueBoxScaleX, dialogueBoxScaleY, dialogueBoxScaleZ);
@@ -65,7 +64,7 @@ public class Dialogue : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (BeginNum < EndNum && other.tag == "Player")
+        if ((index < EndNum - BeginNum) && other.tag == "Player")
         {
             other.GetComponent<Movement>().StateDialogueBegin();
             other.transform.position = new Vector3(transform.position.x + dialogueBoxCenterX,
@@ -81,7 +80,7 @@ public class Dialogue : MonoBehaviour
     {
         DialogueAction();
 
-        while (index <= EndNum - BeginNum)
+        while (index <= (EndNum - BeginNum))
         {
             if (Input.GetMouseButtonDown(0))
             {

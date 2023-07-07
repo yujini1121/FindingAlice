@@ -88,14 +88,6 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
         {
-            if (isClockFollowing)
-            {
-                GameObject.Find("Clock").GetComponent<Clock>().ClockReturnIdle();
-                rigid.useGravity = true;
-                rigid.velocity = Vector3.zero;
-                movable = true;
-                isClockFollowing = false;
-            }
 
             // 0.85f(Cos) ≒ 약 31.78도
             if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.85f)
@@ -134,6 +126,13 @@ public class Movement : MonoBehaviour
                     jumpable = true;
                 }
             }
+        }
+
+        if (isClockFollowing)
+        {
+            GameObject.Find("Clock").GetComponent<Clock>().ClockReturnIdle();
+            ClockStateEnd();
+            rigid.velocity = Vector3.zero;
         }
     }
 
