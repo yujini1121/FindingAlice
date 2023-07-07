@@ -29,6 +29,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private Script script;
     [SerializeField] private int    BeginNum;
     [SerializeField] private int    EndNum;
+    private int index = 0;
 
     [Header("Bounds")]
     [SerializeField] private float  dialogueBoxCenterX;
@@ -45,6 +46,16 @@ public class Dialogue : MonoBehaviour
     void Start()
     {
         script = JsonUtility.FromJson<Script>(Resources.Load<TextAsset>("Json/Script").text);
+        while (script.scriptDatas[0].num < BeginNum)
+        {
+            script.scriptDatas.Remove(script.scriptDatas[0]);
+        }
+        while (EndNum - BeginNum < script.scriptDatas.Count - 1)
+        {
+            script.scriptDatas.Remove(script.scriptDatas[script.scriptDatas.Count - 1]);
+        }
+
+
         GetComponent<BoxCollider>().center  = new Vector3(dialogueBoxCenterX, dialogueBoxCenterY, dialogueBoxCenterZ);
         GetComponent<BoxCollider>().size    = new Vector3(dialogueBoxScaleX, dialogueBoxScaleY, dialogueBoxScaleZ);
         dialogueUI          = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
@@ -70,7 +81,7 @@ public class Dialogue : MonoBehaviour
     {
         DialogueAction();
 
-        while (BeginNum < EndNum)
+        while (index <= EndNum - BeginNum)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -99,10 +110,10 @@ public class Dialogue : MonoBehaviour
     {
         GameObject actor = dialogueUI.transform.GetChild(0).gameObject;
         // 왼쪽 Actor가 존재하면 활성화
-        if (script.scriptDatas[BeginNum].spriteNameL != "")
+        if (script.scriptDatas[index].spriteNameL != "")
         {
             actor.SetActive(true);
-            actor.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + script.scriptDatas[BeginNum].spriteNameL);
+            actor.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + script.scriptDatas[index].spriteNameL);
         }
         else
         {
@@ -111,10 +122,10 @@ public class Dialogue : MonoBehaviour
 
         actor = dialogueUI.transform.GetChild(1).gameObject;
         // 오른쪽 Actor가 존재하면 활성화
-        if (script.scriptDatas[BeginNum].spriteNameR != "")
+        if (script.scriptDatas[index].spriteNameR != "")
         {
             actor.SetActive(true);
-            actor.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + script.scriptDatas[BeginNum].spriteNameR);
+            actor.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + script.scriptDatas[index].spriteNameR);
         }
         else
         {
@@ -122,16 +133,16 @@ public class Dialogue : MonoBehaviour
         }
 
         // 말하고 있지 않은 Actor 어둡게 만들기
-        if (script.scriptDatas[BeginNum].speaker == 0 || script.scriptDatas[BeginNum].speaker == 1)
+        if (script.scriptDatas[index].speaker == 0 || script.scriptDatas[index].speaker == 1)
         {
-            dialogueUI.transform.GetChild(script.scriptDatas[BeginNum].speaker).GetComponent<Image>().color     = Color.white;
-            dialogueUI.transform.GetChild(1 - script.scriptDatas[BeginNum].speaker).GetComponent<Image>().color = Color.gray;
+            dialogueUI.transform.GetChild(script.scriptDatas[index].speaker).GetComponent<Image>().color     = Color.white;
+            dialogueUI.transform.GetChild(1 - script.scriptDatas[index].speaker).GetComponent<Image>().color = Color.gray;
         }
 
-        dialogueActorName.GetComponent<TextMeshProUGUI>().text   = script.scriptDatas[BeginNum].actorName;
-        dialogueActorScript.GetComponent<TextMeshProUGUI>().text = script.scriptDatas[BeginNum].line;
+        dialogueActorName.GetComponent<TextMeshProUGUI>().text   = script.scriptDatas[index].actorName;
+        dialogueActorScript.GetComponent<TextMeshProUGUI>().text = script.scriptDatas[index].line;
 
-        BeginNum++;
+        index++;
     }
 
     private void OnDrawGizmos()

@@ -1978,8 +1978,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script:
     scriptDatas: []
-  BeginNum: 0
-  EndNum: 6
+  BeginNum: 2
+  EndNum: 4
+  index: 0
   dialogueBoxCenterX: 0
   dialogueBoxCenterY: 1.5
   dialogueBoxCenterZ: 0
@@ -2676,7 +2677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1666548329
 RectTransform:
   m_ObjectHideFlags: 0
