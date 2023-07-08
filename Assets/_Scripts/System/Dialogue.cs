@@ -27,6 +27,7 @@ public class Dialogue : MonoBehaviour
 
     [Header("Dialogue")]
     [SerializeField] private Script script;
+    [SerializeField] private int    area;
     [SerializeField] private int    BeginNum;
     [SerializeField] private int    EndNum;
     private int index = 0;
@@ -45,6 +46,8 @@ public class Dialogue : MonoBehaviour
 
     void Start()
     {
+        gameObject.SetActive(DataController.instance.CheckArea(area));
+
         script = JsonUtility.FromJson<Script>(Resources.Load<TextAsset>("Json/Script").text);
         while (script.scriptDatas[0].num < BeginNum)
         {

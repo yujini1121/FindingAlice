@@ -781,59 +781,6 @@ MonoBehaviour:
   jumpByKey: 0
   jumpable: 0
   movable: 1
---- !u!1 &396847399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 396847401}
-  - component: {fileID: 396847400}
-  m_Layer: 0
-  m_Name: DataController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &396847400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396847399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15892d5462713b546b115cd7cad5de18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameData:
-    totalProgressFlag: 0
-    chapterFlag_CT: 0
-    chapterFlag_C1: 0
-    chapterFlag_C2: 0
-    chapterFlag_C3: 0
-    collectionFlag_CT: 0
-    collectionFlag_C1: 0
-    collectionFlag_C2: 0
-    collectionFlag_C3: 0
---- !u!4 &396847401
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396847399}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 19
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &453836932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,6 +2046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script:
     scriptDatas: []
+  area: 0
   BeginNum: 2
   EndNum: 4
   dialogueBoxCenterX: 0

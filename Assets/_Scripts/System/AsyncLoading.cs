@@ -6,28 +6,15 @@ using TMPro;
 
 public class AsyncLoading : MonoBehaviour
 {
-    [System.Serializable]
-    public class TextData
-    {
-        public string text;
-    }
-
-    [System.Serializable]
-    public class LoadingTexts
-    {
-        public List<TextData> textData;
-    }
-
     //비동기 로딩씬
     public static string nextScene;
 
-    [SerializeField] private LoadingTexts loadingTexts;
 
     void Start()
     {
         Time.timeScale = 1f;
-        loadingTexts = JsonUtility.FromJson<LoadingTexts>(Resources.Load<TextAsset>("Json/Script").text);
-        GameObject.Find("Comment").GetComponent<TextMeshProUGUI>().text = loadingTexts.textData[Random.Range(0, loadingTexts.textData.Count + 1)].text;
+        GameObject.Find("Comment").GetComponent<TextMeshProUGUI>().text
+            = DataController.instance.loadingTexts.textData[Random.Range(0, DataController.instance.loadingTexts.textData.Count + 1)].text;
 
         StartCoroutine(LoadScene());
     }

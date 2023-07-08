@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        DataController.instance.LoadData();
     }
     
     public void PlayerDead()
