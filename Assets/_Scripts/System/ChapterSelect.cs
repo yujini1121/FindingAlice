@@ -6,17 +6,15 @@ using UnityEngine.UI;
 
 public class ChapterSelect : MonoBehaviour
 {
-    GameObject chapters;
-    GameObject chapterInfo;
-    GameObject setting;
-    string targetScene;
+    [SerializeField] private GameObject chapters;
+    [SerializeField] private GameObject chapterInfo;
+    [SerializeField] private GameObject chapterInfoSprite;
+    [SerializeField] private GameObject continueGame;
+    [SerializeField] private GameObject setting;
+    private string targetScene;
 
     void Start()
     {
-        chapters = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
-        chapterInfo = GameObject.Find("Canvas").transform.GetChild(2).gameObject;
-        setting = GameObject.Find("Canvas").transform.GetChild(3).gameObject;
-
         for (int i = 0; i < 3; i++)
         {
             if (DataController.instance.CheckProcress(i))
@@ -25,18 +23,17 @@ public class ChapterSelect : MonoBehaviour
             }
             else
             {
-                chapters.transform.GetChild(i + 4).gameObject.SetActive(true);
+                chapters.transform.GetChild(i + 1).GetComponent<Button>().interactable = false;
             }
         }
     }
 
     public void OpenInfo(string sceneName)
     {
+        chapterInfoSprite.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Chapter/" + sceneName);
+        continueGame.GetComponent<Button>().interactable = DataController.instance.IsChapterPlayedBefore(sceneName);
+
         chapterInfo.SetActive(true);
-        chapterInfo.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Chapter/" + sceneName);
-
-        chapterInfo.transform.GetChild(0).GetChild(3).GetComponent<Button>().interactable = DataController.instance.IsChapterPlayedBefore(sceneName);
-
         targetScene = sceneName;
     }
 

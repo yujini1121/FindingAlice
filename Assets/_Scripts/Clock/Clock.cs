@@ -46,35 +46,6 @@ public class Clock : MonoBehaviour
     {
     }
 
-    //void Update()
-    //{
-    //    if (isClockOnEnable && Time.unscaledTime - clockStartTime < clockIncreasableTime + clockMaxDistanceTime)
-    //    {
-    //        if (clockCurDistance < clockMaxDistance)
-    //        {
-    //            clockCurDistance += (clockMaxDistance / clockIncreasableTime) * Time.unscaledDeltaTime;
-
-    //            //카메라 조작
-    //            virtureCamFT.m_CameraDistance = (Time.unscaledTime - clockStartTime) / clockIncreasableTime * 7 + cameraOriginDistance;
-    //        }
-
-    //        Vector3 clockPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-    //        vecToClock = (clockPos - player.transform.position).normalized;
-
-    //        if ((vecToClock.x < 0 && playerTrans.localScale.x > 0) || (vecToClock.x > 0 && playerTrans.localScale.x < 0))
-    //        {
-    //            Vector3 sightDir = playerTrans.localScale;
-    //            sightDir.x *= -1;
-    //            playerTrans.localScale = sightDir;
-    //        }
-
-    //        transform.localPosition = new Vector3(vecToClock.x * clockCurDistance * (playerTrans.localScale.x / Mathf.Abs(playerTrans.localScale.x)),
-    //                                              vecToClock.y * clockCurDistance,
-    //                                              0);
-    //        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -Mathf.Atan2(vecToClock.x, vecToClock.y) * Mathf.Rad2Deg));
-    //    }
-    //}
-
     private void OnEnable()
     {
         //isClockOnEnable = true;

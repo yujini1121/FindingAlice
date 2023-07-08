@@ -187,8 +187,6 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     public void StateBeginFollow(Vector3 vec)
     {
-
-        isClockFollowing = true;
         rigid.useGravity = false;
         rigid.velocity = vec;
     }
@@ -232,5 +230,11 @@ public class Movement : MonoBehaviour
         rigid.useGravity = true;
         movable     = true;
         jumpable    = true;
+    }
+
+    private IEnumerator WaitFrame()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isClockFollowing = true;
     }
 }

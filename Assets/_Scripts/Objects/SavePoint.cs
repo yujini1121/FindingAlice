@@ -11,8 +11,6 @@ public class SavePoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             DataController.instance.SaveData(1 << bitFlagPlace);
-
-            //gameObject.SetActive(false);
         }
     }
 }
