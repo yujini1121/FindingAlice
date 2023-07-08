@@ -63,12 +63,6 @@ public class DataController : MonoBehaviour
     [SerializeField] private GameData gameData;
     [SerializeField] public LoadingTexts loadingTexts;
 
-    private bool gameStartReady;
-
-    void Start()
-    {
-        gameStartReady = true;
-    }
 
     // 플레이 기록이 있는 챕터면 true 반환
     public bool IsChapterPlayedBefore(string sceneName)
@@ -275,13 +269,5 @@ public class DataController : MonoBehaviour
     public void GetCollection()
     {
 
-    }
-
-    public void StartGame()
-    {
-        if (gameStartReady)
-        {
-            AsyncLoading.LoadScene("ChapterSelect");
-        }
     }
 }
