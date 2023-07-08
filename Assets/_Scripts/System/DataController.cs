@@ -17,6 +17,8 @@ public class DataController : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+
+
         gameData     = JsonUtility.FromJson<GameData>(Resources.Load<TextAsset>("Json/GameData").text);
         loadingTexts = JsonUtility.FromJson<LoadingTexts>(Resources.Load<TextAsset>("Json/Script").text);
     }
@@ -165,6 +167,7 @@ public class DataController : MonoBehaviour
         string toJsonData   = JsonUtility.ToJson(gameData, true);
         string filePath     = Application.dataPath + "/Resources/Json/GameData.json";
         File.WriteAllText(filePath, toJsonData);
+        Debug.Log("Save Complete");
     }
 
     public void LoadData()

@@ -9,12 +9,10 @@ public class AsyncLoading : MonoBehaviour
     //비동기 로딩씬
     public static string nextScene;
 
-
     void Start()
     {
-        Time.timeScale = 1f;
         GameObject.Find("Comment").GetComponent<TextMeshProUGUI>().text
-            = DataController.instance.loadingTexts.textData[Random.Range(0, DataController.instance.loadingTexts.textData.Count + 1)].text;
+            = DataController.instance.loadingTexts.textData[Random.Range(0, DataController.instance.loadingTexts.textData.Count)].text;
 
         StartCoroutine(LoadScene());
     }

@@ -35,7 +35,7 @@ public class ChapterSelect : MonoBehaviour
         chapterInfo.SetActive(true);
         chapterInfo.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Chapter/" + sceneName);
 
-        chapterInfo.transform.GetChild(0).GetChild(3).gameObject.SetActive(DataController.instance.IsChapterPlayedBefore(sceneName));
+        chapterInfo.transform.GetChild(0).GetChild(3).GetComponent<Button>().interactable = DataController.instance.IsChapterPlayedBefore(sceneName);
 
         targetScene = sceneName;
     }
