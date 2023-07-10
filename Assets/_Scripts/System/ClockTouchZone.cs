@@ -2,21 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
+using UnityEngine.Windows;
 
-public class ClockTouchZone : MonoBehaviour//, IPointerDownHandler, IDragHandler, IPointerUpHandler
+public class ClockTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    //bool touchUp;
-    //bool touchDown;
+    private Vector2 touchedPos;
+    public static Vector2 toDragedPos;
 
+    private void Start()
+    {
+    }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        touchedPos = eventData.position;
+        ClockManager.instance.ClockBegin();
+        OnDrag(eventData);
+    }
 
-    //public bool TouchDown()
-    //{
-    //    return touchDown;
-    //}
+    public void OnDrag(PointerEventData eventData)
+    {
+        toDragedPos = eventData.position - touchedPos;
+    }
 
-    //public bool TouchUp()
-    //{
-    //    return touchUp;
-    //}
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        ClockManager.instance.ClockEnd();
+    }
 }

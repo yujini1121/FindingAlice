@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
+        Time.timeScale = 1;
         AsyncLoading.LoadScene("ChapterSelect");
-        //GraphicsSettings.renderPipelineAsset = defaultPipeline;
     }
 
     //private void OnApplicationPause(bool pause)

@@ -80,7 +80,8 @@ public class Clock : MonoBehaviour
             }
 
 #if UNITY_EDITOR
-            Vector3 clockPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+            //Vector3 clockPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+            Vector3 clockPos = ClockTouchZone.toDragedPos;
             vecToClock = (clockPos - player.transform.position).normalized;
 #endif
 #if UNITY_ANDROID && !UNITY_EDITOR

@@ -85,27 +85,44 @@ public class ClockManager : MonoBehaviour
         }
     }
 
-    private void Update()
+//    private void Update()
+//    {
+//#if UNITY_EDITOR
+//        if (clockCounter > 0 && clockShootable)
+//        {
+//            if (Input.GetMouseButtonDown(0))
+//            {
+//                clock.SetActive(true);
+//            }
+//            else if (Input.GetMouseButtonUp(0))
+//            {
+//                if (clock.activeInHierarchy)
+//                {
+//                    clock.GetComponent<Clock>().ClockFollow();
+//                    clockCounter--;
+//                }
+//            }
+//        }
+//#endif
+//#if UNITY_ANDROID && !UNITY_EDITOR
+//#endif
+//    }
+
+    public void ClockBegin()
     {
-#if UNITY_EDITOR
         if (clockCounter > 0 && clockShootable)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                clock.SetActive(true);
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                if (clock.activeInHierarchy)
-                {
-                    clock.GetComponent<Clock>().ClockFollow();
-                    clockCounter--;
-                }
-            }
+            clock.SetActive(true);
         }
-#endif
-#if UNITY_ANDROID && !UNITY_EDITOR
-#endif
+    }
+
+    public void ClockEnd()
+    {
+        if (clock.activeInHierarchy)
+        {
+            clock.GetComponent<Clock>().ClockFollow();
+            clockCounter--;
+        }
     }
 
     // ===============================================================================================

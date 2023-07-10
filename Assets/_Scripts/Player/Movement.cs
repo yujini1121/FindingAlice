@@ -130,12 +130,10 @@ public class Movement : MonoBehaviour
                     }
                 }
             }
-
         }
 
         if (isClockFollowing)
         {
-            Debug.Log("취소");
             ClockStateEnd();
             ClockManager.instance.ClockReturnIdle();
             rigid.velocity = Vector3.zero;
