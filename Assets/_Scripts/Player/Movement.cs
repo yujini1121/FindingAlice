@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
     [SerializeField] protected bool jumpByKey           = false;
     [SerializeField] protected bool jumpable            = false;
     [SerializeField] protected bool movable             = true;
+    [SerializeField] protected bool isTalking           = false;
 
     protected virtual void Start()
     {
@@ -65,7 +66,7 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     protected virtual void Jump()
     {
-        if (!jumpByKey || !jumpable) return;
+        if (!jumpByKey || !jumpable || isTalking) return;
 
         jumpable = false;
         rigid.velocity = Vector3.zero;
@@ -226,7 +227,7 @@ public class Movement : MonoBehaviour
         isClockFollowing = false;
         rigid.useGravity = false;
         movable     = false;
-        jumpable    = false;
+        isTalking   = true;
 
         ClockManager.instance.ClockReturnIdle();
     }
@@ -235,7 +236,7 @@ public class Movement : MonoBehaviour
     {
         rigid.useGravity = true;
         movable     = true;
-        jumpable    = true;
+        isTalking   = false;
     }
 
     private IEnumerator WaitFrame()

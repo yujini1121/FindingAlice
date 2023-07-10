@@ -68,10 +68,10 @@ public class Dialogue : MonoBehaviour
     {
         if ((index < EndNum - BeginNum) && other.tag == "Player")
         {
-            other.GetComponent<Movement>().StateDialogueBegin();
             other.transform.position = new Vector3(transform.position.x + dialogueBoxCenterX,
                                                    transform.position.y + dialogueBoxCenterY,
                                                    transform.position.z + dialogueBoxCenterZ);
+            other.GetComponent<Movement>().StateDialogueBegin();
             dialogueUI.SetActive(true);
             ClockManager.instance.clockShootable = false;
             StartCoroutine(PrintDialogue(other.gameObject));
