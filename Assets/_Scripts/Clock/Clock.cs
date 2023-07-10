@@ -39,7 +39,6 @@ public class Clock : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         virtureCam = GameObject.Find("Cam_Idle").GetComponent<CinemachineVirtualCamera>();
         virtureCamFT = virtureCam.GetCinemachineComponent<CinemachineFramingTransposer>();
-        //ClockReturnIdle();
     }
 
     void Start()
@@ -80,8 +79,12 @@ public class Clock : MonoBehaviour
                 clockBg.GetComponent<MeshRenderer>().material.color = clockBgMatColor;
             }
 
+#if UNITY_EDITOR
             Vector3 clockPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
             vecToClock = (clockPos - player.transform.position).normalized;
+#endif
+#if UNITY_ANDROID && !UNITY_EDITOR
+#endif
 
             if ((vecToClock.x < 0 && playerTrans.localScale.x > 0) || (vecToClock.x > 0 && playerTrans.localScale.x < 0))
             {

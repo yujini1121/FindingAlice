@@ -110,28 +110,33 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     protected virtual void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Platform" && !collideToWall)
+        if (collision.gameObject.tag == "Platform")
         {
-            for (int i = 0; i < collision.contacts.Length; i++)
+            if (!collideToWall)
             {
-                // 0.85f(Cos) ≒ 약 31.78도
-                if (Vector3.Dot(collision.contacts[i].point - transform.position, Vector3.down) <= 0.85f)
+                for (int i = 0; i < collision.contacts.Length; i++)
                 {
-                    collideToWall = true;
-                    break;
-                }
-                else if (clockCancel)
-                {
-                    clockCancel = false;
-                    jumpable = true;
+                    // 0.85f(Cos) ≒ 약 31.78도
+                    if (Vector3.Dot(collision.contacts[i].point - transform.position, Vector3.down) <= 0.85f)
+                    {
+                        collideToWall = true;
+                        break;
+                    }
+                    else if (clockCancel)
+                    {
+                        clockCancel = false;
+                        jumpable = true;
+                    }
                 }
             }
+
         }
 
         if (isClockFollowing)
         {
-            GameObject.Find("Clock").GetComponent<Clock>().ClockReturnIdle();
+            Debug.Log("취소");
             ClockStateEnd();
+            ClockManager.instance.ClockReturnIdle();
             rigid.velocity = Vector3.zero;
         }
     }
@@ -189,6 +194,7 @@ public class Movement : MonoBehaviour
     {
         rigid.useGravity = false;
         rigid.velocity = vec;
+        StartCoroutine(WaitFrame());
     }
 
     // ===============================================================================================
@@ -234,7 +240,7 @@ public class Movement : MonoBehaviour
 
     private IEnumerator WaitFrame()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForFixedUpdate();
         isClockFollowing = true;
     }
 }

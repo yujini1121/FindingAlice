@@ -87,28 +87,25 @@ public class ClockManager : MonoBehaviour
 
     private void Update()
     {
-        if (Application.platform == RuntimePlatform.Android)
+#if UNITY_EDITOR
+        if (clockCounter > 0 && clockShootable)
         {
-
-        }
-        else
-        {
-            if (clockCounter > 0 && clockShootable)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButtonDown(0))
+                clock.SetActive(true);
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                if (clock.activeInHierarchy)
                 {
-                    clock.SetActive(true);
-                }
-                else if (Input.GetMouseButtonUp(0))
-                {
-                    if (clock.activeInHierarchy)
-                    {
-                        clock.GetComponent<Clock>().ClockFollow();
-                        clockCounter--;
-                    }
+                    clock.GetComponent<Clock>().ClockFollow();
+                    clockCounter--;
                 }
             }
         }
+#endif
+#if UNITY_ANDROID && !UNITY_EDITOR
+#endif
     }
 
     // ===============================================================================================

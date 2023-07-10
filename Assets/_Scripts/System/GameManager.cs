@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static DataController;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] private GameObject SettingBtn;
-    [SerializeField] private GameObject Setting;
+    [SerializeField] private GameObject settingBtn;
+    [SerializeField] private GameObject setting;
+    [SerializeField] private GameObject joystick;
 
     private void Awake()
     {
@@ -20,7 +23,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        DataController.instance.LoadData();
+        DataController.instance.LoadSavePoint();
+
+        if (DataController.instance.joystickFixed)
+        {
+            joystick.GetComponent<FixedJoystick>().enabled = true;
+        }
+        else
+        {
+            joystick.GetComponent<FloatingJoystick>().enabled = true;
+        }
     }
     
     public void PlayerDead()
@@ -32,16 +44,16 @@ public class GameManager : MonoBehaviour
     {
         //GraphicsSettings.renderPipelineAsset = blurPipeline;
         Time.timeScale = 0;
-        SettingBtn.SetActive(false);
-        Setting.SetActive(true);
+        settingBtn.SetActive(false);
+        setting.SetActive(true);
     }
 
     public void Continue()
     {
         //GraphicsSettings.renderPipelineAsset = defaultPipeline;
         Time.timeScale = 1;
-        Setting.SetActive(false);
-        SettingBtn.SetActive(true);
+        setting.SetActive(false);
+        settingBtn.SetActive(true);
     }
 
     public void ExitGame()

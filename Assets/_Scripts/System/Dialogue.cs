@@ -40,7 +40,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private float  dialogueBoxScaleY;
     [SerializeField] private float  dialogueBoxScaleZ;
 
-    private GameObject dialogueUI;
+    [SerializeField] private GameObject dialogueUI;
     private GameObject dialogueActorName;
     private GameObject dialogueActorScript;
 
@@ -60,7 +60,6 @@ public class Dialogue : MonoBehaviour
 
         GetComponent<BoxCollider>().center  = new Vector3(dialogueBoxCenterX, dialogueBoxCenterY, dialogueBoxCenterZ);
         GetComponent<BoxCollider>().size    = new Vector3(dialogueBoxScaleX, dialogueBoxScaleY, dialogueBoxScaleZ);
-        dialogueUI          = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
         dialogueActorName   = dialogueUI.transform.GetChild(2).GetChild(0).gameObject;
         dialogueActorScript = dialogueUI.transform.GetChild(2).GetChild(1).gameObject;
     }

@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static DataController;
 
 public class DataController : MonoBehaviour
 {
@@ -17,19 +17,8 @@ public class DataController : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-
-
         gameData     = JsonUtility.FromJson<GameData>(Resources.Load<TextAsset>("Json/GameData").text);
         loadingTexts = JsonUtility.FromJson<LoadingTexts>(Resources.Load<TextAsset>("Json/Script").text);
-    }
-
-    [System.Serializable]
-    public enum SceneName
-    {
-        Chapter_T,
-        Chapter_1,
-        Chapter_2,
-        Chapter_3
     }
 
     [System.Serializable]
@@ -49,20 +38,27 @@ public class DataController : MonoBehaviour
     {
         public int totalProgressFlag;
 
-        public int chapterFlag_CT;
-        public int chapterFlag_C1;
-        public int chapterFlag_C2;
-        public int chapterFlag_C3;
+        public int  chapterFlag_CT;
+        public int  chapterFlag_C1;
+        public int  chapterFlag_C2;
+        public int  chapterFlag_C3;
 
-        public int collectionFlag_CT;
-        public int collectionFlag_C1;
-        public int collectionFlag_C2;
-        public int collectionFlag_C3;
+        public int  collectionFlag_CT;
+        public int  collectionFlag_C1;
+        public int  collectionFlag_C2;
+        public int  collectionFlag_C3;
+
+        public bool joystickFixed;
     }
 
     [SerializeField] private GameData gameData;
     [SerializeField] public LoadingTexts loadingTexts;
 
+    public bool joystickFixed
+    {
+        get { return gameData.joystickFixed; }
+        set { gameData.joystickFixed = value; }
+    }
 
     // 플레이 기록이 있는 챕터면 true 반환
     public bool IsChapterPlayedBefore(string sceneName)
@@ -164,7 +160,7 @@ public class DataController : MonoBehaviour
         Debug.Log("Save Complete");
     }
 
-    public void LoadData()
+    public void LoadSavePoint()
     {
         Vector3 position = GameObject.FindGameObjectWithTag("Player").transform.position;
 
@@ -194,14 +190,13 @@ public class DataController : MonoBehaviour
             case "Chapter_3":
                 if (gameData.chapterFlag_C3 > 0)
                 {
-                    position = GameObject.Find("SavePoint_" + (Convert.ToString(gameData.chapterFlag_C3, 3).Length - 1).ToString()).transform.position;
+                    position = GameObject.Find("SavePoint_" + (Convert.ToString(gameData.chapterFlag_C3, 2).Length - 1).ToString()).transform.position;
                 }
                 break;
         }
 
         GameObject.FindGameObjectWithTag("Player").transform.position = position;
     }
-
 
     // true 반환하면 해당 챕터 잠금 해제
     public bool CheckProcress(int i)
