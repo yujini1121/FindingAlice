@@ -37,6 +37,7 @@ public class Item : MonoBehaviour
                     break;
 
                 case ItemType.Oxygen:
+                    OxygenBar.instance.GetOxygenItem();
                     break;
             }
         }

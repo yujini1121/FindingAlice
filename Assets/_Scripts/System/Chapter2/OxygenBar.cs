@@ -5,11 +5,21 @@ using UnityEngine.UI;
 
 public class OxygenBar : MonoBehaviour
 {
+    public static OxygenBar instance;
+
     private Slider oxygenBar;
 
     private float maxOxygen;
     private float minOxygen;
+
     private float depletionRate;
+    private float oxygenItem;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+    }
 
     private void Start()
     {
@@ -17,6 +27,7 @@ public class OxygenBar : MonoBehaviour
         minOxygen = 0f;
 
         depletionRate = maxOxygen / 15f;
+        oxygenItem = maxOxygen / 2f;
 
         oxygenBar = gameObject.GetComponent<Slider>();
         oxygenBar.value = maxOxygen;
@@ -33,5 +44,10 @@ public class OxygenBar : MonoBehaviour
             oxygenBar.value = 0f;
             GameManager.instance.PlayerDead();
         }
+    }
+
+    public void GetOxygenItem()
+    {
+        oxygenBar.value += oxygenItem;
     }
 }

@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d69cf1d2e3ee3419f9c3bd6ac7fa8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 1
   respawnTime: 5
 --- !u!135 &912773034
 SphereCollider:
