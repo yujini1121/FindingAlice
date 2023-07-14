@@ -33,6 +33,8 @@ public class Clock : MonoBehaviour
     private float cameraZoomDampingZ    = 0.1f;
 
     //bool isClockOnEnable;
+    public bool usingClock = false;
+
 
     private void Awake()
     {
@@ -55,6 +57,7 @@ public class Clock : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
         player.GetComponent<Movement>().StateBeginShoot();
+        usingClock = true;
 
         //카메라 조작
         virtureCam.m_Follow = transform;
@@ -129,6 +132,7 @@ public class Clock : MonoBehaviour
         transform.localPosition = Vector3.zero;
         clockBg.SetActive(false);
         gameObject.SetActive(false);
+        usingClock = false;
     }
 
     // ===============================================================================================
@@ -152,7 +156,7 @@ public class Clock : MonoBehaviour
     // ===============================================================================================
     // Cinemachine Virture Camera 값 초기화
     // ===============================================================================================
-    private void CamSettings(bool isZooming)
+    public void CamSettings(bool isZooming)
     {
         if (isZooming)
         {
@@ -188,4 +192,6 @@ public class Clock : MonoBehaviour
             ClockReturnIdle();
         }
     }
+
+    
 }
