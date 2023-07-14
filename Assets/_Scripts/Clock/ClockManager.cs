@@ -23,7 +23,6 @@ public class ClockManager : MonoBehaviour
 
     [SerializeField] private bool _clockShootable = true;
 
-
     // ===============================================================================================
     // 시계 발사 횟수를 관리하는 프로퍼티
     //
@@ -149,4 +148,6 @@ public class ClockManager : MonoBehaviour
             clock.GetComponent<Clock>().ClockReturnIdle();
         }
     }
+
+    
 }
