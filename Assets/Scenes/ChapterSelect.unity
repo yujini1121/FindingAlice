@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 422144107}
   - component: {fileID: 422144106}
   m_Layer: 5
-  m_Name: OptionBg
+  m_Name: SettingBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2902,7 +2902,7 @@ GameObject:
   - component: {fileID: 1233051919}
   - component: {fileID: 1233051920}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: FixedJoystick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2976,7 +2976,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1431661444}
+        m_TargetAssemblyTypeName: ChapterSelect, Assembly-CSharp
+        m_MethodName: ChangeJoystick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1431661440
 GameObject:
@@ -3081,6 +3093,9 @@ MonoBehaviour:
   chapterInfoSprite: {fileID: 789933178}
   continueGame: {fileID: 1850747651}
   setting: {fileID: 1491041250}
+  settingBGSound: {fileID: 600759373}
+  settingFXSound: {fileID: 1950695457}
+  settingFixedJoystick: {fileID: 1233051918}
 --- !u!114 &1431661445
 MonoBehaviour:
   m_ObjectHideFlags: 0

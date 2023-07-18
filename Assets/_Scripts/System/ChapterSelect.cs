@@ -11,6 +11,9 @@ public class ChapterSelect : MonoBehaviour
     [SerializeField] private GameObject chapterInfoSprite;
     [SerializeField] private GameObject continueGame;
     [SerializeField] private GameObject setting;
+    [SerializeField] private GameObject settingBGSound;
+    [SerializeField] private GameObject settingFXSound;
+    [SerializeField] private GameObject settingFixedJoystick;
     private string targetScene;
 
     void Start()
@@ -26,6 +29,9 @@ public class ChapterSelect : MonoBehaviour
                 chapters.transform.GetChild(i + 1).GetComponent<Button>().interactable = false;
             }
         }
+
+        settingBGSound.GetComponent<Slider>().onValueChanged.AddListener(delegate { OnBGSoundChanged(); });
+        settingFXSound.GetComponent<Slider>().onValueChanged.AddListener(delegate { OnFXSoundChanged(); });
     }
 
     public void OpenInfo(string sceneName)
@@ -45,6 +51,14 @@ public class ChapterSelect : MonoBehaviour
 
     public void OpenSetting()
     {
+        if (DataController.instance.joystickFixed)
+            settingFixedJoystick.GetComponent<Toggle>().isOn = true;
+        else
+            settingFixedJoystick.GetComponent<Toggle>().isOn = false;
+
+        settingBGSound.GetComponent<Slider>().value = DataController.instance.bgSoundValue;
+        settingFXSound.GetComponent<Slider>().value = DataController.instance.fxSoundValue;
+
         setting.SetActive(true);
     }
 
@@ -63,4 +77,26 @@ public class ChapterSelect : MonoBehaviour
     {
         AsyncLoading.LoadScene(targetScene);
     }
-}
+
+    public void ChangeJoystick()
+    {
+        if (!settingFixedJoystick.activeInHierarchy) return;
+
+        if (DataController.instance.joystickFixed)
+        {
+            DataController.instance.joystickFixed = false;
+            return;
+        }
+        DataController.instance.joystickFixed = true;
+    }
+
+    public void OnBGSoundChanged()
+    {
+        DataController.instance.bgSoundValue = settingBGSound.GetComponent<Slider>().value;
+    }
+
+    public void OnFXSoundChanged()
+    {
+        DataController.instance.fxSoundValue = settingFXSound.GetComponent<Slider>().value;
+    }
+ }

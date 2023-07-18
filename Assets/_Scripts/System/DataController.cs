@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -59,6 +60,18 @@ public class DataController : MonoBehaviour
     {
         get { return gameData.joystickFixed; }
         set { gameData.joystickFixed = value; }
+    }
+
+    public float bgSoundValue
+    {
+        get { return gameData.bgSoundValue; }
+        set { gameData.bgSoundValue = value; }
+    }
+
+    public float fxSoundValue
+    {
+        get { return gameData.fxSoundValue; }
+        set { gameData.fxSoundValue = value; }
     }
 
     // 플레이 기록이 있는 챕터면 true 반환
@@ -268,5 +281,11 @@ public class DataController : MonoBehaviour
         string filePath = Application.dataPath + "/Resources/Json/GameData.json";
         File.WriteAllText(filePath, toJsonData);
         Debug.Log("Save Complete");
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
     }
 }

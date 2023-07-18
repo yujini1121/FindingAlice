@@ -13,8 +13,6 @@ public class Ch1_Movement : Movement
 #if UNITY_EDITOR
         xAxis = Input.GetAxisRaw("Horizontal");
 
-        Debug.Log(joystick.Horizontal);
-
 #elif UNITY_ANDROID
         xAxis = joystick.Horizontal;
 #endif
