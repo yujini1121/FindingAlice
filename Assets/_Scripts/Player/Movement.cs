@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    protected Joystick      joystick;
+
     protected Rigidbody     rigid;
 
     protected IEnumerator   smoothJump;
@@ -33,6 +35,16 @@ public class Movement : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         vecClockFollow = Vector3.zero;
+
+
+        if (DataController.instance.joystickFixed)
+        {
+            joystick = GameObject.Find("Joystick").GetComponent<FixedJoystick>();
+        }
+        else
+        {
+            joystick = GameObject.Find("Joystick").GetComponent<FloatingJoystick>();
+        }
     }
 
     protected virtual void Move()

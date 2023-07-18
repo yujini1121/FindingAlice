@@ -30,21 +30,20 @@ public class Fish : MonoBehaviour
 
     private IEnumerator FishUpdate()
     {
-        while (true)
+        switch (fishType)
         {
-            switch (fishType)
-            {
-                case FishType.FollowingFish:
+            case FishType.FollowingFish:
+                while (true)
+                {
                     if (!isFollowing)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, originalPosition, returnSpeed * Time.deltaTime);
                     }
-                    break;
-                default:
-                    break;
-            }
 
-            yield return new WaitForFixedUpdate();
+                    yield return new WaitForFixedUpdate();
+                }
+            default:
+                break;
         }
     }
 

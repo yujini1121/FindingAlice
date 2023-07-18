@@ -8,5 +8,7 @@
     "collectionFlag_C1": 0,
     "collectionFlag_C2": 0,
     "collectionFlag_C3": 0,
-    "joystickFixed": true
+    "joystickFixed": false,
+    "bgSoundValue": 1.0,
+    "fxSoundValue": 1.0
 }

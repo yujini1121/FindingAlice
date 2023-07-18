@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,19 +35,21 @@ public class DataController : MonoBehaviour
     [System.Serializable]
     public class GameData
     {
-        public int totalProgressFlag;
+        public int      totalProgressFlag;
 
-        public int  chapterFlag_CT;
-        public int  chapterFlag_C1;
-        public int  chapterFlag_C2;
-        public int  chapterFlag_C3;
-
-        public int  collectionFlag_CT;
-        public int  collectionFlag_C1;
-        public int  collectionFlag_C2;
-        public int  collectionFlag_C3;
-
-        public bool joystickFixed;
+        public int      chapterFlag_CT;
+        public int      chapterFlag_C1;
+        public int      chapterFlag_C2;
+        public int      chapterFlag_C3;
+                        
+        public int      collectionFlag_CT;
+        public int      collectionFlag_C1;
+        public int      collectionFlag_C2;
+        public int      collectionFlag_C3;
+                        
+        public bool     joystickFixed;
+        public float    bgSoundValue;
+        public float    fxSoundValue;
     }
 
     [SerializeField] private GameData gameData;
@@ -153,11 +154,6 @@ public class DataController : MonoBehaviour
             default:
                 break;
         }
-
-        string toJsonData   = JsonUtility.ToJson(gameData, true);
-        string filePath     = Application.dataPath + "/Resources/Json/GameData.json";
-        File.WriteAllText(filePath, toJsonData);
-        Debug.Log("Save Complete");
     }
 
     public void LoadSavePoint()
@@ -264,5 +260,13 @@ public class DataController : MonoBehaviour
     public void GetCollection()
     {
 
+    }
+
+    private void OnApplicationQuit()
+    {
+        string toJsonData = JsonUtility.ToJson(gameData, true);
+        string filePath = Application.dataPath + "/Resources/Json/GameData.json";
+        File.WriteAllText(filePath, toJsonData);
+        Debug.Log("Save Complete");
     }
 }

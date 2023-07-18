@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -19,20 +20,22 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
-    }
 
-    private void Start()
-    {
         DataController.instance.LoadSavePoint();
 
         if (DataController.instance.joystickFixed)
         {
-            joystick.GetComponent<FixedJoystick>().enabled = true;
+            Destroy(joystick.GetComponent<FloatingJoystick>());
         }
         else
         {
-            joystick.GetComponent<FloatingJoystick>().enabled = true;
+            Destroy(joystick.GetComponent<FixedJoystick>());
         }
+    }
+
+    private void Start()
+    {
+
     }
     
     public void PlayerDead()
