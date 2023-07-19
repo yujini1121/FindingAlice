@@ -27,7 +27,8 @@ public class Platform : MonoBehaviour
         Disappear,      // 밟으면 일정 시간 이후 사라지는 플랫폼
         Passing,        // 아래에서 위로 통과할 수 있는 플랫폼
         Sink,           // 밟으면 아래로 내려가는 플랫폼
-        DeadZone        // 닿으면 죽는 플랫폼
+        DeadZone,       // 닿으면 죽는 플랫폼
+        Cave            // ch.2 작은 동굴 플랫폼
     }
 
     [SerializeField] private PlatformType platformType;
@@ -67,6 +68,10 @@ public class Platform : MonoBehaviour
             case PlatformType.DeadZone:
                 GetComponent<Collider>().isTrigger = true;
                 break;
+
+            case PlatformType.Cave:
+                GetComponent<Collider>().isTrigger = true;
+                break;
         }
     }
 
@@ -103,6 +108,9 @@ public class Platform : MonoBehaviour
 
                 case PlatformType.DeadZone:
                     break;
+
+                case PlatformType.Cave:
+                    break;
             }
         }
     }
@@ -136,6 +144,9 @@ public class Platform : MonoBehaviour
 
                 case PlatformType.DeadZone:
                     break;
+
+                case PlatformType.Cave:
+                    break;
             }
         }
     }
@@ -161,6 +172,34 @@ public class Platform : MonoBehaviour
 
                 case PlatformType.DeadZone:
                     GameManager.instance.PlayerDead();
+                    break;
+
+                case PlatformType.Cave:
+                    break;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            switch (platformType)
+            {
+                case PlatformType.Disappear:
+                    break;
+
+                case PlatformType.Passing:
+                    break;
+
+                case PlatformType.Sink:
+                    break;
+
+                case PlatformType.DeadZone:
+                    break;
+
+                case PlatformType.Cave:
+                    OxygenBar.instance.EnterCave();
                     break;
             }
         }

@@ -14,6 +14,7 @@ public class OxygenBar : MonoBehaviour
 
     private float depletionRate;
     private float oxygenItem;
+    private float caveOxygenRate;
 
     private void Awake()
     {
@@ -28,26 +29,35 @@ public class OxygenBar : MonoBehaviour
 
         depletionRate = maxOxygen / 15f;
         oxygenItem = maxOxygen / 2f;
+        caveOxygenRate = maxOxygen / 5f;
 
         oxygenBar = gameObject.GetComponent<Slider>();
         oxygenBar.value = maxOxygen;
+
+        StartCoroutine(OxygenBarUpdate());
     }
 
-    private void LateUpdate() 
-    {
-        if (oxygenBar.value <= maxOxygen && oxygenBar.value > minOxygen)
+    private IEnumerator OxygenBarUpdate()
+    {        
+        while (oxygenBar.value <= maxOxygen && oxygenBar.value > minOxygen)
         {
             oxygenBar.value -= depletionRate * Time.deltaTime;
+
+            yield return null;
         }
-        else
-        {
-            oxygenBar.value = 0f;
-            GameManager.instance.PlayerDead();
-        }
+
+        // oxygenBar의 값이 0이면, 플레이어 사망
+        oxygenBar.value = 0f;
+        GameManager.instance.PlayerDead();
     }
 
     public void GetOxygenItem()
     {
         oxygenBar.value += oxygenItem;
+    }
+
+    public void EnterCave()
+    {
+        oxygenBar.value += caveOxygenRate * Time.deltaTime;
     }
 }
