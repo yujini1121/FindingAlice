@@ -1,20 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static DataController;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("UI")]
     [SerializeField] private GameObject settingBtn;
     [SerializeField] private GameObject setting;
     [SerializeField] private GameObject joystick;
+    [SerializeField] public GameObject dialogue;
 
     private void Awake()
     {
@@ -32,11 +31,6 @@ public class GameManager : MonoBehaviour
             Destroy(joystick.GetComponent<FixedJoystick>());
         }
     }
-
-    private void Start()
-    {
-
-    }
     
     public void PlayerDead()
     {
@@ -45,7 +39,6 @@ public class GameManager : MonoBehaviour
 
     public void OpenSetting()
     {
-        //GraphicsSettings.renderPipelineAsset = blurPipeline;
         Time.timeScale = 0;
         settingBtn.SetActive(false);
         setting.SetActive(true);
@@ -53,7 +46,6 @@ public class GameManager : MonoBehaviour
 
     public void Continue()
     {
-        //GraphicsSettings.renderPipelineAsset = defaultPipeline;
         Time.timeScale = 1;
         setting.SetActive(false);
         settingBtn.SetActive(true);

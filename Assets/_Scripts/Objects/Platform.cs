@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+// ===================================================================================================
+// Platform에 Attach되는 스크립트
+//
+// Inspector 창에서 어떤 플랫폼인지 ItemType을 지정하여 사용한다.
+// ===================================================================================================
+
 public class Platform : MonoBehaviour
 {
     /*
@@ -13,32 +19,33 @@ public class Platform : MonoBehaviour
     Button Trigger      : 버튼 누르면 플랫폼 생성
     */
 
+
+
     [System.Serializable]
     private enum PlatformType
     {
-        Disappear,
-        Passing,
-        Sink,
-        DeadZone
+        Disappear,      // 밟으면 일정 시간 이후 사라지는 플랫폼
+        Passing,        // 아래에서 위로 통과할 수 있는 플랫폼
+        Sink,           // 밟으면 아래로 내려가는 플랫폼
+        DeadZone        // 닿으면 죽는 플랫폼
     }
 
-    Mesh platformMesh;
-
     [SerializeField] private PlatformType platformType;
+    private Mesh platformMesh;
 
     [Header("Disappear")]
     [SerializeField] private float takesToDisappear;
     [SerializeField] private float takesToAppear;
-    Coroutine disappearTimeCheck;
+    private Coroutine disappearTimeCheck;
 
     [Header("Sink")]
     [SerializeField] private float sinkMaxDistance;
     [SerializeField] private float sinkSpeed;
-    Coroutine sink;
-    Coroutine uprise;
-    Vector3 originPos;
+    private Coroutine sink;
+    private Coroutine uprise;
+    private Vector3 originPos;
 
-    void Start()
+    private void Start()
     {
         platformMesh = GetComponent<MeshFilter>().mesh;
         originPos = transform.position;

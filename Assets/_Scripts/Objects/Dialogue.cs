@@ -40,7 +40,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private float  dialogueBoxScaleY;
     [SerializeField] private float  dialogueBoxScaleZ;
 
-    [SerializeField] private GameObject dialogueUI;
+    private GameObject dialogueUI;
     private GameObject dialogueActorName;
     private GameObject dialogueActorScript;
 
@@ -60,6 +60,7 @@ public class Dialogue : MonoBehaviour
 
         GetComponent<BoxCollider>().center  = new Vector3(dialogueBoxCenterX, dialogueBoxCenterY, dialogueBoxCenterZ);
         GetComponent<BoxCollider>().size    = new Vector3(dialogueBoxScaleX, dialogueBoxScaleY, dialogueBoxScaleZ);
+        dialogueUI = GameManager.instance.dialogue;
         dialogueActorName   = dialogueUI.transform.GetChild(2).GetChild(0).gameObject;
         dialogueActorScript = dialogueUI.transform.GetChild(2).GetChild(1).gameObject;
     }
@@ -133,7 +134,7 @@ public class Dialogue : MonoBehaviour
             actor.SetActive(false);
         }
 
-        // 말하고 있지 않은 Actor 어둡게 만들기
+        // 말하고 있지 않는 Actor 어둡게 만들기
         if (script.scriptDatas[index].speaker == 0 || script.scriptDatas[index].speaker == 1)
         {
             dialogueUI.transform.GetChild(script.scriptDatas[index].speaker).GetComponent<Image>().color     = Color.white;

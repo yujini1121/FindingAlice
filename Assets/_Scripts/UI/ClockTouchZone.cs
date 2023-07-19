@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
+
+
+// ===================================================================================================
+// 화면 오른쪽의 시계 터치 존 스크립트
+// ===================================================================================================
 
 public class ClockTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     private Vector2 touchedPos;
     public static Vector2 toDragedPos;
-
-    private void Start()
-    {
-    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

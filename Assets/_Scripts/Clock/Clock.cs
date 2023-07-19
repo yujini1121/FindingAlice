@@ -1,8 +1,12 @@
 using Cinemachine;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
+// ===================================================================================================
+// 플레이어가 발사하는 시계 오브젝트에 Attach되는 스크립트
+// ===================================================================================================
 
 public class Clock : MonoBehaviour
 {
@@ -32,7 +36,7 @@ public class Clock : MonoBehaviour
     private float cameraZoomDampingXY   = 0.1f;
     private float cameraZoomDampingZ    = 0.1f;
 
-    //bool isClockOnEnable;
+    // *****
     public bool usingClock = false;
 
 
@@ -43,13 +47,11 @@ public class Clock : MonoBehaviour
         virtureCamFT = virtureCam.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
-    void Start()
-    {
-    }
-
+    // ===============================================================================================
+    // 시계가 활성화될 때의 행동
+    // ===============================================================================================
     private void OnEnable()
     {
-        //isClockOnEnable = true;
         playerTrans = player.transform;
 
         clockStartTime = Time.unscaledTime;
@@ -63,14 +65,19 @@ public class Clock : MonoBehaviour
         virtureCam.m_Follow = transform;
         CamSettings(true);
 
+        //코루틴 초기화
         if (clockShoot != null) clockShoot = null;
         clockShoot = StartCoroutine(ClockShoot());
     }
 
+    // ===============================================================================================
+    // 시계가 발사되고 있는 상태일 때 실행되는 코루틴
+    // ===============================================================================================
     private IEnumerator ClockShoot()
     {
         while (Time.unscaledTime - clockStartTime < clockIncreasableTime + clockMaxDistanceTime)
         {
+            // 시계가 플레이어로부터 멀어지고 있는 상태
             if (clockCurDistance < clockMaxDistance)
             {
                 clockCurDistance += (clockMaxDistance / clockIncreasableTime) * Time.unscaledDeltaTime;
@@ -82,14 +89,10 @@ public class Clock : MonoBehaviour
                 clockBg.GetComponent<MeshRenderer>().material.color = clockBgMatColor;
             }
 
-#if UNITY_EDITOR
-            //Vector3 clockPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
             Vector3 clockPos = ClockTouchZone.toDragedPos;
             vecToClock = (clockPos - player.transform.position).normalized;
-#endif
-#if UNITY_ANDROID && !UNITY_EDITOR
-#endif
 
+            // 시계가 플레이어의 자식으로 있으므로, 플레이어의 Flip에 따라 시계도 Flip
             if ((vecToClock.x < 0 && playerTrans.localScale.x > 0) || (vecToClock.x > 0 && playerTrans.localScale.x < 0))
             {
                 Vector3 sightDir = playerTrans.localScale;
@@ -115,8 +118,6 @@ public class Clock : MonoBehaviour
     // ===============================================================================================
     public void ClockReturnIdle()
     {
-        //isClockOnEnable = false;
-
         if (Time.timeScale != 1)
         {
             Time.timeScale = 1f;
@@ -136,11 +137,10 @@ public class Clock : MonoBehaviour
     }
 
     // ===============================================================================================
-    // 시계를 따라갈 때 호출되는 함수
+    // 플레이어가 시계를 따라갈 때 호출되는 함수
     // ===============================================================================================
     public void ClockFollow()
     {
-        //isClockOnEnable = false;
         StopCoroutine(clockShoot);
 
         Time.timeScale = 1f;
@@ -186,12 +186,10 @@ public class Clock : MonoBehaviour
     // ===============================================================================================
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             player.GetComponent<Movement>().StateCollsionWithClock(vecToClock * clockCurDistance);
             ClockReturnIdle();
         }
     }
-
-    
 }
