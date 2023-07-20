@@ -5,6 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+// ===================================================================================================
+// Dialogue 출력하는 스크립트
+//
+// Dialogue Box에 Attach 된다
+// ===================================================================================================
+
 public class Dialogue : MonoBehaviour
 {
     // 클래스 및 멤버의 접근지정자 public이어야 Parsing 됨
@@ -46,6 +53,7 @@ public class Dialogue : MonoBehaviour
 
     void Start()
     {
+        // 다이얼로그의 Area가 Save 데이터보다 이전이라면 이미 출력된 다이얼로그로 간주하고 오브젝트 Active false
         gameObject.SetActive(DataController.instance.CheckArea(area));
 
         script = JsonUtility.FromJson<Script>(Resources.Load<TextAsset>("Json/Script").text);
@@ -65,9 +73,12 @@ public class Dialogue : MonoBehaviour
         dialogueActorScript = dialogueUI.transform.GetChild(2).GetChild(1).gameObject;
     }
 
+    // ===============================================================================================
+    // 출력하지 않은 다이얼로그인지 확인 후 출력
+    // ===============================================================================================
     private void OnTriggerEnter(Collider other)
     {
-        if ((index < EndNum - BeginNum) && other.tag == "Player")
+        if ((index < EndNum - BeginNum) && other.CompareTag("Player"))
         {
             other.transform.position = new Vector3(transform.position.x + dialogueBoxCenterX,
                                                    transform.position.y + dialogueBoxCenterY,
@@ -79,6 +90,9 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+    // ===============================================================================================
+    // 화면 터치로 다이얼로그 출력
+    // ===============================================================================================
     private IEnumerator PrintDialogue(GameObject player)
     {
         DialogueAction();
@@ -108,6 +122,9 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+    // ===============================================================================================
+    // 다이얼로그 출력 시 Sprite와 Text를 로드
+    // ===============================================================================================
     private void DialogueAction()
     {
         GameObject actor = dialogueUI.transform.GetChild(0).gameObject;
@@ -147,6 +164,9 @@ public class Dialogue : MonoBehaviour
         index++;
     }
 
+    // ===============================================================================================
+    // 에디터에서 Test를 위한 코드
+    // ===============================================================================================
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

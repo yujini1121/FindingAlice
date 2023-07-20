@@ -5,15 +5,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+// ===================================================================================================
+// 게임 속 플레이어의 죽음 처리 및 씬 전환, UI 관리
+// ===================================================================================================
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     [Header("UI")]
-    [SerializeField] private GameObject settingBtn;
-    [SerializeField] private GameObject setting;
-    [SerializeField] private GameObject joystick;
-    [SerializeField] public GameObject dialogue;
+    public GameObject settingBtn;
+    public GameObject setting;
+    public GameObject joystick;
+    public GameObject dialogue;
 
     private void Awake()
     {
@@ -57,16 +62,11 @@ public class GameManager : MonoBehaviour
         AsyncLoading.LoadScene("ChapterSelect");
     }
 
-    //private void OnApplicationPause(bool pause)
-    //{
-    //    if (pause)
-    //    {
-    //        isPaused = true;
-    //        PopUpOption();
-    //    }
-    //    if (isPaused)
-    //    {
-    //        isPaused = false;
-    //    }
-    //}
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            OpenSetting();
+        }
+    }
 }

@@ -13,10 +13,13 @@ public class StripedMarlinBossPattern : MonoBehaviour
     private float patternCooldown = 4f;
     private float patternWarningTime = 3f;
 
-    private void Start() 
+    private void Awake()
     {
         testWarning = transform.GetChild(0).GetComponent<MeshRenderer>();
-        Debug.Log(testWarning);
+    }
+
+    private void Start() 
+    {
     }
 
     private void OnEnable()
@@ -56,19 +59,18 @@ public class StripedMarlinBossPattern : MonoBehaviour
             case 1:
                 // 패턴 예고
                 transform.GetChild(0).gameObject.SetActive(true);
-                //Color color = testWarning.material.color;
-                Debug.Log(testWarning.material.color);
+                Color color = testWarning.material.color;
 
 
-                // while (Time.time - patternStartTime < patternWarningTime)
-                // {
-                //     float alpha = (Time.time - patternStartTime) / patternWarningTime;
-                //     color = new Color(color.r, color.g, color.b, alpha);
-                //     Debug.Log(alpha);
+                while (Time.time - patternStartTime < patternWarningTime)
+                {
+                    float alpha = (Time.time - patternStartTime) / patternWarningTime;
+                    color = new Color(color.r, color.g, color.b, alpha);
+                    Debug.Log(alpha);
 
-                //     testWarning.material.color = color;
-                //     yield return null;
-                // }
+                    testWarning.material.color = color;
+                    yield return null;
+                }
                 break;
         }
         yield return new WaitForSeconds(patternCooldown);

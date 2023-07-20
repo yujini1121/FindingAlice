@@ -379,6 +379,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bitFlagPlace: 2
+  SavePointCenterX: 0
+  SavePointCenterY: 0
+  SavePointCenterZ: 0
   SavePointScaleX: 0
   SavePointScaleY: 0
   SavePointScaleZ: 0
@@ -1243,6 +1246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bitFlagPlace: 0
+  SavePointCenterX: 0
+  SavePointCenterY: 0
+  SavePointCenterZ: 0
   SavePointScaleX: 0
   SavePointScaleY: 0
   SavePointScaleZ: 0
@@ -3268,6 +3274,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bitFlagPlace: 1
+  SavePointCenterX: 0
+  SavePointCenterY: 0
+  SavePointCenterZ: 0
   SavePointScaleX: 0
   SavePointScaleY: 0
   SavePointScaleZ: 0
@@ -3530,7 +3539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1543505456
 Transform:
   m_ObjectHideFlags: 0
@@ -4243,7 +4252,7 @@ MonoBehaviour:
   settingBtn: {fileID: 932341284}
   setting: {fileID: 277857834}
   joystick: {fileID: 8170153792147655429}
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 1666548328}
 --- !u!1 &1873969098
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,21 +20,18 @@ public class ChapterSelect : MonoBehaviour
     [SerializeField] private GameObject settingFixedJoystick;
     private string targetScene;
 
-    void Start()
+    private void Awake()
     {
         // 이전 챕터 플레이 기록이 없으면 챕터 잠구기
-        for (int i = 0; i < 3; i++)
+        int range = DataController.instance.CheckProcress();
+        for (int i = 0; i <= range; i++)
         {
-            if (DataController.instance.CheckProcress(i))
-            {
-                continue;
-            }
-            else
-            {
-                chapters.transform.GetChild(i + 1).GetComponent<Button>().interactable = false;
-            }
+            chapters.transform.GetChild(i + 1).GetComponent<Button>().interactable = true;
         }
+    }
 
+    void Start()
+    {
         // 배경음 슬라이더 조작 시 슬라이더 값에 따라 음량을 조절하기 위한 델리게이트 지정
         Slider BGSound_Slider = settingBGSound.GetComponent<Slider>();
         BGSound_Slider.onValueChanged.AddListener(delegate

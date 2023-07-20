@@ -16,13 +16,16 @@ public class SavePoint : MonoBehaviour
     [SerializeField] int bitFlagPlace;
 
     [Header("Bounds")]
+    [SerializeField] private float SavePointCenterX;
+    [SerializeField] private float SavePointCenterY;
+    [SerializeField] private float SavePointCenterZ;
     [SerializeField] private float SavePointScaleX;
     [SerializeField] private float SavePointScaleY;
     [SerializeField] private float SavePointScaleZ;
 
     private void Start()
     {
-        GetComponent<BoxCollider>().center  = new Vector3(0, SavePointScaleY / 2 + 0.5f, 0);
+        GetComponent<BoxCollider>().center  = new Vector3(SavePointCenterX, SavePointCenterY, SavePointCenterZ);
         GetComponent<BoxCollider>().size    = new Vector3(SavePointScaleX, SavePointScaleY, SavePointScaleZ);
     }
 
@@ -30,7 +33,7 @@ public class SavePoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // 1을 bitFlagPlace만큼 시프트해서 저장 함수 호출
+            // 1을 bitFlagPlace만큼 시프트해서 데이터 저장
             DataController.instance.SaveData(1 << bitFlagPlace);
         }
     }
@@ -38,9 +41,9 @@ public class SavePoint : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x,
-                                        transform.position.y + (SavePointScaleY / 2 + 0.5f),
-                                        transform.position.z),
+        Gizmos.DrawWireCube(new Vector3(transform.position.x + SavePointCenterX,
+                                        transform.position.y + SavePointCenterY,
+                                        transform.position.z + SavePointCenterZ),
                             new Vector3(SavePointScaleX, SavePointScaleY, SavePointScaleZ));
     }
 }
