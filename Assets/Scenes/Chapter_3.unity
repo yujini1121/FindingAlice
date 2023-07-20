@@ -331,11 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 965303947108291084, guid: db941093b5fda5841bd4451fdfcd341c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.81
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 965303947108291084, guid: db941093b5fda5841bd4451fdfcd341c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 965303947108291084, guid: db941093b5fda5841bd4451fdfcd341c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -573,11 +573,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bitFlagPlace: 2
   SavePointCenterX: 0
-  SavePointCenterY: 1.5
+  SavePointCenterY: 0
   SavePointCenterZ: 0
-  SavePointScaleX: 1
-  SavePointScaleY: 2
-  SavePointScaleZ: 1
+  SavePointScaleX: 0
+  SavePointScaleY: 0
+  SavePointScaleZ: 0
 --- !u!65 &167694653
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9261,7 +9261,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1.36e-43}
+  m_BoundingSphereOverride: {x: 0, y: -2.6349077e-18, z: 6.11e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

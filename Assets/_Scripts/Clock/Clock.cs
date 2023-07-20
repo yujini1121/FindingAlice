@@ -36,9 +36,6 @@ public class Clock : MonoBehaviour
     private float cameraZoomDampingXY   = 0.1f;
     private float cameraZoomDampingZ    = 0.1f;
 
-    // *****
-    public bool usingClock = false;
-
 
     private void Awake()
     {
@@ -59,7 +56,6 @@ public class Clock : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
         player.GetComponent<Movement>().StateBeginShoot();
-        usingClock = true;
 
         //카메라 조작
         virtureCam.m_Follow = transform;
@@ -133,7 +129,6 @@ public class Clock : MonoBehaviour
         transform.localPosition = Vector3.zero;
         clockBg.SetActive(false);
         gameObject.SetActive(false);
-        usingClock = false;
     }
 
     // ===============================================================================================
