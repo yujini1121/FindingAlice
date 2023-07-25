@@ -66,7 +66,7 @@ public class StripedMarlinBossPattern : MonoBehaviour
                 {
                     float alpha = (Time.time - patternStartTime) / patternWarningTime;
                     color = new Color(color.r, color.g, color.b, alpha);
-                    Debug.Log(alpha);
+                    //Debug.Log(alpha);
 
                     testWarning.material.color = color;
                     yield return null;
