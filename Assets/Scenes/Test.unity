@@ -241,7 +241,6 @@ MonoBehaviour:
   clockMaxDistance: 8
   clockCurDistance: 0
   clockShootPower: 20
-  usingClock: 0
 --- !u!1 &81732802
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81732802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 4.57, z: -10}
+  m_LocalPosition: {x: 11.15, y: 2.5700002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -806,7 +805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 246559945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 4.57, z: 0}
+  m_LocalPosition: {x: 11.15, y: 2.5700002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -834,7 +833,7 @@ MonoBehaviour:
   jumpable: 0
   movable: 1
   isTalking: 0
-  speedOffset: {x: 9, y: 0, z: 0}
+  isTouchPlatform: 0
   Clock: {fileID: 13787553}
 --- !u!1 &277857834
 GameObject:
@@ -1445,6 +1444,7 @@ MonoBehaviour:
   takesToAppear: 3
   sinkMaxDistance: 1
   sinkSpeed: 2
+  vectorOfRipCurrent: {x: 0, y: 0, z: 0}
 --- !u!1 &500836064
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1694,7 @@ MonoBehaviour:
   takesToAppear: 0
   sinkMaxDistance: 0
   sinkSpeed: 0
+  vectorOfRipCurrent: {x: 0, y: 0, z: 0}
 --- !u!1 &559047429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,7 +2511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 4.57, z: -10}
+  m_LocalPosition: {x: 11.15, y: 2.5700002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2721,6 +2722,7 @@ MonoBehaviour:
   takesToAppear: 0
   sinkMaxDistance: 0
   sinkSpeed: 0
+  vectorOfRipCurrent: {x: 0, y: 0, z: 0}
 --- !u!65 &1100552933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2811,6 +2813,7 @@ GameObject:
   - component: {fileID: 1228282576}
   - component: {fileID: 1228282575}
   - component: {fileID: 1228282574}
+  - component: {fileID: 1228282578}
   m_Layer: 0
   m_Name: RipCurrent
   m_TagString: RipCurrent
@@ -2896,6 +2899,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1228282578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228282572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ad4a0f83a83034db60d1df2da6aae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformType: 5
+  takesToDisappear: 0
+  takesToAppear: 0
+  sinkMaxDistance: 0
+  sinkSpeed: 0
+  vectorOfRipCurrent: {x: 30, y: 0, z: 0}
 --- !u!1 &1241868536
 GameObject:
   m_ObjectHideFlags: 0
@@ -4317,6 +4338,7 @@ MonoBehaviour:
   takesToAppear: 0
   sinkMaxDistance: 0
   sinkSpeed: 0
+  vectorOfRipCurrent: {x: 0, y: 0, z: 0}
 --- !u!33 &1873969102
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4416,7 +4438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880234543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.5, y: 2, z: 0}
+  m_LocalPosition: {x: 29, y: 2, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4951,6 +4973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45dc366dc4593934c893765f50467612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fillRatio: 0
 --- !u!224 &8170153791920960640
 RectTransform:
   m_ObjectHideFlags: 0

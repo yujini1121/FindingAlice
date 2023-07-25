@@ -36,7 +36,6 @@ public class Clock : MonoBehaviour
     private float cameraZoomDampingXY   = 0.1f;
     private float cameraZoomDampingZ    = 0.1f;
 
-
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -151,7 +150,7 @@ public class Clock : MonoBehaviour
     // ===============================================================================================
     // Cinemachine Virture Camera 값 초기화
     // ===============================================================================================
-    public void CamSettings(bool isZooming)
+    private void CamSettings(bool isZooming)
     {
         if (isZooming)
         {

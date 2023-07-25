@@ -11,6 +11,18 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+    /*
+    Passing Platform    : 통과할 수 있는 플랫폼
+    Disappear Platform  : 밟으면 일정 시간 뒤에 사라지는 플랫폼
+    Sink Platform       : 밟으면 내려가지는 플랫폼
+
+    Button Trigger      : 버튼 누르면 플랫폼 생성
+
+    Rip Current         : 일정 벡터로 밀리는 ch.2의 이안류 기믹
+    */
+
+
+
     [System.Serializable]
     private enum PlatformType
     {
@@ -18,6 +30,8 @@ public class Platform : MonoBehaviour
         Passing,        // 아래에서 위로 통과할 수 있는 플랫폼
         Sink,           // 밟으면 아래로 내려가는 플랫폼
         DeadZone,       // 닿으면 죽는 플랫폼
+        Cave,           // ch.2 작은 동굴 플랫폼
+        RipCurrent      // ch.2 이안류 플랫폼
     }
 
     [SerializeField] private PlatformType platformType;
@@ -34,6 +48,9 @@ public class Platform : MonoBehaviour
     private Coroutine sink;
     private Coroutine uprise;
     private Vector3 originPos;
+
+    [Header("RipCurrent")]
+    [SerializeField] private Vector3 vectorOfRipCurrent;
 
     private void Start()
     {
@@ -55,6 +72,13 @@ public class Platform : MonoBehaviour
                 break;
 
             case PlatformType.DeadZone:
+                GetComponent<Collider>().isTrigger = true;
+                break;
+
+            case PlatformType.Cave:
+                GetComponent<Collider>().isTrigger = true;
+                break;
+            case PlatformType.RipCurrent:
                 GetComponent<Collider>().isTrigger = true;
                 break;
         }
@@ -93,6 +117,9 @@ public class Platform : MonoBehaviour
 
                 case PlatformType.DeadZone:
                     break;
+
+                case PlatformType.Cave:
+                    break;
             }
         }
     }
@@ -126,6 +153,12 @@ public class Platform : MonoBehaviour
 
                 case PlatformType.DeadZone:
                     break;
+
+                case PlatformType.Cave:
+                    break;
+
+                case PlatformType.RipCurrent:
+                    break;
             }
         }
     }
@@ -152,6 +185,11 @@ public class Platform : MonoBehaviour
                 case PlatformType.DeadZone:
                     GameManager.instance.PlayerDead();
                     break;
+
+                case PlatformType.Cave:
+                    break;
+                case PlatformType.RipCurrent:
+                    break;
             }
         }
     }
@@ -172,6 +210,40 @@ public class Platform : MonoBehaviour
                     break;
 
                 case PlatformType.DeadZone:
+                    break;
+
+                case PlatformType.Cave:
+                    OxygenBar.instance.EnterCave();
+                    break;
+                case PlatformType.RipCurrent:
+                    Ch2_Movement.instance.EnterRipCurrent(vectorOfRipCurrent);
+                    break;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            switch (platformType)
+            {
+                case PlatformType.Disappear:
+                    break;
+
+                case PlatformType.Passing:
+                    break;
+
+                case PlatformType.Sink:
+                    break;
+
+                case PlatformType.DeadZone:
+                    break;
+
+                case PlatformType.Cave:
+                    break;
+                case PlatformType.RipCurrent:
+                    Ch2_Movement.instance.ExitRipCurrent();
                     break;
             }
         }
