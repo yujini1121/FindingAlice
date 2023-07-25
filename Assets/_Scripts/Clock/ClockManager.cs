@@ -57,11 +57,7 @@ public class ClockManager : MonoBehaviour
             {
                 clockUI[_clockCounter].SetActive(false);
 
-                if (clockReload != null)
-                {
-                    StopCoroutine(clockReload);
-                }
-                clockReload = StartCoroutine(ClockReload());
+               
             }
         }
     }
@@ -113,6 +109,12 @@ public class ClockManager : MonoBehaviour
         {
             clock.GetComponent<Clock>().ClockFollow();
             clockCounter--;
+            
+            if (clockReload != null)
+            {
+                StopCoroutine(clockReload);
+            }
+            clockReload = StartCoroutine(ClockReload());
         }
     }
 
@@ -121,12 +123,13 @@ public class ClockManager : MonoBehaviour
     //
     // 실행 후 시계가 최대가 아닐 경우 재실행
     // ===============================================================================================
-    private IEnumerator ClockReload()
+    public IEnumerator ClockReload()
     {
+        
         yield return new WaitForSeconds(clockReloadTime);
 
         clockCounter++;
-
+        
         if (clockCounter < clockMaxCount)
         {
             clockReload = StartCoroutine(ClockReload());
