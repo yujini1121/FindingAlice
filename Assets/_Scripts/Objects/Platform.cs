@@ -243,6 +243,7 @@ public class Platform : MonoBehaviour
 
         disappearTimeCheck = null;
     }
+    
 
     private IEnumerator Sink()
     {

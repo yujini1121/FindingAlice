@@ -14,7 +14,7 @@ public class Fish : MonoBehaviour
 
     [Header("FollowingFish")]
     [SerializeField] private float followSpeed = 3.0f; 
-    [SerializeField] private float returnSpeed = 6.0f; 
+    [SerializeField] private float returnSpeed = 6.0f;
     private Vector3 originalPosition;
     private GameObject playerObject;
     private Transform playerTransform;
@@ -35,7 +35,7 @@ public class Fish : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             switch (fishType)
             {
@@ -50,11 +50,24 @@ public class Fish : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        switch (fishType)
+        if (other.CompareTag("Player"))
         {
-            case FishType.FollowingFish:
-                transform.position = Vector3.MoveTowards(transform.position, originalPosition, returnSpeed * Time.deltaTime);
-                break;
+            switch (fishType)
+            {
+                case FishType.FollowingFish:
+                    StartCoroutine(ReturnOriginalPos());
+                    break;
+            }
         }
     }
+
+    private IEnumerator ReturnOriginalPos()
+    {
+        while (transform.position != originalPosition)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, originalPosition, returnSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+    
 }
