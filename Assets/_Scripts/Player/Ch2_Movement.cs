@@ -9,6 +9,7 @@ public class Ch2_Movement : Movement
     protected Animator  animator;
     private OxygenBar oxygenBar;
     public static Ch2_Movement instance;
+    private float playerGravityModifier = 6f;             
 
 
     protected void Awake()
@@ -17,6 +18,9 @@ public class Ch2_Movement : Movement
         oxygenBar = FindObjectOfType<OxygenBar>();
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
+        jumpForce = 12;
+        moveSpeed = 4;
+        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y + playerGravityModifier, Physics.gravity.z);
     }
     
     private void Update()
@@ -105,11 +109,6 @@ public class Ch2_Movement : Movement
         yield return new WaitForSeconds(0.2f);
         jumpable = true;
         jumpByKey = false;
-    }
-
-    IEnumerator waitForReloadClock()
-    {
-        yield return new WaitUntil(() => isTouchPlatform == true);
     }
 
     public void EnterRipCurrent(Vector3 vec)
