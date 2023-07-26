@@ -23,6 +23,8 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] private InteractableType interactableType;
 
+    private GameObject oxygenBar;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -54,8 +56,10 @@ public class Interactable : MonoBehaviour
                 case InteractableType.Button:
                     break;
 
+                // 싱글톤으로 관리하는 것도 비용이 들기때문에 GetComponent로 작성
                 case InteractableType.Cave:
-                    OxygenBar.instance.EnterCave();
+                    oxygenBar = GameObject.Find("oxygenBar");
+                    oxygenBar.GetComponent<OxygenBar>().EnterCave();
                     break;
             }
         }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 // ===================================================================================================
 // Platform에 Attach되는 스크립트
 //
@@ -30,7 +29,6 @@ public class Platform : MonoBehaviour
         Passing,        // 아래에서 위로 통과할 수 있는 플랫폼
         Sink,           // 밟으면 아래로 내려가는 플랫폼
         DeadZone,       // 닿으면 죽는 플랫폼
-        Cave,           // ch.2 작은 동굴 플랫폼
         RipCurrent      // ch.2 이안류 플랫폼
     }
 
@@ -75,9 +73,6 @@ public class Platform : MonoBehaviour
                 GetComponent<Collider>().isTrigger = true;
                 break;
 
-            case PlatformType.Cave:
-                GetComponent<Collider>().isTrigger = true;
-                break;
             case PlatformType.RipCurrent:
                 GetComponent<Collider>().isTrigger = true;
                 break;
@@ -117,9 +112,6 @@ public class Platform : MonoBehaviour
 
                 case PlatformType.DeadZone:
                     break;
-
-                case PlatformType.Cave:
-                    break;
             }
         }
     }
@@ -154,9 +146,6 @@ public class Platform : MonoBehaviour
                 case PlatformType.DeadZone:
                     break;
 
-                case PlatformType.Cave:
-                    break;
-
                 case PlatformType.RipCurrent:
                     break;
             }
@@ -186,8 +175,6 @@ public class Platform : MonoBehaviour
                     GameManager.instance.PlayerDead();
                     break;
 
-                case PlatformType.Cave:
-                    break;
                 case PlatformType.RipCurrent:
                     break;
             }
@@ -212,9 +199,6 @@ public class Platform : MonoBehaviour
                 case PlatformType.DeadZone:
                     break;
 
-                case PlatformType.Cave:
-                    OxygenBar.instance.EnterCave();
-                    break;
                 case PlatformType.RipCurrent:
                     Ch2_Movement.instance.EnterRipCurrent(vectorOfRipCurrent);
                     break;
@@ -240,8 +224,6 @@ public class Platform : MonoBehaviour
                 case PlatformType.DeadZone:
                     break;
 
-                case PlatformType.Cave:
-                    break;
                 case PlatformType.RipCurrent:
                     Ch2_Movement.instance.ExitRipCurrent();
                     break;
