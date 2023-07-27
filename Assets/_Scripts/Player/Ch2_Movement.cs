@@ -6,16 +6,15 @@ using UnityEngine;
 public class Ch2_Movement : Movement
 {
     public GameObject   Clock;
-    protected Animator  animator;
-    private OxygenBar oxygenBar;
+    private Animator  animator;
     public static Ch2_Movement instance;
-    private float playerGravityModifier = 6f;             
+    private float playerGravityModifier = 4f;
+    public bool jump = false;
 
 
     protected void Awake()
     {
         animator = GetComponent<Animator>();
-        oxygenBar = FindObjectOfType<OxygenBar>();
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
         jumpForce = 12;
@@ -25,72 +24,57 @@ public class Ch2_Movement : Movement
     
     private void Update()
     {
-        xAxis = Input.GetAxisRaw("Horizontal");
+        float oxygenRatio = OxygenBar.instance.OxygenRatio;
+        animator.SetFloat("Depletion", oxygenRatio);
+        jump = jumpable;
 
-        if (Input.GetKeyDown(KeyCode.Space) && !jumpByKey && jumpable)
+#if UNITY_EDITOR
+        xAxis = Input.GetAxisRaw("Horizontal");
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            animator.Play("Jumping");
-            jumpByKey = true;
+            JumpInput();
         }
 
-        if (isTouchPlatform)
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
-            animator.SetBool("isGround", true);
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
-            {
-                animator.Play("Running");
-                animator.SetBool("isRunning", true);
-            }
-            else
-            {
-                animator.SetBool("isRunning", false);
-            }
+            animator.SetBool("isSwimming", true);
         }
         else
         {
-            animator.SetBool("isGround", false);
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
-            {
-                animator.Play("Swimming");
-                animator.SetBool("isSwimming", true);
-            }
-            else
-            {
-                animator.SetBool("isSwimming", false);
-            }
+            animator.SetBool("isSwimming", false);
         }
 
+#elif UNITY_ANDROID
+        xAxis = joystick.Horizontal;
 
-        if (oxygenBar != null)
-        {
-            switch (oxygenBar.fillRatio * 5 + 1) //값 수정
-            {
-                case 1:
-                    animator.SetInteger("Depletion", 1);
-                    break;
-                case 2:
-                    animator.SetInteger("Depletion", 2);
-                    break;
-                case 3:
-                    animator.SetInteger("Depletion", 3);
-                    break;
-                case 4:
-                    animator.SetInteger("Depletion", 4);
-                    break;
-                case 5:
-                    animator.SetInteger("Depletion", 5);
-                    break;
-            }
-        }
-    
+    if (joystick.JumpButtonPressed)
+    {
+        JumpInput();
+        animator.Play("Jumping");
     }
-    
+
+    if (xAxis != 0)
+    {
+        animator.SetBool("isSwimming", true);
+    }
+    else
+    {
+        animator.SetBool("isSwimming", false);
+    }
+#endif
+
+    }
+
 
 
     private void FixedUpdate()
     {
         base.Move();
         Jump();
+        if (jumpable)
+        {
+            //ClockManager.instance.StartClockReload();
+        }
     }
 
     protected override void Jump()
@@ -102,6 +86,7 @@ public class Ch2_Movement : Movement
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
         StartCoroutine(ResetJumpDelay());
+
     }
 
     IEnumerator ResetJumpDelay()
