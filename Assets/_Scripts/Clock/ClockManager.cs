@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 // ===================================================================================================
@@ -12,11 +13,10 @@ using UnityEngine;
 public class ClockManager : MonoBehaviour
 {
     public static ClockManager instance;
-
     private void Awake()
     {
         if (instance == null) instance = this;
-        else if (instance != this) Destroy(gameObject);
+        else if (instance != this) Destroy(gameObject);   
     }
 
     private GameObject          clock;
@@ -56,8 +56,12 @@ public class ClockManager : MonoBehaviour
             else if (_clockCounter < temp)
             {
                 clockUI[_clockCounter].SetActive(false);
+                if (clockReload != null)
+                {
+                    StopCoroutine(clockReload);
+                }
+                clockReload = StartCoroutine(ClockReload());
 
-               
             }
         }
     }
@@ -123,18 +127,19 @@ public class ClockManager : MonoBehaviour
     //
     // 실행 후 시계가 최대가 아닐 경우 재실행
     // ===============================================================================================
-    public IEnumerator ClockReload()
+    private IEnumerator ClockReload()
     {
-        
         yield return new WaitForSeconds(clockReloadTime);
 
         clockCounter++;
-        
+
         if (clockCounter < clockMaxCount)
         {
             clockReload = StartCoroutine(ClockReload());
         }
     }
+
+    
 
     // ===============================================================================================
     // 시계의 값을 원복시키는 함수

@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     protected bool          isClockFollowing;
     protected bool          clockCancel;
 
+
     [Header("Movement Value")]
     [SerializeField] protected float moveSpeed          = 5f;
     [SerializeField] protected float speedDecreaseRate  = 0.98f;
