@@ -50,10 +50,13 @@ public class Platform : MonoBehaviour
     [Header("RipCurrent")]
     [SerializeField] private Vector3 vectorOfRipCurrent;
 
+    private Ch2_Movement ch2_Movement;
+
     private void Start()
     {
         platformMesh = GetComponent<MeshFilter>().mesh;
         originPos = transform.position;
+        ch2_Movement = GameObject.Find("Player").GetComponent<Ch2_Movement>();
 
         switch (platformType)
         {
@@ -111,6 +114,9 @@ public class Platform : MonoBehaviour
                     break;
 
                 case PlatformType.DeadZone:
+                    break;
+
+                case PlatformType.RipCurrent:
                     break;
             }
         }
@@ -200,7 +206,7 @@ public class Platform : MonoBehaviour
                     break;
 
                 case PlatformType.RipCurrent:
-                    Ch2_Movement.instance.EnterRipCurrent(vectorOfRipCurrent);
+                    ch2_Movement.EnterRipCurrent(vectorOfRipCurrent);
                     break;
             }
         }
@@ -225,7 +231,7 @@ public class Platform : MonoBehaviour
                     break;
 
                 case PlatformType.RipCurrent:
-                    Ch2_Movement.instance.ExitRipCurrent();
+                    ch2_Movement.ExitRipCurrent();
                     break;
             }
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 // ===================================================================================================
@@ -16,17 +17,17 @@ public class ClockManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
-        else if (instance != this) Destroy(gameObject);   
+        else if (instance != this) Destroy(gameObject);
     }
 
-    private GameObject          clock;
-    private List<GameObject>    clockUI;
-    private Coroutine           clockReload;
+    private GameObject clock;
+    private List<GameObject> clockUI;
+    private Coroutine clockReload;
 
     private int clockMaxCount = 2;
-    [SerializeField] private int    _clockCounter;
-    [SerializeField] private float  clockReloadTime = 3f;
-    [SerializeField] private bool   _clockShootable = true;
+    [SerializeField] private int _clockCounter;
+    [SerializeField] private float clockReloadTime = 3f;
+    [SerializeField] private bool _clockShootable = true;
 
     // ===============================================================================================
     // 시계 발사 횟수를 관리하는 프로퍼티
@@ -47,20 +48,23 @@ public class ClockManager : MonoBehaviour
             // clockCounter++
             if (_clockCounter > temp)
             {
-                for (int i = 0; i < _clockCounter; i++)
-                {
-                    clockUI[i].SetActive(true);
-                }
+                //for (int i = 0; i < _clockCounter; i++)
+                //{
+                //    clockUI[i].SetActive(true);
+                //}
+                clockUI[_clockCounter - 1].SetActive(true);
             }
             // clockCounter--
             else if (_clockCounter < temp)
             {
-                clockUI[_clockCounter].SetActive(false);
+                clockUI[_clockCounter].GetComponent<Image>().fillAmount = 0;
+
                 if (clockReload != null)
                 {
+                    clockUI[_clockCounter].GetComponent<Image>().fillAmount = clockUI[temp].GetComponent<Image>().fillAmount;
+                    clockUI[temp].GetComponent<Image>().fillAmount = 0;
                     StopCoroutine(clockReload);
                 }
-                clockReload = StartCoroutine(ClockReload());
 
             }
         }
@@ -113,12 +117,11 @@ public class ClockManager : MonoBehaviour
         {
             clock.GetComponent<Clock>().ClockFollow();
             clockCounter--;
-            
-            if (clockReload != null)
+
+            if (SceneManager.GetActiveScene().name != "Test")
             {
-                StopCoroutine(clockReload);
+                ClockResume();
             }
-            clockReload = StartCoroutine(ClockReload());
         }
     }
 
@@ -129,7 +132,21 @@ public class ClockManager : MonoBehaviour
     // ===============================================================================================
     private IEnumerator ClockReload()
     {
-        yield return new WaitForSeconds(clockReloadTime);
+        while (true)
+        {
+            if (clockCounter >= 0 && clockCounter < clockUI.Count)
+            {
+                clockUI[clockCounter].GetComponent<Image>().fillAmount += Time.deltaTime * (1 / clockReloadTime);
+                if(clockUI[clockCounter].GetComponent<Image>().fillAmount >= 1)
+                {
+                    break;
+                }
+            }
+            yield return null;
+
+        }
+        clockUI[clockCounter].SetActive(false);
+
 
         clockCounter++;
 
@@ -137,9 +154,34 @@ public class ClockManager : MonoBehaviour
         {
             clockReload = StartCoroutine(ClockReload());
         }
+        else
+        {
+            clockReload = null;
+        }
     }
 
-    
+    public void ClockCoroutinePause()
+    {
+        if (clockReload != null)
+        {
+            StopCoroutine(clockReload);
+        }
+    }
+
+    public void ClockCoroutineStart()
+    {
+        if (clockReload != null)
+        {
+            clockReload = StartCoroutine(ClockReload());
+            return;
+        }
+        ClockResume();
+    }
+
+    private void ClockResume()
+    {
+        clockReload = StartCoroutine(ClockReload());
+    }
 
     // ===============================================================================================
     // 시계의 값을 원복시키는 함수

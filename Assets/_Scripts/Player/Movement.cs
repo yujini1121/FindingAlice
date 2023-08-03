@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
 
     protected Rigidbody     rigid;
 
+    protected Animator animator;
+
     protected IEnumerator   smoothJump;
 
     protected Vector3       vecClockFollow;
@@ -47,6 +49,7 @@ public class Movement : MonoBehaviour
             joystick = GameObject.Find("Joystick").GetComponent<FixedJoystick>();
         else
             joystick = GameObject.Find("Joystick").GetComponent<FloatingJoystick>();
+        animator = GetComponent<Animator>();
     }
 
     // ===============================================================================================
@@ -89,7 +92,7 @@ public class Movement : MonoBehaviour
         {
             jumpByKey = true;
         }
-        //점프 애니메이션 여기(또는 밑에 jump 함수에)
+        animator.Play("Jumping");
     }
 
     // ===============================================================================================
@@ -291,5 +294,96 @@ public class Movement : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
         isClockFollowing = true;
+    }
+
+    protected void Animator_Run()
+    {
+#if UNITY_EDITOR
+        xAxis = Input.GetAxisRaw("Horizontal");
+        if (xAxis != 0 && jumpable)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
+
+
+#elif UNITY_ANDROID
+        xAxis = joystick.Horizontal;
+
+        if (xAxis != 0)
+        {
+            animator.SetBool("isSwimming", true);
+        }
+        else
+        {
+            animator.SetBool("isSwimming", false);
+        }
+#endif
+    }
+
+    protected void Animator_Swim()
+    {
+        float oxygenRatio = OxygenBar.instance.OxygenRatio;
+        animator.SetFloat("Depletion", oxygenRatio);
+#if UNITY_EDITOR
+        xAxis = Input.GetAxisRaw("Horizontal");
+
+        if (xAxis != 0)
+        {
+            animator.SetBool("isSwimming", true);
+        }
+        else
+        {
+            animator.SetBool("isSwimming", false);
+        }
+
+        if (rigid.velocity.y < 0)
+        {
+            animator.SetBool("isDropping", true);
+        }
+        else
+        {
+            animator.SetBool("isDropping", false);
+        }
+#elif UNITY_ANDROID              
+        xAxis = joystick.Horizontal;
+
+        if (xAxis != 0)
+        {
+            animator.SetBool("isSwimming", true);
+        }
+        else
+        {
+            animator.SetBool("isSwimming", false);
+        }
+
+        if (rigid.velocity.y < 0)
+        {
+            animator.SetBool("isDropping", true);
+        }
+        else
+        {
+            animator.SetBool("isDropping", false);
+        }
+#endif
+    }
+
+    protected void Animator_Jump()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Space) && jumpable)
+        {
+            JumpInput();
+        }
+#elif UNITY_ANDROID              
+
+        if (joystick.JumpButtonPressed)
+        {
+            JumpInput();
+        }
+#endif
     }
 }
