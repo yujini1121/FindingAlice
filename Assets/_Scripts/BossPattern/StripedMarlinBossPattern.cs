@@ -46,7 +46,7 @@ public class StripedMarlinBossPattern : MonoBehaviour
     private IEnumerator Pattern()
     {
         // * 0, 2가 맞음, 테스트를 위해 잠시 1, 2로 변경한 것 *
-        int patternCase = Random.Range(1, 2);
+        int patternCase = Random.Range(0, 1);
         float patternStartTime = Time.time;
 
         switch (patternCase)

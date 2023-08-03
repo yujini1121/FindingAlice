@@ -6,10 +6,10 @@ using UnityEngine;
 public class Ch2_Movement : Movement
 {
     public GameObject   Clock;
-    private Animator  animator;
     public static Ch2_Movement instance;
-    private float playerGravityModifier = 4f;
-    public bool jump = false;
+
+    private Vector3 playerGravityModifier;
+    private Vector3 originalGravity;
 
 
     protected void Awake()
@@ -19,62 +19,31 @@ public class Ch2_Movement : Movement
         else if (instance != this) Destroy(gameObject);
         jumpForce = 12;
         moveSpeed = 4;
-        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y + playerGravityModifier, Physics.gravity.z);
+
+        originalGravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z);
+        playerGravityModifier = new Vector3(0f, 20f, 0f);
+        animator = GetComponent<Animator>();
     }
-    
-    private void Update()
-    {
-        float oxygenRatio = OxygenBar.instance.OxygenRatio;
-        animator.SetFloat("Depletion", oxygenRatio);
-        jump = jumpable;
-
-#if UNITY_EDITOR
-        xAxis = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            JumpInput();
-        }
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
-        {
-            animator.SetBool("isSwimming", true);
-        }
-        else
-        {
-            animator.SetBool("isSwimming", false);
-        }
-
-#elif UNITY_ANDROID
-        xAxis = joystick.Horizontal;
-
-    if (joystick.JumpButtonPressed)
-    {
-        JumpInput();
-        animator.Play("Jumping");
-    }
-
-    if (xAxis != 0)
-    {
-        animator.SetBool("isSwimming", true);
-    }
-    else
-    {
-        animator.SetBool("isSwimming", false);
-    }
-#endif
-
-    }
-
-
 
     private void FixedUpdate()
     {
         base.Move();
         Jump();
-        if (jumpable)
+
+        if (rigid.velocity.y < 0)
         {
-            //ClockManager.instance.StartClockReload();
+            Physics.gravity = originalGravity + playerGravityModifier;
         }
+        else
+        {
+            Physics.gravity = originalGravity;
+        }
+    }
+
+    private void Update()
+    {
+        base.Animator_Swim();
+        base.Animator_Jump();
     }
 
     protected override void Jump()
@@ -94,6 +63,24 @@ public class Ch2_Movement : Movement
         yield return new WaitForSeconds(0.2f);
         jumpable = true;
         jumpByKey = false;
+    }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if (ClockManager.instance.clockCounter < 2)
+        {
+            ClockManager.instance.ClockCoroutineStart();
+        }
+    }
+
+    protected override void OnCollisionExit(Collision collision)
+    {
+        base.OnCollisionExit(collision);
+        if (ClockManager.instance.clockCounter < 2)
+        {
+            ClockManager.instance.ClockCoroutinePause();
+        }
     }
 
     public void EnterRipCurrent(Vector3 vec)
