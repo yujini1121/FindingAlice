@@ -11,7 +11,6 @@ public class Ch2_Movement : Movement
     private Vector3 playerGravityModifier;
     private Vector3 originalGravity;
 
-
     protected void Awake()
     {
         animator = GetComponent<Animator>();
