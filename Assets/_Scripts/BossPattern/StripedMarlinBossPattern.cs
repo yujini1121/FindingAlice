@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class StripedMarlinBossPattern : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class StripedMarlinBossPattern : MonoBehaviour
         warningSpearfish = transform.GetChild(1);
         testWarning = transform.GetChild(0).GetComponent<MeshRenderer>();
         warningSpearfishMesh = warningSpearfish.GetComponent<MeshRenderer>();
-        spearfishRb = spearfishPrefab.GetComponent<Rigidbody>();  
+        spearfishRb = spearfishPrefab.GetComponent<Rigidbody>();    
     }
 
     private void Start() 
