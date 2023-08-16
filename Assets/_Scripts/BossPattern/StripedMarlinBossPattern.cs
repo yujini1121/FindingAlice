@@ -7,7 +7,13 @@ public class StripedMarlinBossPattern : MonoBehaviour
 {
     private Coroutine pattern;
 
+    public Transform stripedMarlin;
+
     private GameObject player;
+    public GameObject bossFish1;
+    public GameObject bossFish2;
+    public GameObject bossFish3;
+    public GameObject bossFish4;
 
     [SerializeField] private GameObject spearfishPrefab;
     private Transform warningSpearfish;
@@ -17,7 +23,7 @@ public class StripedMarlinBossPattern : MonoBehaviour
     private MeshRenderer testWarning;
     private MeshRenderer warningSpearfishMesh;
 
-    private float patternCooldown = 4f;
+    private float patternCooldown = 5f;
     private float patternWarningTime = 3f;
     private float spearfishWarningTime = 0.5f;
     private float spearfishSpeed = 8f;
@@ -28,7 +34,12 @@ public class StripedMarlinBossPattern : MonoBehaviour
         testWarning = transform.GetChild(0).GetComponent<MeshRenderer>();
         warningSpearfishMesh = warningSpearfish.GetComponent<MeshRenderer>();
         spearfishRb = spearfishPrefab.GetComponent<Rigidbody>();    
+    }
 
+    private void Start() 
+    {
+  	    // GameObject myInstance = Instantiate(prefab); // 부모 지정 X
+        // GameObject myInstance = Instantiate(prefab, parent); // 부모 지정       
     }
 
     private void OnEnable()
@@ -105,32 +116,25 @@ public class StripedMarlinBossPattern : MonoBehaviour
                 transform.GetChild(0).gameObject.SetActive(true);
                 Color color = testWarning.material.color;
 
-
                 while (Time.time - patternStartTime < patternWarningTime)
                 {
                     float alpha = (Time.time - patternStartTime) / patternWarningTime;
                     color = new Color(color.r, color.g, color.b, alpha);
-                    //Debug.Log(alpha);
 
                     testWarning.material.color = color;
                     yield return null;
                 }
-                yield return new WaitForSeconds(patternCooldown);
+                // 5초 기다림
+                // 물고기 생성
                 break;
         }
-        
+        yield return new WaitForSeconds(patternCooldown);
+
+        Instantiate(bossFish1);
+        Instantiate(bossFish2);
+        Instantiate(bossFish3);
+        Instantiate(bossFish4);
 
         pattern = StartCoroutine(Pattern());
     }
-
-    // while (pattern2_duration <= 1f)
-    // {
-    //     pattern.transform.position = new Vector3(player.transform.position.x,
-    //                                                 player.transform.position.y,
-    //                                                 pattern.transform.position.z);
-    //     pattern2_time += Time.deltaTime;
-    //     pattern2_duration = pattern2_time / pattern2_launchTime;
-    //     patternColor.material.color = new Color(1, 0, 0, Mathf.Lerp(0f, 0.8f, pattern2_duration));
-    //     yield return null;
-    // }
 }
