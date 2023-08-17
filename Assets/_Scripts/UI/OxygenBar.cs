@@ -25,10 +25,10 @@ public class OxygenBar : MonoBehaviour
 
     private void Start()
     {
-        maxOxygen = 1f;
+        maxOxygen = 1f; 
         minOxygen = 0f;
 
-        depletionRate = maxOxygen / 15f;
+        depletionRate = maxOxygen / 15f; 
         oxygenItem = maxOxygen / 2f;
         caveOxygenRate = maxOxygen / 5f;
 
