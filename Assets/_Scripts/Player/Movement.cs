@@ -93,6 +93,7 @@ public class Movement : MonoBehaviour
             jumpByKey = true;
         }
         animator.Play("Jumping");
+        animator.SetBool("isJumping", true);
     }
 
     // ===============================================================================================
@@ -106,9 +107,7 @@ public class Movement : MonoBehaviour
 
         jumpable = false;
         rigid.velocity = Vector3.zero;
-        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-
+        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);     
     }
 
     // ===============================================================================================
@@ -168,6 +167,7 @@ public class Movement : MonoBehaviour
                     }
                 }
             }
+
         }
 
         // 시계로 이동 중에 플랫폼과 접촉 시 시계 사용 취소
@@ -247,6 +247,7 @@ public class Movement : MonoBehaviour
         rigid.useGravity = true;
         clockCancel = true;
         movable = true;
+        animator.Play("Recoiling");
     }
 
     // ===============================================================================================
@@ -340,15 +341,8 @@ public class Movement : MonoBehaviour
             animator.SetBool("isSwimming", false);
         }
 
-        if (rigid.velocity.y < 0)
-        {
-            animator.SetBool("isDropping", true);
-        }
-        else
-        {
-            animator.SetBool("isDropping", false);
-        }
-#elif UNITY_ANDROID              
+
+#elif UNITY_ANDROID
         xAxis = joystick.Horizontal;
 
         if (xAxis != 0)
@@ -360,7 +354,8 @@ public class Movement : MonoBehaviour
             animator.SetBool("isSwimming", false);
         }
 
-        if (rigid.velocity.y < 0)
+#endif
+        if (rigid.velocity.y < -0.9)
         {
             animator.SetBool("isDropping", true);
         }
@@ -368,7 +363,6 @@ public class Movement : MonoBehaviour
         {
             animator.SetBool("isDropping", false);
         }
-#endif
     }
 
     protected void Animator_Jump()

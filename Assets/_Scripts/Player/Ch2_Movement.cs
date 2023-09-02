@@ -8,8 +8,7 @@ public class Ch2_Movement : Movement
     public GameObject   Clock;
     public static Ch2_Movement instance;
 
-    private Vector3 playerGravityModifier;
-    private Vector3 originalGravity;
+    public float playerGravityModifier;
 
     protected void Awake()
     {
@@ -18,12 +17,9 @@ public class Ch2_Movement : Movement
         else if (instance != this) Destroy(gameObject);
         jumpForce = 12;
         moveSpeed = 4;
-
-        originalGravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z);
-        playerGravityModifier = new Vector3(0f, 20f, 0f);
-        animator = GetComponent<Animator>();
+        playerGravityModifier = 20f;
     }
-
+    
     private void FixedUpdate()
     {
         base.Move();
@@ -31,11 +27,7 @@ public class Ch2_Movement : Movement
 
         if (rigid.velocity.y < 0)
         {
-            Physics.gravity = originalGravity + playerGravityModifier;
-        }
-        else
-        {
-            Physics.gravity = originalGravity;
+            rigid.AddForce(Vector3.up * playerGravityModifier);
         }
     }
 
