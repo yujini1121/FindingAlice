@@ -835,6 +835,7 @@ MonoBehaviour:
   isTalking: 0
   isTouchPlatform: 0
   Clock: {fileID: 13787553}
+  playerGravityModifier: 0
 --- !u!1 &277857834
 GameObject:
   m_ObjectHideFlags: 0
