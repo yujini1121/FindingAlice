@@ -7,7 +7,8 @@ public class Fish : MonoBehaviour
     [System.Serializable]
     private enum FishType
     {
-        FollowingFish
+        FollowingFish,
+        JellyFish
     }
 
     [SerializeField] private FishType fishType;
@@ -15,21 +16,56 @@ public class Fish : MonoBehaviour
     [Header("FollowingFish")]
     [SerializeField] private float followSpeed = 3.0f; 
     [SerializeField] private float returnSpeed = 6.0f;
+    
+    [Header("JellyFish")]
+    [SerializeField] private float movementRange = 5.0f; 
+    [SerializeField] private float movementSpeed = 5.0f;
+    [SerializeField] private float jelPower;
+
     private Vector3 originalPosition;
     private GameObject playerObject;
     private Transform playerTransform;
+    private Rigidbody playerRb;
+
+    private bool isTouched;
 
     private void Start()
     {
         originalPosition = transform.position;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerTransform = playerObject.transform;
+        playerRb = playerObject.GetComponent<Rigidbody>();
 
         switch (fishType)
         {
             case FishType.FollowingFish:
                 GetComponent<Collider>().isTrigger = true;
-                break;  
+                break;
+            case FishType.JellyFish:
+                jelPower = 50.0f;
+                StartCoroutine(JelMove());
+                break;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if (other.CompareTag("Player"))
+        {
+            switch (fishType)
+            {
+                case FishType.FollowingFish:
+                    break;
+                case FishType.JellyFish:
+                    isTouched = true;
+                    playerTransform.position = new Vector3 (playerTransform.position.x - jelPower,
+                                                            playerTransform.position.y,
+                                                            playerTransform.position.z);
+                    // playerRb.velocity = new Vector3 (playerTransform.position.x - jelPower,
+                    //                                  playerTransform.position.y,
+                    //                                  playerTransform.position.z);
+                    break;
+            }
         }
     }
 
@@ -42,10 +78,10 @@ public class Fish : MonoBehaviour
                 case FishType.FollowingFish:
                     transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, followSpeed * Time.deltaTime);
                     break;
+                case FishType.JellyFish:
+                    break;
             }
-         
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -56,6 +92,8 @@ public class Fish : MonoBehaviour
             {
                 case FishType.FollowingFish:
                     StartCoroutine(ReturnOriginalPos());
+                    break;
+                case FishType.JellyFish:
                     break;
             }
         }
@@ -69,5 +107,13 @@ public class Fish : MonoBehaviour
             yield return null;
         }
     }
-    
+
+    private IEnumerator JelMove()
+    {
+        while (true)
+        {
+            transform.position = originalPosition + new Vector3(0, Mathf.Sin(Time.time) * 2.5f, 0);
+            yield return null;
+        }
+    }
 }
