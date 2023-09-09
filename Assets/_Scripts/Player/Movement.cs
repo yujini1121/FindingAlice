@@ -91,9 +91,8 @@ public class Movement : MonoBehaviour
         if (!jumpByKey && jumpable)
         {
             jumpByKey = true;
+            animator.Play("Jumping");
         }
-        animator.Play("Jumping");
-        animator.SetBool("isJumping", true);
     }
 
     // ===============================================================================================
@@ -127,7 +126,7 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             // 0.85f(Cos) ≒ 약 31.78도
-            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.85f)
+            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.6f)
             {
                 jumpByKey = false;
                 jumpable = true;
@@ -137,6 +136,7 @@ public class Movement : MonoBehaviour
             }
         }
     }
+
 
     // ===============================================================================================
     // 플랫폼의 벽 부분에 닿았는지 검사하는 함수

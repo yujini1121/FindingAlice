@@ -18,6 +18,7 @@ public class Ch2_Movement : Movement
         jumpForce = 12;
         moveSpeed = 4;
         playerGravityModifier = 20f;
+        jumpable = true;
     }
     
     private void FixedUpdate()
@@ -40,22 +41,20 @@ public class Ch2_Movement : Movement
     protected override void Jump()
     {
         if (!jumpByKey || !jumpable || isTalking) return;
-
-        jumpable = false;
-        rigid.velocity = Vector3.zero;
-        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
         StartCoroutine(ResetJumpDelay());
+        rigid.velocity = Vector3.zero;
+        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
 
     }
 
     IEnumerator ResetJumpDelay()
     {
-        yield return new WaitForSeconds(0.2f);
+        jumpable = false;
+        yield return new WaitForSeconds(0.7f);
         jumpable = true;
         jumpByKey = false;
     }
-
+    
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
@@ -67,7 +66,12 @@ public class Ch2_Movement : Movement
 
     protected override void OnCollisionExit(Collision collision)
     {
-        base.OnCollisionExit(collision);
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            if (collideToWall)
+                collideToWall = false;
+        }
+
         if (ClockManager.instance.clockCounter < 2)
         {
             ClockManager.instance.ClockCoroutinePause();
