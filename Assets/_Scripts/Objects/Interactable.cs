@@ -58,7 +58,7 @@ public class Interactable : MonoBehaviour
 
                 // 싱글톤으로 관리하는 것도 비용이 들기때문에 GetComponent로 작성
                 case InteractableType.Cave:
-                    oxygenBar = GameObject.Find("oxygenBar");
+                    oxygenBar = GameObject.Find("OxygenBar");
                     oxygenBar.GetComponent<OxygenBar>().EnterCave();
                     break;
             }

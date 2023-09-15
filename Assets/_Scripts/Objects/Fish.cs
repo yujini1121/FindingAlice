@@ -18,16 +18,12 @@ public class Fish : MonoBehaviour
     [SerializeField] private float returnSpeed = 6.0f;
     
     [Header("JellyFish")]
-    [SerializeField] private float movementRange = 5.0f; 
-    [SerializeField] private float movementSpeed = 5.0f;
-    [SerializeField] private float jelPower;
+    private int playerDir;
 
     private Vector3 originalPosition;
     private GameObject playerObject;
     private Transform playerTransform;
     private Rigidbody playerRb;
-
-    private bool isTouched;
 
     private void Start()
     {
@@ -42,7 +38,6 @@ public class Fish : MonoBehaviour
                 GetComponent<Collider>().isTrigger = true;
                 break;
             case FishType.JellyFish:
-                jelPower = 50.0f;
                 StartCoroutine(JelMove());
                 break;
         }
@@ -57,13 +52,8 @@ public class Fish : MonoBehaviour
                 case FishType.FollowingFish:
                     break;
                 case FishType.JellyFish:
-                    isTouched = true;
-                    playerTransform.position = new Vector3 (playerTransform.position.x - jelPower,
-                                                            playerTransform.position.y,
-                                                            playerTransform.position.z);
-                    // playerRb.velocity = new Vector3 (playerTransform.position.x - jelPower,
-                    //                                  playerTransform.position.y,
-                    //                                  playerTransform.position.z);
+                    playerDir = playerObject.transform.position.x - gameObject.transform.position.x > 0 ? 1 : -1;
+                    playerRb.AddForce(new Vector3(playerDir * 150, 0, 0), ForceMode.Impulse);
                     break;
             }
         }
