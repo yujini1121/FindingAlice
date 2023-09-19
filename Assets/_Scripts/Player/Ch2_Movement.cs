@@ -44,7 +44,6 @@ public class Ch2_Movement : Movement
         StartCoroutine(ResetJumpDelay());
         rigid.velocity = Vector3.zero;
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
-
     }
 
     IEnumerator ResetJumpDelay()
@@ -54,14 +53,27 @@ public class Ch2_Movement : Movement
         jumpable = true;
         jumpByKey = false;
     }
-    
+
     protected override void OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
-        if (ClockManager.instance.clockCounter < 2)
+        if (collision.gameObject.CompareTag("Platform"))
         {
-            ClockManager.instance.ClockCoroutineStart();
+            // 0.85f(Cos) ≒ 약 31.78도
+            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.6f)
+            {
+                jumpByKey = false;
+                jumpable = true;
+
+                if (smoothJump != null)
+                    StopCoroutine(smoothJump);
+            }
+
+            if (ClockManager.instance.clockCounter < 2)
+            {
+                ClockManager.instance.ClockCoroutineStart();
+            }
         }
+        
     }
 
     protected override void OnCollisionExit(Collision collision)
@@ -70,12 +82,14 @@ public class Ch2_Movement : Movement
         {
             if (collideToWall)
                 collideToWall = false;
+
+            if (ClockManager.instance.clockCounter < 2)
+            {
+                ClockManager.instance.ClockCoroutinePause();
+            }
         }
 
-        if (ClockManager.instance.clockCounter < 2)
-        {
-            ClockManager.instance.ClockCoroutinePause();
-        }
+
     }
 
     public void EnterRipCurrent(Vector3 vec)

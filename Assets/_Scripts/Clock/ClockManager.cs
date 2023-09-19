@@ -118,7 +118,7 @@ public class ClockManager : MonoBehaviour
             clock.GetComponent<Clock>().ClockFollow();
             clockCounter--;
 
-            if (SceneManager.GetActiveScene().name != "Test")
+            if (SceneManager.GetActiveScene().name != "Chapter_2")
             {
                 ClockResume();
             }
@@ -170,12 +170,7 @@ public class ClockManager : MonoBehaviour
 
     public void ClockCoroutineStart()
     {
-        if (clockReload != null)
-        {
-            clockReload = StartCoroutine(ClockReload());
-            return;
-        }
-        ClockResume();
+        ClockResume();  
     }
 
     private void ClockResume()
