@@ -4645,6 +4645,9 @@ MonoBehaviour:
   fishType: 0
   followSpeed: 3
   returnSpeed: 6
+  movementRange: 5
+  movementSpeed: 5
+  jelPower: 0
 --- !u!1 &1899856762
 GameObject:
   m_ObjectHideFlags: 0
