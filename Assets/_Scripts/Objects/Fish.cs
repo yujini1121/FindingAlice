@@ -59,6 +59,7 @@ public class Fish : MonoBehaviour
         }
     }
 
+    // 없애도 되는 주석
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
