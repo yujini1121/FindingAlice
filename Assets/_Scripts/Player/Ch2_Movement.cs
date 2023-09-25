@@ -7,11 +7,13 @@ public class Ch2_Movement : Movement
 {
     public GameObject   Clock;
     public static Ch2_Movement instance;
+    public ClockManager clockManager;
 
     public float playerGravityModifier;
 
     protected void Awake()
     {
+
         animator = GetComponent<Animator>();
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
@@ -20,7 +22,7 @@ public class Ch2_Movement : Movement
         playerGravityModifier = 20f;
         jumpable = true;
     }
-    
+
     private void FixedUpdate()
     {
         base.Move();
@@ -58,6 +60,8 @@ public class Ch2_Movement : Movement
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
+            isTouchPlatform = true;
+            clockManager.NotifyIsTouchPlatform(isTouchPlatform);
             // 0.85f(Cos) ≒ 약 31.78도
             if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.6f)
             {
@@ -80,6 +84,8 @@ public class Ch2_Movement : Movement
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
+            isTouchPlatform = false;
+            clockManager.NotifyIsTouchPlatform(isTouchPlatform);
             if (collideToWall)
                 collideToWall = false;
 
