@@ -28,6 +28,7 @@ public class ClockManager : MonoBehaviour
     [SerializeField] private int _clockCounter;
     [SerializeField] private float clockReloadTime = 3f;
     [SerializeField] private bool _clockShootable = true;
+    [SerializeField] private bool isTouchPlatform = false;
 
     // ===============================================================================================
     // 시계 발사 횟수를 관리하는 프로퍼티
@@ -108,6 +109,11 @@ public class ClockManager : MonoBehaviour
         }
     }
 
+    public void NotifyIsTouchPlatform(bool isTouching)
+    {
+        isTouchPlatform = isTouching;
+    }
+
     // ===============================================================================================
     // 시계 사용 입력이 종료되었을 때 호출되는 함수
     // ===============================================================================================
@@ -118,11 +124,12 @@ public class ClockManager : MonoBehaviour
             clock.GetComponent<Clock>().ClockFollow();
             clockCounter--;
 
-            if (SceneManager.GetActiveScene().name != "Chapter_2")
+            if (SceneManager.GetActiveScene().name != "Chapter_2" || isTouchPlatform)
             {
                 ClockResume();
             }
         }
+        
     }
 
     // ===============================================================================================
@@ -174,7 +181,7 @@ public class ClockManager : MonoBehaviour
     }
 
     private void ClockResume()
-    {
+    {   
         clockReload = StartCoroutine(ClockReload());
     }
 

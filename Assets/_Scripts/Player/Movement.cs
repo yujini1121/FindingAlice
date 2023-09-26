@@ -192,6 +192,7 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
+            isTouchPlatform = false;
             if (collideToWall)
                 collideToWall = false;
             else
