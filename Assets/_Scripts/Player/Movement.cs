@@ -90,8 +90,8 @@ public class Movement : MonoBehaviour
     {
         if (!jumpByKey && jumpable)
         {
+            animator.SetTrigger("Jumping");
             jumpByKey = true;
-            animator.Play("Jumping");
         }
     }
 
@@ -103,7 +103,7 @@ public class Movement : MonoBehaviour
     protected virtual void Jump()
     {
         if (!jumpByKey || !jumpable || isTalking) return;
-
+        
         jumpable = false;
         rigid.velocity = Vector3.zero;
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);     
@@ -126,9 +126,10 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             // 0.85f(Cos) ≒ 약 31.78도
-            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.6f)
+            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.85f)
             {
                 jumpByKey = false;
+                Debug.Log("OCE");
                 jumpable = true;
 
                 if (smoothJump != null)
@@ -167,7 +168,6 @@ public class Movement : MonoBehaviour
                     }
                 }
             }
-
         }
 
         // 시계로 이동 중에 플랫폼과 접촉 시 시계 사용 취소
@@ -231,10 +231,11 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     public void StateBeginFollow(Vector3 vec)
     {
+        animator.SetTrigger("Recoiling");
+        animator.SetBool("isRecoiling", true);
         rigid.useGravity = false;
         rigid.velocity = vec;
         StartCoroutine(WaitFrame());
-
     }
 
     // ===============================================================================================
@@ -243,12 +244,10 @@ public class Movement : MonoBehaviour
     public void StateCollsionWithClock(Vector3 vec)
     {
         vecClockFollow = vec * 4;
-
         isClockFollowing = false;
         rigid.useGravity = true;
         clockCancel = true;
         movable = true;
-        animator.Play("Recoiling");
     }
 
     // ===============================================================================================
@@ -256,6 +255,7 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     public void ClockStateEnd()
     {
+        animator.SetBool("isRecoiling", false);
         vecClockFollow = Vector3.zero;
         isClockFollowing = false;
         rigid.useGravity = true;
@@ -332,6 +332,7 @@ public class Movement : MonoBehaviour
         animator.SetFloat("Depletion", oxygenRatio);
 #if UNITY_EDITOR
         xAxis = Input.GetAxisRaw("Horizontal");
+        if (isTouchPlatform) { animator.SetBool("isRecoiling", false); }
 
         if (xAxis != 0)
         {
