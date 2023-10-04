@@ -18,12 +18,14 @@ public class Fish : MonoBehaviour
     [SerializeField] private float returnSpeed = 6.0f;
     
     [Header("JellyFish")]
-    private int playerDir;
+    private int knockBackDir;
 
     private Vector3 originalPosition;
     private GameObject player;
     private Transform playerTransform;
     private Rigidbody playerRb;
+    private int playerDir;
+    private Vector3 knockBackPos;
 
     private void Start()
     {
@@ -54,12 +56,22 @@ public class Fish : MonoBehaviour
                 case FishType.JellyFish:
                     playerDir = player.transform.position.x - gameObject.transform.position.x > 0 ? 1 : -1;
                     playerRb.AddForce(new Vector3(playerDir * 150, 0, 0), ForceMode.Impulse);
+
+                    // 플레이어가 밀려나야 하는 방향 (플레이어의 오른쪽에서 부딪히면 -1, 왼쪽에서 부딪히면 1)
+                    Debug.Log("KnockBack");
+                    knockBackDir = player.transform.position.x - gameObject.transform.position.x > 0 ? 1 : -1;
+                    knockBackPos = new Vector3(playerTransform.position.x + 4f * knockBackDir, 
+                                               playerTransform.position.y + 4f, 
+                                               playerTransform.position.z);
+                    Debug.Log(knockBackPos);
+                    playerTransform.position = Vector3.Lerp(playerTransform.position, knockBackPos, 1f);
+
+                    // playerRb.AddForce(new Vector3(knockBackDir * 2f, 0f, 0f) * 100f, ForceMode.Impulse);
                     break;
             }
         }
     }
 
-    // 없애도 되는 주석
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -90,6 +102,7 @@ public class Fish : MonoBehaviour
         }
     }
 
+    // FollowingFish
     private IEnumerator ReturnOriginalPos()
     {
         while (transform.position != originalPosition)
@@ -99,6 +112,7 @@ public class Fish : MonoBehaviour
         }
     }
 
+    // JellyFish
     private IEnumerator JelMove()
     {
         while (true)
