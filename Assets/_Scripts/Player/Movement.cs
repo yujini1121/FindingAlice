@@ -129,7 +129,7 @@ public class Movement : MonoBehaviour
             if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.85f)
             {
                 jumpByKey = false;
-                Debug.Log("OCE");
+                //Debug.Log("OCE");
                 jumpable = true;
 
                 if (smoothJump != null)

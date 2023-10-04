@@ -21,16 +21,16 @@ public class Fish : MonoBehaviour
     private int playerDir;
 
     private Vector3 originalPosition;
-    private GameObject playerObject;
+    private GameObject player;
     private Transform playerTransform;
     private Rigidbody playerRb;
 
     private void Start()
     {
         originalPosition = transform.position;
-        playerObject = GameObject.FindGameObjectWithTag("Player");
-        playerTransform = playerObject.transform;
-        playerRb = playerObject.GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerTransform = player.transform;
+        playerRb = player.GetComponent<Rigidbody>();
 
         switch (fishType)
         {
@@ -52,7 +52,7 @@ public class Fish : MonoBehaviour
                 case FishType.FollowingFish:
                     break;
                 case FishType.JellyFish:
-                    playerDir = playerObject.transform.position.x - gameObject.transform.position.x > 0 ? 1 : -1;
+                    playerDir = player.transform.position.x - gameObject.transform.position.x > 0 ? 1 : -1;
                     playerRb.AddForce(new Vector3(playerDir * 150, 0, 0), ForceMode.Impulse);
                     break;
             }
