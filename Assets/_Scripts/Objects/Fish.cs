@@ -60,11 +60,16 @@ public class Fish : MonoBehaviour
                     // 플레이어가 밀려나야 하는 방향 (플레이어의 오른쪽에서 부딪히면 -1, 왼쪽에서 부딪히면 1)
                     Debug.Log("KnockBack");
                     knockBackDir = player.transform.position.x - gameObject.transform.position.x > 0 ? 1 : -1;
-                    knockBackPos = new Vector3(playerTransform.position.x + 4f * knockBackDir, 
-                                               playerTransform.position.y + 4f, 
+                    knockBackPos = new Vector3(playerTransform.position.x + 2f * knockBackDir, 
+                                               playerTransform.position.y + 1f, 
                                                playerTransform.position.z);
-                    Debug.Log(knockBackPos);
-                    playerTransform.position = Vector3.Lerp(playerTransform.position, knockBackPos, 1f);
+
+                    StartCoroutine(KnockBack());
+
+
+
+                    // Debug.Log(knockBackPos);
+                    // playerTransform.position = Vector3.Lerp(playerTransform.position, knockBackPos, 1f);
 
                     // playerRb.AddForce(new Vector3(knockBackDir * 2f, 0f, 0f) * 100f, ForceMode.Impulse);
                     break;
@@ -120,5 +125,22 @@ public class Fish : MonoBehaviour
             transform.position = originalPosition + new Vector3(0, Mathf.Sin(Time.time) * 2.5f, 0);
             yield return null;
         }
+    }
+
+    private IEnumerator KnockBack()
+    {
+        float duration = 0.3f; // 이동에 걸리는 시간 (조절 가능)
+        float elapsedTime = 0f;
+        Vector3 initialPosition = playerTransform.position;
+
+        while (elapsedTime < duration)
+        {
+            playerTransform.position = Vector3.Lerp(initialPosition, knockBackPos, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // playerTransform.position = knockBackPos;
+        
     }
 }

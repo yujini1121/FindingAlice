@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Test_8
+      name: Oxygen_8
       rect:
         serializedVersion: 2
         x: 0
@@ -138,7 +138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_7
+      name: Oxygen_7
       rect:
         serializedVersion: 2
         x: 600
@@ -159,7 +159,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_6
+      name: Oxygen_6
       rect:
         serializedVersion: 2
         x: 1200
@@ -180,7 +180,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_5
+      name: Oxygen_5
       rect:
         serializedVersion: 2
         x: 1800
@@ -201,7 +201,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_4
+      name: Oxygen_4
       rect:
         serializedVersion: 2
         x: 2400
@@ -222,7 +222,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_3
+      name: Oxygen_3
       rect:
         serializedVersion: 2
         x: 3000
@@ -243,7 +243,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_2
+      name: Oxygen_2
       rect:
         serializedVersion: 2
         x: 3600
@@ -264,7 +264,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_1
+      name: Oxygen_1
       rect:
         serializedVersion: 2
         x: 4200
@@ -285,7 +285,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_0
+      name: Oxygen_0
       rect:
         serializedVersion: 2
         x: 4800
@@ -316,15 +316,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Test_0: 795897701
-      Test_1: 1434747679
-      Test_2: -1010392962
-      Test_3: 668177119
-      Test_4: 1100711552
-      Test_5: 1434747679
-      Test_6: -990262544
-      Test_7: -1576216123
-      Test_8: 1794933453
+      Oxygen_0: 668177119
+      Oxygen_1: 491677818
+      Oxygen_2: -990262544
+      Oxygen_3: 795897701
+      Oxygen_4: 1100711552
+      Oxygen_5: 1434747679
+      Oxygen_6: -1576216123
+      Oxygen_7: 1362002278
+      Oxygen_8: -1010392962
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
