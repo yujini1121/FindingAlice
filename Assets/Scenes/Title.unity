@@ -852,6 +852,9 @@ MonoBehaviour:
     collectionFlag_C1: 0
     collectionFlag_C2: 0
     collectionFlag_C3: 0
+    joystickFixed: 0
+    bgSoundValue: 0
+    fxSoundValue: 0
   loadingTexts:
     textData: []
 --- !u!4 &1217866258
