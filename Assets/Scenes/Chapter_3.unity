@@ -792,8 +792,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC548\uB155\uD558\uC138\uC694 \uBC18\uAC11\uC2B5\uB2C8\uB2E4"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2ac70f6a8f8919141aa2605d8d93f4db, type: 2}
-  m_sharedMaterial: {fileID: 8641853059377196076, guid: 2ac70f6a8f8919141aa2605d8d93f4db, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c57058a30f64e5f478966c29c06290e8, type: 2}
+  m_sharedMaterial: {fileID: -7303863643642878313, guid: c57058a30f64e5f478966c29c06290e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2161,10 +2161,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: "\uC774\uB984 "
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2ac70f6a8f8919141aa2605d8d93f4db, type: 2}
-  m_sharedMaterial: {fileID: 8641853059377196076, guid: 2ac70f6a8f8919141aa2605d8d93f4db, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c57058a30f64e5f478966c29c06290e8, type: 2}
+  m_sharedMaterial: {fileID: -7303863643642878313, guid: c57058a30f64e5f478966c29c06290e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3479,6 +3479,7 @@ MonoBehaviour:
   _clockCounter: 2
   clockReloadTime: 3
   _clockShootable: 1
+  isTouchPlatform: 0
 --- !u!1 &1560393282
 GameObject:
   m_ObjectHideFlags: 0
@@ -3704,10 +3705,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: "\uADF8\uB9CC\uD558\uAE30 "
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2ac70f6a8f8919141aa2605d8d93f4db, type: 2}
-  m_sharedMaterial: {fileID: 8641853059377196076, guid: 2ac70f6a8f8919141aa2605d8d93f4db, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c57058a30f64e5f478966c29c06290e8, type: 2}
+  m_sharedMaterial: {fileID: -7303863643642878313, guid: c57058a30f64e5f478966c29c06290e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3770,7 +3771,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1684331821
@@ -4131,10 +4132,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: "\uACC4\uC18D\uD558\uAE30 "
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2ac70f6a8f8919141aa2605d8d93f4db, type: 2}
-  m_sharedMaterial: {fileID: 8641853059377196076, guid: 2ac70f6a8f8919141aa2605d8d93f4db, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c57058a30f64e5f478966c29c06290e8, type: 2}
+  m_sharedMaterial: {fileID: -7303863643642878313, guid: c57058a30f64e5f478966c29c06290e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4197,7 +4198,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1938423856
