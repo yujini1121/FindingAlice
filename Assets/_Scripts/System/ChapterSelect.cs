@@ -38,18 +38,18 @@ public class ChapterSelect : MonoBehaviour
         // 배경음 슬라이더 조작 시 슬라이더 값에 따라 음량을 조절하기 위한 델리게이트 지정
         Slider BGSound_Slider = settingBGSound.GetComponent<Slider>();
         BGSound_Slider.onValueChanged.AddListener(delegate
-                                                        {
-                                                            DataController.instance.bgSoundValue
-                                                                = settingBGSound.GetComponent<Slider>().value;
-                                                        });
+        {
+            DataController.instance.bgSoundValue
+                = settingBGSound.GetComponent<Slider>().value;
+        });
 
         // 효과음 슬라이더 조작 시 슬라이더 값에 따라 음량을 조절하기 위한 델리게이트 지정
         Slider FXSound_Slider = settingFXSound.GetComponent<Slider>();
         FXSound_Slider.onValueChanged.AddListener(delegate
-                                                        {
-                                                            DataController.instance.fxSoundValue
-                                                                = settingFXSound.GetComponent<Slider>().value;
-                                                        });
+        {
+            DataController.instance.fxSoundValue
+                = settingFXSound.GetComponent<Slider>().value;
+        });
     }
 
     // ===============================================================================================
@@ -140,7 +140,7 @@ public class ChapterSelect : MonoBehaviour
             case "Chapter_T":
                 return "제 0장 튜토리얼";
             case "Chapter_1":
-                return "제 1장 달토끼의 집";
+                return "제 1장 달 토끼의 집";
             case "Chapter_2":
                 return "제 2장 바닷속 용궁";
             case "Chapter_3":

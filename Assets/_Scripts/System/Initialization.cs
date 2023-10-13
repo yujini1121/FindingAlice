@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -9,7 +10,13 @@ using UnityEngine;
 
 public class Initialization : MonoBehaviour
 {
+
+    [SerializeField] private GameObject copyrightBtn;
+    [SerializeField] private GameObject copyrightInfo;
+    [SerializeField] private GameObject touchToStart;
     private bool gameStartReady;
+    float time;
+    
 
     //private void Awake()
     //{
@@ -38,11 +45,40 @@ public class Initialization : MonoBehaviour
         AudioManager.instance.PlayBgm(true);
     }
 
+    private void Update()
+    {
+        BlinkAnimation();
+    }
+
     public void StartGame()
     {
         if (gameStartReady)
         {
             AsyncLoading.LoadScene("ChapterSelect");
         }
+    }
+
+    public void OpenCopyRightInfo()
+    {
+        copyrightBtn.SetActive(false);
+        copyrightInfo.SetActive(true);
+    }
+
+    public void CloseCopyRightInfo()
+    {
+        copyrightBtn.SetActive(true);
+        copyrightInfo.SetActive(false);
+    }
+
+    private void BlinkAnimation()
+    {
+        if (time < 0.5f) touchToStart.GetComponent<TextMeshProUGUI>().color = new Color(255, 255, 255, 1 - time);
+        else
+        {
+            touchToStart.GetComponent<TextMeshProUGUI>().color = new Color(255, 255, 255, time);
+            if (time > 1f) time = 0;
+        }
+
+        time += Time.deltaTime;
     }
 }
