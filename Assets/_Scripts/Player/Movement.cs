@@ -79,7 +79,6 @@ public class Movement : MonoBehaviour
         {
             velocity *= moveSpeed;
         }
-
         rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, 0);
     }
 
@@ -106,7 +105,8 @@ public class Movement : MonoBehaviour
         
         jumpable = false;
         rigid.velocity = Vector3.zero;
-        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);     
+        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Jump);
     }
 
     // ===============================================================================================
@@ -221,7 +221,7 @@ public class Movement : MonoBehaviour
     // Player가 Clock을 발사했을 때의 행동
     // ===============================================================================================
     public void StateBeginShoot()
-    {
+    { 
         movable = false;
         jumpable = false;
     }
@@ -231,6 +231,7 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     public void StateBeginFollow(Vector3 vec)
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Clock);
         animator.SetTrigger("Recoiling");
         animator.SetBool("isRecoiling", true);
         rigid.useGravity = false;

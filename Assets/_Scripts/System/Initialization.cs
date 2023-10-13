@@ -35,6 +35,7 @@ public class Initialization : MonoBehaviour
     private void Start()
     {
         gameStartReady = true;
+        AudioManager.instance.PlayBgm(true);
     }
 
     public void StartGame()

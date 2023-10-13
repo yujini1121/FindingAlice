@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,9 @@ public class ChapterSelect : MonoBehaviour
     [SerializeField] private GameObject settingBGSound;
     [SerializeField] private GameObject settingFXSound;
     [SerializeField] private GameObject settingFixedJoystick;
+    [SerializeField] private GameObject chapterInfoTextGameObject;
     private string targetScene;
+    private string chapterName;
 
     private void Awake()
     {
@@ -59,6 +62,9 @@ public class ChapterSelect : MonoBehaviour
 
         chapterInfo.SetActive(true);
         targetScene = sceneName;
+
+        chapterName = GetChapterName(sceneName);
+        chapterInfoTextGameObject.GetComponent<TextMeshProUGUI>().text = chapterName;
     }
 
     // ===============================================================================================
@@ -126,4 +132,21 @@ public class ChapterSelect : MonoBehaviour
         }
         DataController.instance.joystickFixed = true;
     }
- }
+
+    private string GetChapterName(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Chapter_T":
+                return "제 0장 튜토리얼";
+            case "Chapter_1":
+                return "제 1장 달토끼의 집";
+            case "Chapter_2":
+                return "제 2장 바닷속 용궁";
+            case "Chapter_3":
+                return "제 3장 버섯 나무 숲";
+            default:
+                return "알 수 없는 챕터";
+        }
+    }
+}
