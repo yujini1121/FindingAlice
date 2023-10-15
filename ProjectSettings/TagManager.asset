@@ -7,6 +7,8 @@ TagManager:
   - Platform
   - Dialogue
   - RipCurrent
+  - bgUnmute
+  - fxUnmute
   layers:
   - Default
   - TransparentFX

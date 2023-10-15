@@ -231,12 +231,12 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     public void StateBeginFollow(Vector3 vec)
     {
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Clock);
         animator.SetTrigger("Recoiling");
         animator.SetBool("isRecoiling", true);
         rigid.useGravity = false;
         rigid.velocity = vec;
         StartCoroutine(WaitFrame());
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Clock);
     }
 
     // ===============================================================================================
