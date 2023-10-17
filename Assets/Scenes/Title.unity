@@ -1757,7 +1757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDirection: {x: 0, y: 1, z: 0}
-  speed: 100
+  speed: 50
 --- !u!1 &1694203991
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,4 +2255,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDirection: {x: 0, y: -1, z: 0}
-  speed: 100
+  speed: 50
