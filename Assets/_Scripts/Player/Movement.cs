@@ -303,27 +303,10 @@ public class Movement : MonoBehaviour
     {
 #if UNITY_EDITOR
         xAxis = Input.GetAxisRaw("Horizontal");
-        if (xAxis != 0 && jumpable)
-        {
-            animator.SetBool("isRunning", true);
-        }
-        else
-        {
-            animator.SetBool("isRunning", false);
-        }
-
-
+        animator.SetBool("isRunning", xAxis != 0 && jumpable);
 #elif UNITY_ANDROID
         xAxis = joystick.Horizontal;
-
-        if (xAxis != 0)
-        {
-            animator.SetBool("isSwimming", true);
-        }
-        else
-        {
-            animator.SetBool("isSwimming", false);
-        }
+        animator.SetBool("isRunning", xAxis != 0);
 #endif
     }
 
@@ -334,38 +317,12 @@ public class Movement : MonoBehaviour
 #if UNITY_EDITOR
         xAxis = Input.GetAxisRaw("Horizontal");
         if (isTouchPlatform) { animator.SetBool("isRecoiling", false); }
-
-        if (xAxis != 0)
-        {
-            animator.SetBool("isSwimming", true);
-        }
-        else
-        {
-            animator.SetBool("isSwimming", false);
-        }
-
-
+        animator.SetBool("isSwimming", xAxis != 0);
 #elif UNITY_ANDROID
         xAxis = joystick.Horizontal;
-
-        if (xAxis != 0)
-        {
-            animator.SetBool("isSwimming", true);
-        }
-        else
-        {
-            animator.SetBool("isSwimming", false);
-        }
-
+        animator.SetBool("isSwimming", xAxis != 0);
 #endif
-        if (rigid.velocity.y < -0.9)
-        {
-            animator.SetBool("isDropping", true);
-        }
-        else
-        {
-            animator.SetBool("isDropping", false);
-        }
+        animator.SetBool("isDropping", rigid.velocity.y < -0.9);
     }
 
     protected void Animator_Jump()
