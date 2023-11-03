@@ -13,6 +13,7 @@ public class Ch2_Movement : Movement
 
     protected void Awake()
     {
+
         animator = GetComponent<Animator>();
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
@@ -76,6 +77,7 @@ public class Ch2_Movement : Movement
                 ClockManager.instance.ClockCoroutineStart();
             }
         }
+        
     }
 
     protected override void OnCollisionExit(Collision collision)
@@ -92,6 +94,8 @@ public class Ch2_Movement : Movement
                 ClockManager.instance.ClockCoroutinePause();
             }
         }
+
+
     }
 
     public void EnterRipCurrent(Vector3 vec)
