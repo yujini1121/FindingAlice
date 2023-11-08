@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
 
     protected Rigidbody     rigid;
 
-    protected Animator animator;
+    protected Animator      animator;
 
     protected IEnumerator   smoothJump;
 

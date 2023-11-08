@@ -20,6 +20,7 @@ public class Ch1_Movement : Movement
     {
         animator = GetComponent<Animator>();
     }
+    
     private void Update()
     {
         base.Animator_Run();

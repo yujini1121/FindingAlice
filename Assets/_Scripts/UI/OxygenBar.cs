@@ -7,12 +7,12 @@ public class OxygenBar : MonoBehaviour
 {
     public static OxygenBar instance;
 
-    private Slider oxygenBar;
+    private Image oxygenBar;
 
+    private float curTime;
     private float maxOxygen;
-    private float minOxygen;
+    public static float curOxygen;
 
-    private float depletionRate;
     private float oxygenItem;
     private float caveOxygenRate;
     public float OxygenRatio;
@@ -25,42 +25,85 @@ public class OxygenBar : MonoBehaviour
 
     private void Start()
     {
-        maxOxygen = 1f; 
-        minOxygen = 0f;
+        oxygenBar = GetComponent<Image>();
 
-        depletionRate = maxOxygen / 1000f; 
-        oxygenItem = maxOxygen / 2f;
-        caveOxygenRate = maxOxygen / 5f;
+        curTime = 0f;
+        maxOxygen = 100f;
+        curOxygen = maxOxygen;
 
-        oxygenBar = gameObject.GetComponent<Slider>();
-        oxygenBar.value = maxOxygen;
+        // depletionRate = maxOxygen / 1000f; 
+        // oxygenItem = maxOxygen / 2f;
+        // caveOxygenRate = maxOxygen / 5f;
 
-        StartCoroutine(OxygenBarUpdate());
+        // StartCoroutine(OxygenBarUpdate());
     }
 
-    private IEnumerator OxygenBarUpdate()
+    private void Update()
     {
-        
-        while (oxygenBar.value <= maxOxygen && oxygenBar.value > minOxygen)
-        {
-            OxygenRatio = oxygenBar.value;
-            oxygenBar.value -= depletionRate * Time.deltaTime;
+        oxygenBar.fillAmount = curOxygen / maxOxygen;
+        curTime += Time.deltaTime;
 
-            yield return null;
+        if (curTime >= 3.0f)
+        {
+            curOxygen -= 12.5f;
+            curOxygen = Mathf.Max(0, curOxygen);
+            curTime = 0f;
         }
 
-        // oxygenBar의 값이 0이면, 플레이어 사망
-        oxygenBar.value = 0f;
-        GameManager.instance.PlayerDead();
-    }
+        if (curOxygen <= 0)
+        {
+            oxygenBar.fillAmount = 0f;
+            GameManager.instance.PlayerDead();
+        }
+    } 
+
+    // // 임시로 while true로 작성, 추후 수정 필요
+    // private IEnumerator OxygenBarUpdate()
+    // {
+    //     while (true)
+    //     {
+    //         oxygenBar.fillAmount = curOxygen / maxOxygen;
+
+    //         curTime += Time.deltaTime;
+    //         Debug.Log(curTime);
+
+    //         if (curTime >= 3.0f)
+    //         {
+    //             curOxygen -= 12.5f;
+    //             curOxygen = Mathf.Max(0, curOxygen);
+    //             curTime = 0f;
+
+    //             yield return null;
+    //         }
+    //     }
+    // }
+
+    // 예전코드 ######################################################################
+    // private IEnumerator OxygenBarUpdate()
+    // {
+        
+    //     while (oxygenBar.value <= maxOxygen && oxygenBar.value > minOxygen)
+    //     {
+    //         OxygenRatio = oxygenBar.value;
+    //         oxygenBar.value -= depletionRate * Time.deltaTime;
+
+    //         yield return null;
+    //     }
+
+    //     // oxygenBar의 값이 0이면, 플레이어 사망
+    //     oxygenBar.value = 0f;
+    //     GameManager.instance.PlayerDead();
+    // }
 
     public void GetOxygenItem()
     {
-        oxygenBar.value += oxygenItem;
+        Debug.Log("GetOxygenItem");
+        oxygenBar.fillAmount += oxygenItem;
     }
 
     public void EnterCave()
     {
-        oxygenBar.value += caveOxygenRate * Time.deltaTime;
+        Debug.Log("EnterCave");
+        oxygenBar.fillAmount += caveOxygenRate * Time.deltaTime;
     }
 }

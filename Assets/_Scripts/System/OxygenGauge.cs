@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OxygenGauge : MonoBehaviour
 {
-    private Image OxygenBar;
+    private Image oxygenBar;
     private float maxOxygen = 100f;
     public static float curOxygen;
 
@@ -13,14 +13,14 @@ public class OxygenGauge : MonoBehaviour
 
     void Start()
     {
-        OxygenBar = GetComponent<Image>();
+        oxygenBar = GetComponent<Image>();
         curOxygen = maxOxygen;
         curTime = 0f;
     }
 
     void Update()
     {
-        OxygenBar.fillAmount = curOxygen / maxOxygen;
+        oxygenBar.fillAmount = curOxygen / maxOxygen;
 
         curTime += Time.deltaTime;
 

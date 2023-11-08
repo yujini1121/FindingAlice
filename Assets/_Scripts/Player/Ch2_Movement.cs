@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Ch2_Movement : Movement
 {
-    public GameObject   Clock;
-    public static Ch2_Movement instance;
-    public ClockManager clockManager;
+    public GameObject               Clock;
+    public static Ch2_Movement      instance;
+    public ClockManager             clockManager;
 
-    public float playerGravityModifier;
+    public float                    playerGravityModifier;
 
     protected void Awake()
     {
-
         animator = GetComponent<Animator>();
+
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
+
         jumpForce = 12;
         moveSpeed = 4;
         playerGravityModifier = 20f;
@@ -77,7 +78,6 @@ public class Ch2_Movement : Movement
                 ClockManager.instance.ClockCoroutineStart();
             }
         }
-        
     }
 
     protected override void OnCollisionExit(Collision collision)
@@ -94,8 +94,6 @@ public class Ch2_Movement : Movement
                 ClockManager.instance.ClockCoroutinePause();
             }
         }
-
-
     }
 
     public void EnterRipCurrent(Vector3 vec)
