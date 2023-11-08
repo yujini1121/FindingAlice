@@ -39,14 +39,27 @@ public class Turtle : MonoBehaviour
 
     void Watch()
     {
+        // Input Pos
         playerPos.Enqueue(player.transform.position);
 
+        // Output Pos
         // 가장 먼저 저장된 값을 제거하고 그 값을 followPos에 저장
         if (playerPos.Count > followSpeed)
             followPos = playerPos.Dequeue();
         else if (playerPos.Count < followSpeed)
             followPos = playerTf.position;
     }
+
+    // Watch()########################################
+    // if (!playerPos.Contains(player.position))
+    //     playerPos.Enqueue(player.position);
+
+    // 제거된 값을 제거하고, 그 값을 followPos에 저장
+    // if (playerPos.Count > followSpeed)
+    //     followPos = playerPos.Dequeue();
+    // else if (playerPos.Count < followSpeed)
+    //     followPos = playerTf.position;
+
 
     void Follow()
     {
