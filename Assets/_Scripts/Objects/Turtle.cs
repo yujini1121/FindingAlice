@@ -60,7 +60,7 @@ public class Turtle : MonoBehaviour
     // else if (playerPos.Count < followSpeed)
     //     followPos = playerTf.position;
 
-
+        
     void Follow()
     {
         transform.position = followPos;

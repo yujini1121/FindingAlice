@@ -27,12 +27,15 @@ public class Lever : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(1);
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log(2);
             if (!isFlipped)
             {
+                Debug.Log(3);
                 transform.Rotate(Vector3.up, 180.0f);
-                testPrefab.SetActive(false);
+                testPrefab.SetActive(true);
                 isFlipped = true;
             }
         }

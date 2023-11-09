@@ -236,7 +236,7 @@ public class Movement : MonoBehaviour
         rigid.useGravity = false;
         rigid.velocity = vec;
         StartCoroutine(WaitFrame());
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Clock);
+        //AudioManager.instance.PlaySfx(AudioManager.Sfx.Clock);
     }
 
     // ===============================================================================================
@@ -340,4 +340,14 @@ public class Movement : MonoBehaviour
         }
 #endif
     }
+
+    protected void OnApplicationQuit() 
+    {
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif      
+    }
+
 }
