@@ -129,18 +129,15 @@ public class Fish : MonoBehaviour
 
     private IEnumerator KnockBack()
     {
-        float duration = 0.3f; // 이동에 걸리는 시간 (조절 가능)
-        float elapsedTime = 0f;
-        Vector3 initialPosition = playerTransform.position;
+        float durationTime = 0.3f;          // 넉백 지속시간
+        float elapsedTime = 0.1f;           // 이동하는데 걸리는 시간
+        Vector3 initPos = playerTransform.position;
 
-        while (elapsedTime < duration)
+        while (elapsedTime < durationTime)
         {
-            playerTransform.position = Vector3.Lerp(initialPosition, knockBackPos, elapsedTime / duration);
+            playerTransform.position = Vector3.Lerp(initPos, knockBackPos, elapsedTime / durationTime);
             elapsedTime += Time.deltaTime;
             yield return null;
-        }
-
-        // playerTransform.position = knockBackPos;
-        
+        }        
     }
 }

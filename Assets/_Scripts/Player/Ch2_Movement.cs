@@ -26,11 +26,13 @@ public class Ch2_Movement : Movement
 
     private void FixedUpdate()
     {
+        Debug.Log(playerGravityModifier);
         base.Move();
         Jump();
 
         if (rigid.velocity.y < 0)
         {
+            // 플레이어가 하강할 때, (0, 20, 0)만큼 AddForce
             rigid.AddForce(Vector3.up * playerGravityModifier);
         }
     }
