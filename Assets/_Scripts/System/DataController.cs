@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -58,10 +59,11 @@ public class DataController : MonoBehaviour
         public int      collectionFlag_C1;
         public int      collectionFlag_C2;
         public int      collectionFlag_C3;
-                        
+
         public bool     joystickFixed;          // 조이스틱 Fixed/Floating 저장
         public float    bgSoundValue;           // 배경음 크기 저장
         public float    fxSoundValue;           // 효과음 크기 저장
+
     }
 
     [SerializeField] private GameData gameData;
@@ -83,6 +85,30 @@ public class DataController : MonoBehaviour
     {
         get { return gameData.fxSoundValue; }
         set { gameData.fxSoundValue = value; }
+    }
+
+    public int collectionFlag_CT
+    {
+        get { return gameData.collectionFlag_CT; }
+        set { gameData.collectionFlag_CT = value; }
+    }
+
+    public int collectionFlag_C1
+    {
+        get { return gameData.collectionFlag_C1; }
+        set { gameData.collectionFlag_C1 = value; }
+    }
+
+    public int collectionFlag_C2
+    {
+        get { return gameData.collectionFlag_C2; }
+        set { gameData.collectionFlag_C2 = value; }
+    }
+
+    public int collectionFlag_C3
+    {
+        get { return gameData.collectionFlag_C3; }
+        set { gameData.collectionFlag_C3 = value; }
     }
 
     // ===============================================================================================
@@ -125,18 +151,22 @@ public class DataController : MonoBehaviour
         {
             case "Chapter_T":
                 gameData.chapterFlag_CT &= 0;
+                gameData.collectionFlag_CT &= 0;
                 break;
 
             case "Chapter_1":
                 gameData.chapterFlag_C1 &= 0;
+                gameData.collectionFlag_C1 &= 0;
                 break;
 
             case "Chapter_2":
                 gameData.chapterFlag_C2 &= 0;
+                gameData.collectionFlag_C2 &= 0;
                 break;
 
             case "Chapter_3":
                 gameData.chapterFlag_C3 &= 0;
+                gameData.collectionFlag_C3 &= 0;
                 break;
         }
 
@@ -296,9 +326,85 @@ public class DataController : MonoBehaviour
         return true;
     }
 
-    public void GetCollection()
+    public void GetCollection(int bitPlace)
     {
 
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Chapter_T":
+                if ((gameData.collectionFlag_CT & bitPlace) == bitPlace)
+                    return;
+
+                gameData.collectionFlag_CT |= bitPlace;
+                break;
+
+
+            case "Chapter_1":
+                if ((gameData.collectionFlag_C1 & bitPlace) == bitPlace)
+                    return;
+
+                gameData.collectionFlag_C1 |= bitPlace;
+                break;
+
+
+            case "Chapter_2":
+                if ((gameData.collectionFlag_C2 & bitPlace) == bitPlace)
+                    return;
+
+                gameData.collectionFlag_C2 |= bitPlace;
+                break;
+
+
+            case "Chapter_3":
+                if ((gameData.collectionFlag_C3 & bitPlace) == bitPlace)
+                    return;
+
+                gameData.collectionFlag_C3 |= bitPlace;
+                break;
+
+
+            default:
+                break;
+        }
+    }
+
+    public void LoadCollectionItems()
+    {
+        int collectionFlag = 0;
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Chapter_T":
+                collectionFlag = gameData.collectionFlag_CT;
+                break;
+
+            case "Chapter_1":
+                collectionFlag = gameData.collectionFlag_C1;
+                break;
+
+            case "Chapter_2":
+                collectionFlag = gameData.collectionFlag_C2;
+                break;
+
+            case "Chapter_3":
+                collectionFlag = gameData.collectionFlag_C3;
+                break;
+        }
+        
+        string binaryFlag = Convert.ToString(collectionFlag, 2);
+
+        for (int i = 0; i < binaryFlag.Length; i++)
+        {
+            if (binaryFlag[i] == '1')
+            {
+                string itemName = "Collection_" + i;
+                GameObject itemObject = GameObject.Find(itemName);
+                if (itemObject != null)
+                {
+                    itemObject.SetActive(false);
+                }
+            }
+        }
     }
 
     // ===============================================================================================

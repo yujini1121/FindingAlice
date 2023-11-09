@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static DataController;
 
 
 // ===================================================================================================
@@ -20,8 +22,11 @@ public class ChapterSelect : MonoBehaviour
     [SerializeField] private GameObject settingFXSound;
     [SerializeField] private GameObject settingFixedJoystick;
     [SerializeField] private GameObject chapterInfoTextGameObject;
+    [SerializeField] private GameObject collection;
+
     private string targetScene;
     private string chapterName;
+    private int numOfColledtedItems;
 
     private void Awake()
     {
@@ -62,9 +67,11 @@ public class ChapterSelect : MonoBehaviour
 
         chapterInfo.SetActive(true);
         targetScene = sceneName;
+        numOfColledtedItems = GetNumOFCollectedItems(targetScene);
 
         chapterName = GetChapterName(sceneName);
         chapterInfoTextGameObject.GetComponent<TextMeshProUGUI>().text = chapterName;
+        collection.GetComponent<TextMeshProUGUI>().text = "수집품\n ( " + numOfColledtedItems + " / 20 )";
     }
 
     // ===============================================================================================
@@ -148,5 +155,38 @@ public class ChapterSelect : MonoBehaviour
             default:
                 return "알 수 없는 챕터";
         }
+    }
+
+    private int GetNumOFCollectedItems(string sceneName)
+    {
+        string binaryFlag;
+        int collection = 0;
+
+        switch (sceneName)
+        {
+            case "Chapter_T":
+                binaryFlag = Convert.ToString(DataController.instance.collectionFlag_CT, 2);
+                break;
+            case "Chapter_1":
+                binaryFlag = Convert.ToString(DataController.instance.collectionFlag_C1, 2);
+                break;
+            case "Chapter_2":
+                binaryFlag = Convert.ToString(DataController.instance.collectionFlag_C2, 2);
+                break;
+            case "Chapter_3":
+                binaryFlag = Convert.ToString(DataController.instance.collectionFlag_C3, 2);
+                break;
+            default:
+                binaryFlag = null; break;
+        }
+
+        for (int i = 0; i < binaryFlag.Length; i++)
+        {
+            if (binaryFlag[i] == '1')
+            {
+                collection++;
+            }
+        }
+        return collection;
     }
 }

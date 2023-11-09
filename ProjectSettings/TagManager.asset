@@ -7,7 +7,6 @@ TagManager:
   - Platform
   - Dialogue
   - RipCurrent
-  - Item
   layers:
   - Default
   - TransparentFX

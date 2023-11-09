@@ -1,5 +1,5 @@
 {
-    "totalProgressFlag": 1,
+    "totalProgressFlag": 0,
     "chapterFlag_CT": 0,
     "chapterFlag_C1": 0,
     "chapterFlag_C2": 0,
@@ -9,6 +9,6 @@
     "collectionFlag_C2": 0,
     "collectionFlag_C3": 0,
     "joystickFixed": false,
-    "bgSoundValue": 0.7849924564361572,
-    "fxSoundValue": 0.45142626762390139
+    "bgSoundValue": 0.0,
+    "fxSoundValue": 0.0
 }

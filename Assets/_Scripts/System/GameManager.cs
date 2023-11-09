@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         else if (instance != this) Destroy(gameObject);
 
         DataController.instance.LoadSavePoint();
+        DataController.instance.LoadCollectionItems();
 
         if (DataController.instance.joystickFixed)
         {
