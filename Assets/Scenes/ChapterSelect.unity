@@ -2902,7 +2902,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -500, y: 0}
-  m_SizeDelta: {x: 500, y: 100}
+  m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1046241743
 MonoBehaviour:
@@ -3845,6 +3845,7 @@ MonoBehaviour:
   settingFXSound: {fileID: 1950695457}
   settingFixedJoystick: {fileID: 1233051918}
   chapterInfoTextGameObject: {fileID: 1687925058}
+  collection: {fileID: 1046241741}
 --- !u!114 &1431661445
 MonoBehaviour:
   m_ObjectHideFlags: 0
