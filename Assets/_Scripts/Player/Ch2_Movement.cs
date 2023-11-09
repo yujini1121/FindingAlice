@@ -66,7 +66,7 @@ public class Ch2_Movement : Movement
             isTouchPlatform = true;
             clockManager.NotifyIsTouchPlatform(isTouchPlatform);
             // 0.85f(Cos) ≒ 약 31.78도
-            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.6f)
+            if (Vector3.Dot(collision.contacts[0].point - transform.position, Vector3.down) > 0.85f)
             {
                 jumpByKey = false;
                 jumpable = true;
