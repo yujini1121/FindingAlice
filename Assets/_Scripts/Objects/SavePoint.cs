@@ -35,6 +35,7 @@ public class SavePoint : MonoBehaviour
         {
             // 1을 bitFlagPlace만큼 시프트해서 데이터 저장
             DataController.instance.SaveData(1 << bitFlagPlace);
+            gameObject.SetActive(false);
         }
     }
 

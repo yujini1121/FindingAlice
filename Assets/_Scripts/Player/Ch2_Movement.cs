@@ -27,7 +27,7 @@ public class Ch2_Movement : Movement
     private void FixedUpdate()
     {
         Debug.Log(playerGravityModifier);
-        base.Move();
+        Move();
         Jump();
 
         if (rigid.velocity.y < 0)
@@ -37,12 +37,44 @@ public class Ch2_Movement : Movement
         }
     }
 
-    private void Update()
+    protected override void Move()
     {
-        base.Animator_Swim();
-        base.Animator_Jump();
-    }
+        float oxygenRatio = OxygenBar.instance.OxygenRatio;
+        animator.SetFloat("Depletion", oxygenRatio);
+#if UNITY_EDITOR
+        xAxis = Input.GetAxisRaw("Horizontal");
+        if (isTouchPlatform) { animator.SetBool("isRecoiling", false); }
+        animator.SetBool("isSwimming", xAxis != 0);
+#elif UNITY_ANDROID
+        xAxis = joystick.Horizontal;
+        animator.SetBool("isSwimming", xAxis != 0);
+#endif
+        animator.SetBool("isDropping", rigid.velocity.y < -0.9);
 
+        if (!movable) return;
+
+        // 좌우 이동에 따라 플레이어 Flip
+        if ((transform.localScale.x < 0 && xAxis > 0) || (transform.localScale.x > 0 && xAxis < 0))
+        {
+            Vector3 reverse = transform.localScale;
+            reverse.x = -transform.localScale.x;
+            transform.localScale = reverse;
+        }
+
+        Vector3 velocity = new Vector3(xAxis, 0, 0);
+
+        // 추후 수정 필요
+        if (Mathf.Abs(vecClockFollow.x) > moveSpeed)
+        {
+            velocity.x = vecClockFollow.x;
+            vecClockFollow *= speedDecreaseRate;
+        }
+        else
+        {
+            velocity *= moveSpeed;
+        }
+        rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, 0);
+    }
     protected override void Jump()
     {
         if (!jumpByKey || !jumpable || isTalking) return;

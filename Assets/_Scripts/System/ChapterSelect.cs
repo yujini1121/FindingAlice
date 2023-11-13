@@ -71,7 +71,23 @@ public class ChapterSelect : MonoBehaviour
 
         chapterName = GetChapterName(sceneName);
         chapterInfoTextGameObject.GetComponent<TextMeshProUGUI>().text = chapterName;
-        collection.GetComponent<TextMeshProUGUI>().text = "수집품\n ( " + numOfColledtedItems + " / 20 )";
+        switch (sceneName)
+        {
+            case "Chapter_T":
+                collection.GetComponent<TextMeshProUGUI>().text = "수집품\n ( " + numOfColledtedItems + " / 4 )";
+                break;
+            case "Chapter_1":
+                collection.GetComponent<TextMeshProUGUI>().text = "수집품\n ( " + numOfColledtedItems + " / 7 )";
+                break;
+            case "Chapter_2":
+                collection.GetComponent<TextMeshProUGUI>().text = "수집품\n ( " + numOfColledtedItems + " / 20 )";
+                break;
+            case "Chapter_3":
+                collection.GetComponent<TextMeshProUGUI>().text = "수집품\n ( " + numOfColledtedItems + " / 20 )";
+                break;
+            default:
+                break;
+        }
     }
 
     // ===============================================================================================

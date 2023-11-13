@@ -57,6 +57,15 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     protected virtual void Move()
     {
+
+#if UNITY_EDITOR
+        xAxis = Input.GetAxisRaw("Horizontal");
+        animator.SetBool("isRunning", xAxis != 0 && jumpable);
+#elif UNITY_ANDROID
+        xAxis = joystick.Horizontal;
+        animator.SetBool("isRunning", xAxis != 0);
+#endif
+
         if (!movable) return;
 
         // 좌우 이동에 따라 플레이어 Flip
@@ -101,6 +110,19 @@ public class Movement : MonoBehaviour
     // ===============================================================================================
     protected virtual void Jump()
     {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Space) && jumpable)
+        {
+            JumpInput();
+        }
+#elif UNITY_ANDROID              
+
+        if (joystick.JumpButtonPressed)
+        {
+            JumpInput();
+        }
+#endif
+
         if (!jumpByKey || !jumpable || isTalking) return;
         
         jumpable = false;
@@ -297,48 +319,6 @@ public class Movement : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
         isClockFollowing = true;
-    }
-
-    protected void Animator_Run()
-    {
-#if UNITY_EDITOR
-        xAxis = Input.GetAxisRaw("Horizontal");
-        animator.SetBool("isRunning", xAxis != 0 && jumpable);
-#elif UNITY_ANDROID
-        xAxis = joystick.Horizontal;
-        animator.SetBool("isRunning", xAxis != 0);
-#endif
-    }
-
-    protected void Animator_Swim()
-    {
-        float oxygenRatio = OxygenBar.instance.OxygenRatio;
-        animator.SetFloat("Depletion", oxygenRatio);
-#if UNITY_EDITOR
-        xAxis = Input.GetAxisRaw("Horizontal");
-        if (isTouchPlatform) { animator.SetBool("isRecoiling", false); }
-        animator.SetBool("isSwimming", xAxis != 0);
-#elif UNITY_ANDROID
-        xAxis = joystick.Horizontal;
-        animator.SetBool("isSwimming", xAxis != 0);
-#endif
-        animator.SetBool("isDropping", rigid.velocity.y < -0.9);
-    }
-
-    protected void Animator_Jump()
-    {
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Space) && jumpable)
-        {
-            JumpInput();
-        }
-#elif UNITY_ANDROID              
-
-        if (joystick.JumpButtonPressed)
-        {
-            JumpInput();
-        }
-#endif
     }
 
     protected void OnApplicationQuit() 

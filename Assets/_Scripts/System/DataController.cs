@@ -225,39 +225,70 @@ public class DataController : MonoBehaviour
     {
         // 저장된 데이터가 없을 때 플레이어가 기본 위치에서 시작하도록 지정
         Vector3 position = GameObject.FindGameObjectWithTag("Player").transform.position;
+        int savepointFlag = 0;
 
         switch (SceneManager.GetActiveScene().name)
         {
             case "Chapter_T":
-                if (gameData.chapterFlag_CT > 0)
+                savepointFlag = gameData.chapterFlag_CT;
+                if (savepointFlag > 0)
                 {
-                    position = GameObject.Find("SavePoint_" + (Convert.ToString(gameData.chapterFlag_CT, 2).Length - 1).ToString()).transform.position;
+                    position = GameObject.Find("SavePoint_" + (Convert.ToString(savepointFlag, 2).Length - 1).ToString()).transform.position;
                 }
                 break;
 
             case "Chapter_1":
-                if (gameData.chapterFlag_C1 > 0)
+                savepointFlag = gameData.chapterFlag_C1;
+                if (savepointFlag > 0)
                 {
-                    position = GameObject.Find("SavePoint_" + (Convert.ToString(gameData.chapterFlag_C1, 2).Length - 1).ToString()).transform.position;
+                    position = GameObject.Find("SavePoint_" + (Convert.ToString(savepointFlag, 2).Length - 1).ToString()).transform.position;
                 }
                 break;
 
             case "Chapter_2":
-                if (gameData.chapterFlag_C2 > 0)
+                savepointFlag = gameData.chapterFlag_C2;
+                if (savepointFlag > 0)
                 {
-                    position = GameObject.Find("SavePoint_" + (Convert.ToString(gameData.chapterFlag_C2, 2).Length - 1).ToString()).transform.position;
+                    position = GameObject.Find("SavePoint_" + (Convert.ToString(savepointFlag, 2).Length - 1).ToString()).transform.position;
                 }
                 break;
 
             case "Chapter_3":
-                if (gameData.chapterFlag_C3 > 0)
+                savepointFlag = gameData.chapterFlag_C3;
+                if (savepointFlag > 0)
                 {
-                    position = GameObject.Find("SavePoint_" + (Convert.ToString(gameData.chapterFlag_C3, 2).Length - 1).ToString()).transform.position;
+                    position = GameObject.Find("SavePoint_" + (Convert.ToString(savepointFlag, 2).Length - 1).ToString()).transform.position;
                 }
                 break;
+
+        }
+
+        for (int i = Convert.ToString(savepointFlag, 2).Length - 2; i != 0; i--)
+        {
+            string itemName = "SavePoint_" + i;
+            GameObject itemObject = GameObject.Find(itemName);
+            if (itemObject != null)
+            {
+                itemObject.SetActive(false);
+            }
         }
 
         GameObject.FindGameObjectWithTag("Player").transform.position = position;
+
+        //string binaryFlag = Convert.ToString(savepointFlag, 2);
+
+        //for (int i = 0; i < binaryFlag.Length; i++)
+        //{
+        //    if (binaryFlag[i] == '1')
+        //    {
+        //        string itemName = "SavePoint_" + i;
+        //        GameObject itemObject = GameObject.Find(itemName);
+        //        if (itemObject != null)
+        //        {
+        //            itemObject.SetActive(false);
+        //        }
+        //    }
+        //}
     }
 
     // ===============================================================================================

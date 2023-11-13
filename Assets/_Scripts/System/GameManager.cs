@@ -88,6 +88,14 @@ public class GameManager : MonoBehaviour
         AsyncLoading.LoadScene("ChapterSelect");
     }
 
+    public void Again()
+    {
+        Time.timeScale = 1;
+        setting.SetActive(false);
+        settingBtn.SetActive(true);
+        DataController.instance.LoadSavePoint();
+    }
+
     private void OnApplicationPause(bool pause)
     {
         if (pause)

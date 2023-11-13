@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class UnmuteManager : MonoBehaviour
 {
-    [SerializeField] private GameObject bgUnmute;
-    [SerializeField] private GameObject fxUnmute;
+    [SerializeField] private GameObject bgmute;
+    [SerializeField] private GameObject fxmute;
 
     private void Update()
     {
-        bgUnmute.SetActive(AudioManager.instance.bgmVolume > 0);
-        fxUnmute.SetActive(AudioManager.instance.sfxVolume > 0);
+        bgmute.SetActive(AudioManager.instance.bgmVolume <= 0);
+        fxmute.SetActive(AudioManager.instance.sfxVolume <= 0);
     }
 }
